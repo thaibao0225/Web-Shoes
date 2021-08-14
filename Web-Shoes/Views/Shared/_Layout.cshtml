@@ -41,13 +41,6 @@
 </head>
 <body>
 
-    
-
-
-
-
-   
-
     <div class="colorlib-loader"></div>
 
     <div id="page">
@@ -62,10 +55,9 @@
         <partial name="_FooterPartial" />
     </div>
 
-       
 
-        
-    
+    @await RenderSectionAsync("Scripts", required: false)
+
 
 </body>
 </html>
