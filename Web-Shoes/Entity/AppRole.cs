@@ -7,5 +7,9 @@ namespace Web_Shoes.Entity
 {
     public class AppRole
     {
+        public string Description { set; get; }
+
+        
+
     }
 }
