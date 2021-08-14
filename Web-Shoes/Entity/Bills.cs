@@ -7,5 +7,9 @@ namespace Web_Shoes.Entity
 {
     public class Bills
     {
+        public int bill_Id { set; get; }
+        public string bill_UserId { set; get; }
+        public string bill_Paid { set; get; }
+
     }
 }

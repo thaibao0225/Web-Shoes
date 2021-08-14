@@ -930,7 +930,6 @@
 
   <ItemGroup>
     <Folder Include="Data\DataSeeding\" />
-    <Folder Include="Configurations\" />
   </ItemGroup>
 
 </Project>
