@@ -11,9 +11,9 @@ namespace Web_Shoes.Entity
         public int pd_Id { set; get; }
         public string pd_Name { set; get; }
         public string pd_Description { set; get; }
-        public string pd_Price { set; get; }
+        public int pd_Price { set; get; }
 
-        public string pd_ReducePrice { set; get; }
+        public int pd_ReducePrice { set; get; }
         public string pd_Img1 { set; get; }
         public string pd_Img2 { set; get; }
 
