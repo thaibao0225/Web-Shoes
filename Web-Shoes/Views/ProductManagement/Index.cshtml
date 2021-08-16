@@ -1,0 +1,154 @@
+﻿@model Web_Shoes.Models.ProductModel
+
+
+@{
+    ViewData["Title"] = "Index";
+ Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form method="get" asp-action="Index">
+    <p>
+        <input type="submit" value="Filter" />
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pro[0].pd_Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_Price)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_ReducePrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_Img1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_Img2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_Img3)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_Img4)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_Rate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_MenuFacturer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_ShortDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_Size)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_Brand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_Style)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_Color)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_Material)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.haha[0].pd_Technologies)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Pro)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Id)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Price)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_ReducePrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Img1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Img2)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Img3)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Img4)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Rate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_MenuFacturer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Size)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Style)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Color)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Material)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pd_Technologies)
+                    </td>
+
+
+
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.pd_Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.pd_Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.pd_Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

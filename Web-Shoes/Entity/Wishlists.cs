@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 
 namespace Web_Shoes.Entity
 {
-    public class Cart
+    public class Wishlists
     {
-        public int cart_Id { set; get; }
-        public string cart_UserID { set; get; }
-
-
+        public int wl_Id { set; get; }
+        public string wl_UserId { set; get; }
     }
 }
