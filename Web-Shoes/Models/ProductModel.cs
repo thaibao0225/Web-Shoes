@@ -1,38 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Web_Shoes.Entity
+namespace Web_Shoes.Models
 {
-    public class Products
+    public class ProductModel
     {
-
-        [DisplayName("Id")]
+        
         public int pd_Id { set; get; }
-
-        [DisplayName("Name Product")]
         public string pd_Name { set; get; }
-
-        [DisplayName("Description")]
         public string pd_Description { set; get; }
-
-        [DisplayName("Price")]
         public int pd_Price { set; get; }
 
-
-        [DisplayName("ReducePrice")]
         public int pd_ReducePrice { set; get; }
-
         public string pd_Img1 { set; get; }
         public string pd_Img2 { set; get; }
 
         public string pd_Img3 { set; get; }
         public string pd_Img4 { set; get; }
-
-
-        [DisplayName("Rate")]
         public int pd_Rate { set; get; }
 
         public string pd_MenuFacturer { set; get; }
@@ -45,7 +32,7 @@ namespace Web_Shoes.Entity
 
         public string pd_Material { set; get; }
         public string pd_Technologies { set; get; }
-
+        public IList<string> Pro { get; set; }
 
 
     }

@@ -4,8 +4,10 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Web_Shoes.Configurations;
 using Web_Shoes.Entity;
+using Web_Shoes.Models;
 
 namespace Web_Shoes.Data
 {
@@ -74,7 +76,9 @@ namespace Web_Shoes.Data
         public DbSet<Reviews> Reviews { set; get; }
         public DbSet<Wishlists> Wishlists { set; get; }
 
-
-
+        internal Task SaveChangesAsync(ProductModel product1)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
