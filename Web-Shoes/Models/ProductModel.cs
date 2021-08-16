@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Web_Shoes.Entity;
 
 namespace Web_Shoes.Models
 {
@@ -32,8 +33,8 @@ namespace Web_Shoes.Models
 
         public string pd_Material { set; get; }
         public string pd_Technologies { set; get; }
-        public IList<string> Pro { get; set; }
-
+     
+      
 
     }
 }

@@ -18,7 +18,9 @@ namespace Web_Shoes.Data
         {
         }
 
-
+        public ApplicationDbContext()
+        {
+        }
 
         public static readonly ILoggerFactory loggerFactory = LoggerFactory.Create(builder => {
             builder

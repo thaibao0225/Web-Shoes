@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,62 +13,136 @@ using Web_Shoes.Models;
 
 namespace Web_Shoes.Controllers
 {
+
     public class ProductManagementController : Controller
     {
         private readonly ApplicationDbContext _context;
 
 
+        // public IList<Products> hihi { get; set; }
+
+
+        //public async Task<List<ProductModel>> haha()
+        //{
+        //    var ddd = from d in _context.Products select new { d };
+        //    var listKq = new List<ProductModel>();
+
+
+        //    var aaa = await ddd.Select(x => new ProductModel()
+        //    {
+        //        pd_Id = x.d.pd_Id,
+        //        pd_Name = x.d.pd_Name,
+        //        pd_Description = x.d.pd_Description,
+        //        pd_Price = x.d.pd_Price,
+        //        pd_ReducePrice = x.d.pd_ReducePrice,
+        //        pd_Img1 = x.d.pd_Img1,
+        //        pd_Img2 = x.d.pd_Img2,
+        //        pd_Img3 = x.d.pd_Img3,
+        //        pd_Img4 = x.d.pd_Img4,
+        //        pd_Rate = x.d.pd_Rate,
+        //        pd_MenuFacturer = x.d.pd_MenuFacturer,
+        //        pd_ShortDescription = x.d.pd_ShortDescription,
+        //        pd_Size = x.d.pd_Size,
+        //        pd_Brand = x.d.pd_Brand,
+        //        pd_Style = x.d.pd_Style,
+        //        pd_Color = x.d.pd_Color,
+        //        pd_Material = x.d.pd_Material,
+        //        pd_Technologies = x.d.pd_Technologies,
+
+
+        //    }).ToListAsync();
+            
+        //    return aaa;
+        
+
+
+               
+
+            
+        //}
         public ProductManagementController(ApplicationDbContext context)
         {
             _context = context;
         }
+        ProductModel ggg = new ProductModel();
 
-        //public ProductManagementController()
-        //{
-        //    haha = "aaa";
-        //}
+        [BindProperty(SupportsGet = true)]
 
+        public string SearchString { get; set; }
+        [Route("/productmanagement")]
         [HttpGet]
-        [Route("productmanagement")]
-        // GET: ProductManagementController
         public async Task<ActionResult> Index()
         {
-            try
-            {
-                var query = from p in _context.Products select new { p };
+            
+            try {
 
 
-                var productsView = await query.Select(x => new Products
+                //var pro = await (from p in _context.Products select  p ).ToListAsync();
+
+             var ddd = from d in _context.Products select  d ;
+               
+                
+                foreach (var item in ddd)
                 {
-                    pd_Id = x.p.pd_Id,
-                    pd_Name = x.p.pd_Name,
-                    pd_Description = x.p.pd_Description,
-                    pd_ReducePrice = x.p.pd_ReducePrice,
-                    pd_Price = x.p.pd_Price,
-                    pd_Rate = x.p.pd_Rate
-                }).ToListAsync();
+                 
+                       
+                    
+                }
 
-                //var productsView = from a in _context.Products select a;
+                // //haha = pro;
 
-                //productsView = (IQueryable<Products>)await productsView.ToListAsync();
-
-                query = await query.ToListAsync();
+                // // Đọc (nạp) Article
 
 
-                return View(productsView);
+                // var data = await pro.Select(x => new ProductModel()
+                //{
+                //    pd_Id = x.d.pd_Id,
+                //    pd_Name = x.d.pd_Name,
+                //    pd_Description = x.d.pd_Description,
+                //    pd_Price = x.d.pd_Price,
+                //    pd_ReducePrice = x.d.pd_ReducePrice,
+                //    pd_Img1 = x.d.pd_Img1,
+                //     pd_Img2 = x.d.pd_Img2,
+                //     pd_Img3 = x.d.pd_Img3,
+                //     pd_Img4 = x.d.pd_Img4,
+                //     pd_Rate = x.d.pd_Rate,
+                //     pd_MenuFacturer = x.d.pd_MenuFacturer,
+                //     pd_ShortDescription = x.d.pd_ShortDescription,
+                //     pd_Size = x.d.pd_Size,
+                //     pd_Brand = x.d.pd_Brand,
+                //     pd_Style = x.d.pd_Style,
+                //     pd_Color = x.d.pd_Color,
+                //     pd_Material = x.d.pd_Material,
+                //     pd_Technologies = x.d.pd_Technologies,
+
+
+                // }).ToListAsync();
+                // var pagedResult = new PagedResult<ProductModel>()
+                // {
+
+                //     Items = data
+                // };
+                // //return pagedResult;
+               
+
+                return View();
+
 
             }
+
             catch
             {
                 ViewBag.thongbao = "Cann't create";
                 return View();
-
             }
+        
 
 
         }
 
+      
 
+   
 
 
         // GET: ProductManagementController/Details/5
