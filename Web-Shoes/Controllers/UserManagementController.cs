@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Web_Shoes.Data;
+using Web_Shoes.Entity;
+using Web_Shoes.Models;
 
 namespace Web_Shoes.Controllers
 {
@@ -12,8 +15,9 @@ namespace Web_Shoes.Controllers
     {
 
         private readonly ApplicationDbContext _context;
+        //private readonly UserManager<AppUser> _userManager;
 
-
+        public UsersModel usersModel;
         public UserManagementController(ApplicationDbContext context)
         {
             _context = context;
@@ -23,9 +27,10 @@ namespace Web_Shoes.Controllers
         [Route("/usersmanagement")]
         [HttpGet]
         // GET: UserManagementController
-        public ActionResult Index()
+        public ActionResult IndexAsync()
         {
-            var userQuery = from a in _context.Users select a;
+            var userQuery = from a in _context.AppUser select a;
+
 
             return View(userQuery);
         }
@@ -49,7 +54,7 @@ namespace Web_Shoes.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexAsync));
             }
             catch
             {
@@ -70,7 +75,7 @@ namespace Web_Shoes.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexAsync));
             }
             catch
             {
@@ -91,7 +96,7 @@ namespace Web_Shoes.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexAsync));
             }
             catch
             {
