@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Web_Shoes.Migrations
 {
-    public partial class inti : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,7 @@ namespace Web_Shoes.Migrations
                     bill_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     bill_UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    bill_Paid = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    bill_Paid = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -104,8 +104,8 @@ namespace Web_Shoes.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     pd_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     pd_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    pd_Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    pd_ReducePrice = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    pd_Price = table.Column<int>(type: "int", nullable: false),
+                    pd_ReducePrice = table.Column<int>(type: "int", nullable: false),
                     pd_Img1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     pd_Img2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     pd_Img3 = table.Column<string>(type: "nvarchar(max)", nullable: true),

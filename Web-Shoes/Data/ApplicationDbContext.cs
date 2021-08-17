@@ -18,9 +18,6 @@ namespace Web_Shoes.Data
         {
         }
 
-        public ApplicationDbContext()
-        {
-        }
 
         public static readonly ILoggerFactory loggerFactory = LoggerFactory.Create(builder => {
             builder
@@ -78,9 +75,5 @@ namespace Web_Shoes.Data
         public DbSet<Reviews> Reviews { set; get; }
         public DbSet<Wishlists> Wishlists { set; get; }
 
-        internal Task SaveChangesAsync(ProductModel product1)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
