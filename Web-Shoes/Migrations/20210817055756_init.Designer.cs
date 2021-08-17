@@ -10,8 +10,8 @@ using Web_Shoes.Data;
 namespace Web_Shoes.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210814231424_inti")]
-    partial class inti
+    [Migration("20210817055756_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -258,8 +258,8 @@ namespace Web_Shoes.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("bill_Paid")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("bill_Paid")
+                        .HasColumnType("int");
 
                     b.Property<string>("bill_UserId")
                         .HasColumnType("nvarchar(max)");
@@ -393,14 +393,14 @@ namespace Web_Shoes.Migrations
                     b.Property<string>("pd_Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("pd_Price")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("pd_Price")
+                        .HasColumnType("int");
 
                     b.Property<int>("pd_Rate")
                         .HasColumnType("int");
 
-                    b.Property<string>("pd_ReducePrice")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("pd_ReducePrice")
+                        .HasColumnType("int");
 
                     b.Property<string>("pd_ShortDescription")
                         .HasColumnType("nvarchar(max)");
