@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin2.cshtml";
 }
 
 <h1>Edit</h1>
@@ -10,8 +10,8 @@
 <h4>Products</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+    <div class="col-md-4" >
+        <form asp-action="Edit" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="pd_Id" />
             <div class="form-group">

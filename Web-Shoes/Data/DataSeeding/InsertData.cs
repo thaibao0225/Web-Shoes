@@ -63,6 +63,11 @@ namespace Web_Shoes.Data.DataSeeding
 
             //Table AppUser 2222222222222222222222222222222222222222222222222222222222222222222
 
+            builder.Entity<AppUser>().HasData(
+                new AppUser()
+                {
+                    Id = "232C301F-DA60-463D-9A9A-5626FBA094FF"
+                });
 
 
 
