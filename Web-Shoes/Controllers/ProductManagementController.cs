@@ -106,7 +106,7 @@ namespace Web_Shoes.Controllers
             }
         }
 
-        [HttpGet("/hoc-lap-trinh-asp/{id:int?}/")]
+        [HttpGet("/productmanagement/edit/{id:int?}/")]
         // GET: ProductManagementController/Edit/5
         public ActionResult Edit(int id)
         {
@@ -127,7 +127,7 @@ namespace Web_Shoes.Controllers
         }
 
         // POST: ProductManagementController/Edit/5
-        [HttpPost("/hoc-lap-trinh-asp/{id:int?}/")]
+        [HttpPost("/productmanagement/edit/{id:int?}/")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, ProductModel productModel)
         {
@@ -170,41 +170,30 @@ namespace Web_Shoes.Controllers
         }
 
 
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(UserUpdateRequest request)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return View();
-        //    var result = await _userApiClient.EditUser(request.Id, request);
-        //    if (result.ISuccessed)
-        //    {
-        //        TempData["result"] = "Edit successfully";
-        //        return RedirectToAction("Index");
-
-        //    }
-        //    ModelState.AddModelError("", result.Message);
-        //    return View(request);
-        //}
-
-
 
 
 
 
 
         // GET: ProductManagementController/Delete/5
+        [HttpGet("/productmanagement/delete/{id:int?}/")]
         public ActionResult Delete(int id)
         {
-            return View();
+            var productQuery = _context.Products.FirstOrDefault(x => x.pd_Id == id);
+
+            return View(productQuery);
         }
 
         // POST: ProductManagementController/Delete/5
-        [HttpPost]
+        [HttpPost("/productmanagement/delete/{id:int?}/")]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
+                var productQuery = _context.Products.FirstOrDefault(x => x.pd_Id == id);
+                _context.Products.Remove(productQuery);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
