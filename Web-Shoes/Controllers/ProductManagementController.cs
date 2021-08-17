@@ -71,15 +71,6 @@ namespace Web_Shoes.Controllers
             try
             {
 
-                //var user = await _context.Products.FindAsync(productModel.pd_Name);
-                //if (user != null)
-                //{
-
-                //    throw new Exception("Product have existed");
-                //}
-
-
-
 
                 var product1 = new Products()
                 {
@@ -103,25 +94,8 @@ namespace Web_Shoes.Controllers
                 };
 
 
-
-                //user = new User()
-                //{
-
-                //    Email = request.Email,
-                //    user_FirstName = request.user_FirstName,
-                //    user_LastName = request.user_LastName,
-                //    user_FullName = request.user_FullName,
-                //    user_DOB = request.user_DOB,
-                //    UserName = request.UserName,
-                //};
-
-             
-
                 _context.Products.Add(product1);
                 await _context.SaveChangesAsync();
-                
-                
-
 
                 return RedirectToAction(nameof(Index));
             }
@@ -132,70 +106,61 @@ namespace Web_Shoes.Controllers
             }
         }
 
-        //public async Task<ApiResult<bool>> Register(RegisterRequest request)
-        //{
-        //    var user = await _userManager.FindByNameAsync(request.UserName);
-        //    if (user != null)
-        //    {
-
-        //        return new ApiErrorResult<bool>("Account have existed");
-        //    }
-        //    if (await _userManager.FindByEmailAsync(request.Email) != null)
-        //    {
-        //        return new ApiErrorResult<bool>("Email have existed");
-        //    }
-        //    user = new User()
-        //    {
-
-        //        Email = request.Email,
-        //        user_FirstName = request.user_FirstName,
-        //        user_LastName = request.user_LastName,
-        //        user_FullName = request.user_FullName,
-        //        user_DOB = request.user_DOB,
-        //        UserName = request.UserName,
-        //    };
-
-        //    var result = await _userManager.CreateAsync(user, request.Password);
-        //    if (result.Succeeded)
-        //    {
-        //        return new ApiSuccessResult<bool>();
-        //    }
-        //    return new ApiErrorResult<bool>("Register Failed");
-        //}
-
-
-
-        //public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-
-
-
-
-        //        ViewBag.thongbao = "Created";
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        ViewBag.thongbao = "Cann't create";
-        //        return View();
-        //    }
-        //}
-
+        [HttpGet("/hoc-lap-trinh-asp/{id:int?}/")]
         // GET: ProductManagementController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            try
+            {
+
+                var productQuery = _context.Products.FirstOrDefault(x => x.pd_Id == id);
+
+                return View(productQuery);
+            }
+            catch (Exception)
+            {
+
+                ViewBag.thongbao = "Cann't create";
+                return View();
+            }
+            
         }
 
         // POST: ProductManagementController/Edit/5
-        [HttpPost]
+        [HttpPost("/hoc-lap-trinh-asp/{id:int?}/")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, ProductModel productModel)
         {
             try
             {
+
+                var productQuery = _context.Products.FirstOrDefault(x => x.pd_Id == id);
+
+
+
+
+                productQuery.pd_Name = productModel.pd_Name;
+                productQuery.pd_Description = productModel.pd_Description;
+                productQuery.pd_Price = productModel.pd_Price;
+                productQuery.pd_ReducePrice = productModel.pd_ReducePrice;
+                productQuery.pd_Img1 = productModel.pd_Img1;
+                productQuery.pd_Img2 = productModel.pd_Img2;
+                productQuery.pd_Img3 = productModel.pd_Img3;
+                productQuery.pd_Img4 = productModel.pd_Img4;
+                productQuery.pd_Rate = productModel.pd_Rate;
+                productQuery.pd_MenuFacturer = productModel.pd_MenuFacturer;
+                productQuery.pd_ShortDescription = productModel.pd_ShortDescription;
+                productQuery.pd_Size = productModel.pd_Size;
+                productQuery.pd_Brand = productModel.pd_Brand;
+                productQuery.pd_Style = productModel.pd_Style;
+                productQuery.pd_Color = productModel.pd_Color;
+                productQuery.pd_Material = productModel.pd_Material;
+                productQuery.pd_Technologies = productModel.pd_Technologies;
+
+
+
+                _context.SaveChanges();
+
                 return RedirectToAction(nameof(Index));
             }
             catch
