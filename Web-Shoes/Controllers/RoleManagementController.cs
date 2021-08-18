@@ -116,18 +116,24 @@ namespace Web_Shoes.Controllers
         }
 
         // GET: RoleManagementController/Delete/5
-        public ActionResult Delete(int id)
+        [Route("/rolemanagement/delete/{id:guid}")]
+        [HttpGet]
+        public ActionResult Delete(string id)
         {
-            return View();
+            var roleQuery = _context.AppRole.FirstOrDefault(a => a.Id == id);
+            return View(roleQuery);
         }
 
         // POST: RoleManagementController/Delete/5
-        [HttpPost]
+        [HttpPost("/rolemanagement/delete/{id:guid}")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(string id, IFormCollection collection)
         {
             try
             {
+                var roleQuery = _context.AppRole.FirstOrDefault(a => a.Id == id);
+                _context.AppRole.Remove(roleQuery);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
