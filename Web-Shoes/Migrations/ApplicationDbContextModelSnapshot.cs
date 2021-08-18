@@ -280,11 +280,21 @@ namespace Web_Shoes.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("bill_UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("bill_Id");
 
+                    b.HasIndex("bill_UserId");
+
                     b.ToTable("Bills");
+
+                    b.HasData(
+                        new
+                        {
+                            bill_Id = 1,
+                            bill_Paid = 10000,
+                            bill_UserId = "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff"
+                        });
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.Cart", b =>
@@ -295,11 +305,20 @@ namespace Web_Shoes.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("cart_UserID")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("cart_Id");
 
+                    b.HasIndex("cart_UserID");
+
                     b.ToTable("Carts");
+
+                    b.HasData(
+                        new
+                        {
+                            cart_Id = 1,
+                            cart_UserID = "658771FF-AB71-43EA-AD96-0893F460274E"
+                        });
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.Categories", b =>
@@ -361,6 +380,16 @@ namespace Web_Shoes.Migrations
                     b.HasKey("Contact_Id");
 
                     b.ToTable("ContactSystems");
+
+                    b.HasData(
+                        new
+                        {
+                            Contact_Id = 1,
+                            Contact_Address = "HCM",
+                            Contact_Email = "admin@gmail.com",
+                            Contact_Phone = "0123456789",
+                            Contact_Website = "https://shoes.com"
+                        });
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.ContactUsers", b =>
@@ -388,6 +417,69 @@ namespace Web_Shoes.Migrations
                     b.HasKey("cu_Id");
 
                     b.ToTable("ContactUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            cu_Id = 1,
+                            cu_Description = "Description",
+                            cu_Email = "Email",
+                            cu_FirstName = "FirstName",
+                            cu_LastName = "LastName",
+                            cu_Subject = "Subject"
+                        });
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.ProductInCart", b =>
+                {
+                    b.Property<int>("pic_CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("pic_ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("pic_amount")
+                        .HasColumnType("int");
+
+                    b.HasKey("pic_CartId", "pic_ProductId");
+
+                    b.HasIndex("pic_ProductId");
+
+                    b.ToTable("ProductInCart");
+
+                    b.HasData(
+                        new
+                        {
+                            pic_CartId = 1,
+                            pic_ProductId = 1,
+                            pic_amount = 10
+                        });
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.ProductInWishlist", b =>
+                {
+                    b.Property<int>("piw_WishlistId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("piw_ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("piw_amount")
+                        .HasColumnType("int");
+
+                    b.HasKey("piw_WishlistId", "piw_ProductId");
+
+                    b.HasIndex("piw_ProductId");
+
+                    b.ToTable("ProductInWishlist");
+
+                    b.HasData(
+                        new
+                        {
+                            piw_WishlistId = 1,
+                            piw_ProductId = 1,
+                            piw_amount = 0
+                        });
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.Products", b =>
@@ -528,6 +620,8 @@ namespace Web_Shoes.Migrations
 
                     b.HasKey("pic_productId", "pic_CategoriesId");
 
+                    b.HasIndex("pic_CategoriesId");
+
                     b.ToTable("ProductsInCategories");
 
                     b.HasData(
@@ -548,6 +642,28 @@ namespace Web_Shoes.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Web_Shoes.Entity.ReviewInproduct", b =>
+                {
+                    b.Property<int>("rip_ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("rip_ReviewId")
+                        .HasColumnType("int");
+
+                    b.HasKey("rip_ProductId", "rip_ReviewId");
+
+                    b.HasIndex("rip_ReviewId");
+
+                    b.ToTable("ReviewInproduct");
+
+                    b.HasData(
+                        new
+                        {
+                            rip_ProductId = 1,
+                            rip_ReviewId = 1
+                        });
+                });
+
             modelBuilder.Entity("Web_Shoes.Entity.Reviews", b =>
                 {
                     b.Property<int>("review_id")
@@ -559,11 +675,21 @@ namespace Web_Shoes.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("review_UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("review_id");
 
+                    b.HasIndex("review_UserId");
+
                     b.ToTable("Reviews");
+
+                    b.HasData(
+                        new
+                        {
+                            review_id = 1,
+                            review_Comment = "Good",
+                            review_UserId = "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff"
+                        });
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.Wishlists", b =>
@@ -574,11 +700,20 @@ namespace Web_Shoes.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("wl_UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("wl_Id");
 
+                    b.HasIndex("wl_UserId");
+
                     b.ToTable("Wishlists");
+
+                    b.HasData(
+                        new
+                        {
+                            wl_Id = 1,
+                            wl_UserId = "658771FF-AB71-43EA-AD96-0893F460274E"
+                        });
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.AppRole", b =>
@@ -594,14 +729,14 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd",
-                            ConcurrencyStamp = "f5cd1860-c984-4d39-adcd-5f7379d5212c",
+                            ConcurrencyStamp = "c907c662-393f-49e1-93d4-1beed7f56a66",
                             Name = "staff",
                             Description = "Staff"
                         },
                         new
                         {
                             Id = "360E601E-92F2-4F08-832B-604A21293258",
-                            ConcurrencyStamp = "6684b7df-1b9c-4e40-a715-21ad42cd5a77",
+                            ConcurrencyStamp = "88b4cfcb-8dde-4abb-9c2c-2894bcafaa5f",
                             Name = "admin",
                             Description = "admin"
                         });
@@ -625,15 +760,57 @@ namespace Web_Shoes.Migrations
                     b.HasData(
                         new
                         {
+                            Id = "658771FF-AB71-43EA-AD96-0893F460274E",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a563a3a3-82bb-46b7-9481-b5a492fd06d3",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f76fa0a4-f5ef-4016-bedb-18c3e0ce575e",
+                            TwoFactorEnabled = false,
+                            DoB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "1",
+                            LastName = "1"
+                        },
+                        new
+                        {
+                            Id = "A37A6031-61EF-4917-ACA7-916228E16694",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "19786e38-4b49-43c5-8fd2-80bbdf0d3d0d",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "b4c020bd-1859-4cf0-81ae-d1daa0f5c73c",
+                            TwoFactorEnabled = false,
+                            DoB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "2",
+                            LastName = "2"
+                        },
+                        new
+                        {
+                            Id = "9033DB4C-7C78-4123-8953-2C1957C9068A",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "575e42e4-a3af-4390-b3e3-16c42af3e5a7",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "14f104b8-eea0-42a2-803e-c91d7545b884",
+                            TwoFactorEnabled = false,
+                            DoB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "3",
+                            LastName = "3"
+                        },
+                        new
+                        {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3d62b131-3e7a-4467-b9bb-00aaf9f98bd0",
+                            ConcurrencyStamp = "adce939c-a069-4064-87fc-4dbfd0209ac8",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "Admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAENtmLQYszmEAolRJi3I4zdWa/0Z/bwhbeFMCChb7Xr71RdjHr1uQvBQ5bmZJe7R/ZA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENodKUkqjyC5pYSdvopeKwyBbLMvlO6OkNan43mLGCKskmYA1hAxzSQFwoLppm990A==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -646,13 +823,13 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "31922de8-ea70-44cb-8151-e689898ad463",
+                            ConcurrencyStamp = "00ecfe66-330c-46d2-b5be-6ca9a65f04ad",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "staff@gmail.com",
                             NormalizedUserName = "Staff",
-                            PasswordHash = "AQAAAAEAACcQAAAAELKznmZFpkTxphvNPvc4nXYo3p1LhhZG5odQ9AkLCNDsP2SPYj01voTszaIAl/AIyw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHbddIwx3bBrYi78FNxhuxOkkmm9EjrTOLEzWtlSUbneJ+TwE0ohF9SJ9Ju153cHsA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -712,6 +889,160 @@ namespace Web_Shoes.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.Bills", b =>
+                {
+                    b.HasOne("Web_Shoes.Entity.AppUser", "AppUserB")
+                        .WithMany("BillsAU")
+                        .HasForeignKey("bill_UserId");
+
+                    b.Navigation("AppUserB");
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.Cart", b =>
+                {
+                    b.HasOne("Web_Shoes.Entity.AppUser", "AppUserC")
+                        .WithMany("CartU")
+                        .HasForeignKey("cart_UserID");
+
+                    b.Navigation("AppUserC");
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.ProductInCart", b =>
+                {
+                    b.HasOne("Web_Shoes.Entity.Cart", "CartPICart")
+                        .WithMany("ProductInCartC")
+                        .HasForeignKey("pic_CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Web_Shoes.Entity.Products", "ProductsPICart")
+                        .WithMany("ProductInCartP")
+                        .HasForeignKey("pic_ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CartPICart");
+
+                    b.Navigation("ProductsPICart");
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.ProductInWishlist", b =>
+                {
+                    b.HasOne("Web_Shoes.Entity.Products", "ProductsPIW")
+                        .WithMany("ProductInWishlistP")
+                        .HasForeignKey("piw_ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Web_Shoes.Entity.Wishlists", "WishlistsPIW")
+                        .WithMany("ProductInWishlistW")
+                        .HasForeignKey("piw_WishlistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductsPIW");
+
+                    b.Navigation("WishlistsPIW");
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.ProductsInCategories", b =>
+                {
+                    b.HasOne("Web_Shoes.Entity.Categories", "CategoriesPIC")
+                        .WithMany("ProductsInCategoriesC")
+                        .HasForeignKey("pic_CategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Web_Shoes.Entity.Products", "ProductsPIC")
+                        .WithMany("ProductsInCategoriesP")
+                        .HasForeignKey("pic_productId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CategoriesPIC");
+
+                    b.Navigation("ProductsPIC");
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.ReviewInproduct", b =>
+                {
+                    b.HasOne("Web_Shoes.Entity.Products", "ProductsRIP")
+                        .WithMany("ReviewInproductP")
+                        .HasForeignKey("rip_ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Web_Shoes.Entity.Reviews", "ReviewsRIP")
+                        .WithMany("ReviewInproductR")
+                        .HasForeignKey("rip_ReviewId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductsRIP");
+
+                    b.Navigation("ReviewsRIP");
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.Reviews", b =>
+                {
+                    b.HasOne("Web_Shoes.Entity.AppUser", "AppUserR")
+                        .WithMany("ReviewsU")
+                        .HasForeignKey("review_UserId");
+
+                    b.Navigation("AppUserR");
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.Wishlists", b =>
+                {
+                    b.HasOne("Web_Shoes.Entity.AppUser", "UserW")
+                        .WithMany("WishlistsU")
+                        .HasForeignKey("wl_UserId");
+
+                    b.Navigation("UserW");
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.Cart", b =>
+                {
+                    b.Navigation("ProductInCartC");
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.Categories", b =>
+                {
+                    b.Navigation("ProductsInCategoriesC");
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.Products", b =>
+                {
+                    b.Navigation("ProductInCartP");
+
+                    b.Navigation("ProductInWishlistP");
+
+                    b.Navigation("ProductsInCategoriesP");
+
+                    b.Navigation("ReviewInproductP");
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.Reviews", b =>
+                {
+                    b.Navigation("ReviewInproductR");
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.Wishlists", b =>
+                {
+                    b.Navigation("ProductInWishlistW");
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.AppUser", b =>
+                {
+                    b.Navigation("BillsAU");
+
+                    b.Navigation("CartU");
+
+                    b.Navigation("ReviewsU");
+
+                    b.Navigation("WishlistsU");
                 });
 #pragma warning restore 612, 618
         }

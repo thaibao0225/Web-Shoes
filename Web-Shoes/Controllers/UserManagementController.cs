@@ -57,12 +57,33 @@ namespace Web_Shoes.Controllers
         }
 
         // POST: UserManagementController/Create
-        [HttpPost]
+        [HttpPost("/usermanagement/create")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(AppUser appUser)
         {
             try
             {
+
+                var hasher = new PasswordHasher<AppUser>();
+
+                var CreateUser = new AppUser()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = appUser.UserName,
+                    NormalizedUserName = appUser.UserName,
+                    NormalizedEmail = appUser.Email,
+                    Email = appUser.Email,
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, appUser.PasswordHash),
+                    SecurityStamp = string.Empty,
+                    FirstName = appUser.FirstName,
+                    LastName = appUser.LastName,
+                    DoB = appUser.DoB
+                };
+
+                _context.AppUser.Add(CreateUser);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(IndexAsync));
             }
             catch
@@ -72,18 +93,34 @@ namespace Web_Shoes.Controllers
         }
 
         // GET: UserManagementController/Edit/5
-        public ActionResult Edit(int id)
+        [Route("/usermanagement/edit/{id:guid}")]
+        [HttpGet]
+        public ActionResult Edit(string id)
         {
-            return View();
+
+            var userQuery = _context.AppUser.FirstOrDefault(a => a.Id == id);
+            return View(userQuery);
         }
 
         // POST: UserManagementController/Edit/5
-        [HttpPost]
+        [HttpPost("/usermanagement/edit/{id:guid}")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(string id, AppUser appUser)
         {
             try
             {
+
+                var userQuery = _context.AppUser.FirstOrDefault(a => a.Id == id);
+
+                userQuery.UserName = appUser.UserName;
+                userQuery.FirstName = appUser.FirstName;
+                userQuery.LastName = appUser.LastName;
+                userQuery.Email = appUser.Email;
+                userQuery.DoB = appUser.DoB;
+
+
+                _context.SaveChanges();
+
                 return RedirectToAction(nameof(IndexAsync));
             }
             catch

@@ -15,6 +15,8 @@ namespace Web_Shoes.Configurations
         {
             builder.ToTable("Bills");
             builder.HasKey(t => new { t.bill_Id });
+            builder.HasOne(t => t.AppUserB).WithMany(ur => ur.BillsAU)
+     .HasForeignKey(pc => pc.bill_UserId);
 
 
 

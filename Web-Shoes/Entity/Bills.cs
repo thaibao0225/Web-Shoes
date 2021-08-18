@@ -8,6 +8,7 @@ namespace Web_Shoes.Entity
     public class Bills
     {
         public int bill_Id { set; get; }
+        public AppUser AppUserB { get; set; }
         public string bill_UserId { set; get; }
         public int bill_Paid { set; get; }
 

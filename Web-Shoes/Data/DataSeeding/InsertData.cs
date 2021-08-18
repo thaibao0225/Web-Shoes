@@ -16,6 +16,39 @@ namespace Web_Shoes.Data.DataSeeding
 
             //var hasher = new PasswordHasher<AppUsers>();
 
+
+
+
+            builder.Entity<AppUser>().HasData(
+              new AppUser()
+              {
+                  Id = "658771FF-AB71-43EA-AD96-0893F460274E",
+                  FirstName = "1",
+                  LastName = "1",
+
+
+              },
+
+              new AppUser()
+              {
+                  Id = "A37A6031-61EF-4917-ACA7-916228E16694",
+                  FirstName = "2",
+                  LastName = "2",
+
+              },
+
+              new AppUser()
+              {
+                  Id = "9033DB4C-7C78-4123-8953-2C1957C9068A",
+                  FirstName = "3",
+                  LastName = "3",
+
+              }
+              );
+
+
+
+
             //Table Products
             builder.Entity<Products>().HasData(
                 new Products()
@@ -178,23 +211,24 @@ namespace Web_Shoes.Data.DataSeeding
 
             //Table Bills
 
-            //builder.Entity<Bills>().HasData(
-            //    new Bills(){
-            //        bill_Id = 1,
-            //        bill_UserId = "",
-            //        bill_Paid = 10000
-            //    });
+            builder.Entity<Bills>().HasData(
+                new Bills()
+                {
+                    bill_Id = 1,
+                    bill_UserId = IdAdmin,
+                    bill_Paid = 10000
+                });
 
 
             //Table Cart
 
-            //builder.Entity<Cart>().HasData(
-            //    new Cart()
-            //    {
-            //        cart_Id = 1,
-            //        cart_UserID = ""
+            builder.Entity<Cart>().HasData(
+                new Cart()
+                {
+                    cart_Id = 1,
+                    cart_UserID = "658771FF-AB71-43EA-AD96-0893F460274E"
 
-            //    });
+                });
 
 
             //Table Categories
@@ -225,37 +259,68 @@ namespace Web_Shoes.Data.DataSeeding
 
             //Table ContactSystem
 
-            //builder.Entity<ContactSystem>().HasData(
-            //    new ContactSystem()
-            //    {
-            //        Contact_Id = 1,
-            //        Contact_Address = "",
-            //        Contact_Phone = "",
-            //        Contact_Email = "",
-            //        Contact_Website = ""
+            builder.Entity<ContactSystem>().HasData(
+                new ContactSystem()
+                {
+                    Contact_Id = 1,
+                    Contact_Address = "HCM",
+                    Contact_Phone = "0123456789",
+                    Contact_Email = "admin@gmail.com",
+                    Contact_Website = "https://shoes.com"
 
 
-            //    });
+                });
 
 
 
             //Table ContactUsers
 
 
+            builder.Entity<ContactUsers>().HasData(
+                new ContactUsers()
+                {
+                    cu_Id = 1,
+                    cu_FirstName = "FirstName",
+                    cu_LastName = "LastName",
+                    cu_Email = "Email",
+                    cu_Subject = "Subject",
+                    cu_Description = "Description"
+                });
 
 
-            //builder.Entity<ContactUsers>().HasData(
-            //    new ContactUsers()
-            //    {
-            //        cu_Id = 1,
-            //        cu_FirstName = "",
-            //        cu_LastName = "",
-            //        cu_Email = "",
-            //        cu_Subject = "",
-            //        cu_Description = ""
 
 
-            //    });
+            
+
+
+            //Table Reviews
+
+
+            builder.Entity<Reviews>().HasData(
+                new Reviews()
+                {
+                    review_id = 1,
+                    review_Comment = "Good",
+                    review_UserId = IdAdmin
+
+                });
+
+
+
+
+
+            //Table Wishlist
+
+
+            builder.Entity<Wishlists>().HasData(
+                new Wishlists()
+                {
+                    wl_Id = 1,
+                    wl_UserId = "658771FF-AB71-43EA-AD96-0893F460274E"
+
+                });
+
+
 
 
 
@@ -282,31 +347,46 @@ namespace Web_Shoes.Data.DataSeeding
                 });
 
 
-            //Table Reviews
-
-
-            //builder.Entity<Reviews>().HasData(
-            //    new Reviews()
-            //    {
-            //        review_id = 1,
-            //        review_Comment = "",
-            //        review_UserId=""
-
-            //    });
+            //Table ProductInCategories
 
 
 
+            builder.Entity<ProductInWishlist>().HasData(
+                new ProductInWishlist()
+                {
+                    piw_ProductId = 1,
+                    piw_WishlistId = 1
+                });
 
-            //Table Wishlist
+            //Table ProductInCart
 
 
-            //builder.Entity<Wishlists>().HasData(
-            //    new Wishlists()
-            //    {
-            //        wl_Id = 1,
-            //        wl_UserId = ""
 
-            //    });
+            builder.Entity<ProductInCart>().HasData(
+                new ProductInCart()
+                {
+                    pic_CartId = 1,
+                    pic_ProductId = 1,
+                    pic_amount = 10,
+
+                });
+
+
+            //Table ReviewInproduct
+
+
+
+            builder.Entity<ReviewInproduct>().HasData(
+                new ReviewInproduct()
+                {
+                    rip_ProductId = 1,
+                    rip_ReviewId = 1,
+                });
+
+
+
+
+
 
 
 

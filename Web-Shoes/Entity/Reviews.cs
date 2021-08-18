@@ -9,7 +9,9 @@ namespace Web_Shoes.Entity
     {
         public int review_id { set; get; }
         public string review_Comment { set; get; }
+        public AppUser AppUserR { get; set; }
         public string review_UserId { set; get; }
+        public List<ReviewInproduct> ReviewInproductR { get; set; }
 
     }
 }

@@ -136,9 +136,6 @@ namespace Web_Shoes.Controllers
 
                 var productQuery = _context.Products.FirstOrDefault(x => x.pd_Id == id);
 
-
-
-
                 productQuery.pd_Name = productModel.pd_Name;
                 productQuery.pd_Description = productModel.pd_Description;
                 productQuery.pd_Price = productModel.pd_Price;

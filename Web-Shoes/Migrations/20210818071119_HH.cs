@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Web_Shoes.Migrations
 {
-    public partial class init : Migration
+    public partial class HH : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,33 +19,6 @@ namespace Web_Shoes.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_About", x => x.about_id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Bills",
-                columns: table => new
-                {
-                    bill_Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    bill_UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    bill_Paid = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bills", x => x.bill_Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Carts",
-                columns: table => new
-                {
-                    cart_Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    cart_UserID = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Carts", x => x.cart_Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -126,32 +99,6 @@ namespace Web_Shoes.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductsInCategories",
-                columns: table => new
-                {
-                    pic_CategoriesId = table.Column<int>(type: "int", nullable: false),
-                    pic_productId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductsInCategories", x => new { x.pic_productId, x.pic_CategoriesId });
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Reviews",
-                columns: table => new
-                {
-                    review_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    review_Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    review_UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reviews", x => x.review_id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -197,16 +144,27 @@ namespace Web_Shoes.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Wishlists",
+                name: "ProductsInCategories",
                 columns: table => new
                 {
-                    wl_Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    wl_UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    pic_CategoriesId = table.Column<int>(type: "int", nullable: false),
+                    pic_productId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Wishlists", x => x.wl_Id);
+                    table.PrimaryKey("PK_ProductsInCategories", x => new { x.pic_productId, x.pic_CategoriesId });
+                    table.ForeignKey(
+                        name: "FK_ProductsInCategories_Categories_pic_CategoriesId",
+                        column: x => x.pic_CategoriesId,
+                        principalTable: "Categories",
+                        principalColumn: "cg_Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductsInCategories_Products_pic_productId",
+                        column: x => x.pic_productId,
+                        principalTable: "Products",
+                        principalColumn: "pd_Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -228,6 +186,65 @@ namespace Web_Shoes.Migrations
                         principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bills",
+                columns: table => new
+                {
+                    bill_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    bill_UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    bill_Paid = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bills", x => x.bill_Id);
+                    table.ForeignKey(
+                        name: "FK_Bills_Users_bill_UserId",
+                        column: x => x.bill_UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Carts",
+                columns: table => new
+                {
+                    cart_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    cart_UserID = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carts", x => x.cart_Id);
+                    table.ForeignKey(
+                        name: "FK_Carts_Users_cart_UserID",
+                        column: x => x.cart_UserID,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reviews",
+                columns: table => new
+                {
+                    review_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    review_Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    review_UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reviews", x => x.review_id);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Users_review_UserId",
+                        column: x => x.review_UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -315,6 +332,99 @@ namespace Web_Shoes.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Wishlists",
+                columns: table => new
+                {
+                    wl_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    wl_UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Wishlists", x => x.wl_Id);
+                    table.ForeignKey(
+                        name: "FK_Wishlists_Users_wl_UserId",
+                        column: x => x.wl_UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductInCart",
+                columns: table => new
+                {
+                    pic_CartId = table.Column<int>(type: "int", nullable: false),
+                    pic_ProductId = table.Column<int>(type: "int", nullable: false),
+                    pic_amount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductInCart", x => new { x.pic_CartId, x.pic_ProductId });
+                    table.ForeignKey(
+                        name: "FK_ProductInCart_Carts_pic_CartId",
+                        column: x => x.pic_CartId,
+                        principalTable: "Carts",
+                        principalColumn: "cart_Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductInCart_Products_pic_ProductId",
+                        column: x => x.pic_ProductId,
+                        principalTable: "Products",
+                        principalColumn: "pd_Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReviewInproduct",
+                columns: table => new
+                {
+                    rip_ReviewId = table.Column<int>(type: "int", nullable: false),
+                    rip_ProductId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReviewInproduct", x => new { x.rip_ProductId, x.rip_ReviewId });
+                    table.ForeignKey(
+                        name: "FK_ReviewInproduct_Products_rip_ProductId",
+                        column: x => x.rip_ProductId,
+                        principalTable: "Products",
+                        principalColumn: "pd_Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ReviewInproduct_Reviews_rip_ReviewId",
+                        column: x => x.rip_ReviewId,
+                        principalTable: "Reviews",
+                        principalColumn: "review_id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductInWishlist",
+                columns: table => new
+                {
+                    piw_WishlistId = table.Column<int>(type: "int", nullable: false),
+                    piw_ProductId = table.Column<int>(type: "int", nullable: false),
+                    piw_amount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductInWishlist", x => new { x.piw_WishlistId, x.piw_ProductId });
+                    table.ForeignKey(
+                        name: "FK_ProductInWishlist_Products_piw_ProductId",
+                        column: x => x.piw_ProductId,
+                        principalTable: "Products",
+                        principalColumn: "pd_Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductInWishlist_Wishlists_piw_WishlistId",
+                        column: x => x.piw_WishlistId,
+                        principalTable: "Wishlists",
+                        principalColumn: "wl_Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "About",
                 columns: new[] { "about_id", "about_Description", "about_Img" },
@@ -330,6 +440,16 @@ namespace Web_Shoes.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "ContactSystems",
+                columns: new[] { "Contact_Id", "Contact_Address", "Contact_Email", "Contact_Phone", "Contact_Website" },
+                values: new object[] { 1, "HCM", "admin@gmail.com", "0123456789", "https://shoes.com" });
+
+            migrationBuilder.InsertData(
+                table: "ContactUsers",
+                columns: new[] { "cu_Id", "cu_Description", "cu_Email", "cu_FirstName", "cu_LastName", "cu_Subject" },
+                values: new object[] { 1, "Description", "Email", "FirstName", "LastName", "Subject" });
+
+            migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "pd_Id", "pd_Brand", "pd_Color", "pd_Description", "pd_Img1", "pd_Img2", "pd_Img3", "pd_Img4", "pd_Material", "pd_MenuFacturer", "pd_Name", "pd_Price", "pd_Rate", "pd_ReducePrice", "pd_ShortDescription", "pd_Size", "pd_Style", "pd_Technologies" },
                 values: new object[,]
@@ -338,6 +458,37 @@ namespace Web_Shoes.Migrations
                     { 2, "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", 10000, 2, 1000, "2", "2", "2", "2" },
                     { 3, "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", 10000, 3, 1000, "3", "3", "3", "3" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Description", "Discriminator", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "c907c662-393f-49e1-93d4-1beed7f56a66", "Staff", "AppRole", "staff", null },
+                    { "360E601E-92F2-4F08-832B-604A21293258", "88b4cfcb-8dde-4abb-9c2c-2894bcafaa5f", "admin", "AppRole", "admin", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "658771FF-AB71-43EA-AD96-0893F460274E", 0, "a563a3a3-82bb-46b7-9481-b5a492fd06d3", "AppUser", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, "1", "1", false, null, null, null, null, null, false, "f76fa0a4-f5ef-4016-bedb-18c3e0ce575e", false, null },
+                    { "A37A6031-61EF-4917-ACA7-916228E16694", 0, "19786e38-4b49-43c5-8fd2-80bbdf0d3d0d", "AppUser", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, "2", "2", false, null, null, null, null, null, false, "b4c020bd-1859-4cf0-81ae-d1daa0f5c73c", false, null },
+                    { "9033DB4C-7C78-4123-8953-2C1957C9068A", 0, "575e42e4-a3af-4390-b3e3-16c42af3e5a7", "AppUser", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, "3", "3", false, null, null, null, null, null, false, "14f104b8-eea0-42a2-803e-c91d7545b884", false, null },
+                    { "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff", 0, "adce939c-a069-4064-87fc-4dbfd0209ac8", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "admin@gmail.com", "Admin", "AQAAAAEAACcQAAAAENodKUkqjyC5pYSdvopeKwyBbLMvlO6OkNan43mLGCKskmYA1hAxzSQFwoLppm990A==", null, false, "", false, "Admin" },
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "00ecfe66-330c-46d2-b5be-6ca9a65f04ad", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "staff@gmail.com", "Staff", "AQAAAAEAACcQAAAAEHbddIwx3bBrYi78FNxhuxOkkmm9EjrTOLEzWtlSUbneJ+TwE0ohF9SJ9Ju153cHsA==", null, false, "", false, "Staff" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Bills",
+                columns: new[] { "bill_Id", "bill_Paid", "bill_UserId" },
+                values: new object[] { 1, 10000, "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff" });
+
+            migrationBuilder.InsertData(
+                table: "Carts",
+                columns: new[] { "cart_Id", "cart_UserID" },
+                values: new object[] { 1, "658771FF-AB71-43EA-AD96-0893F460274E" });
 
             migrationBuilder.InsertData(
                 table: "ProductsInCategories",
@@ -350,32 +501,73 @@ namespace Web_Shoes.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Roles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Description", "Discriminator", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "f5cd1860-c984-4d39-adcd-5f7379d5212c", "Staff", "AppRole", "staff", null },
-                    { "360E601E-92F2-4F08-832B-604A21293258", "6684b7df-1b9c-4e40-a715-21ad42cd5a77", "admin", "AppRole", "admin", null }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[,]
-                {
-                    { "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff", 0, "3d62b131-3e7a-4467-b9bb-00aaf9f98bd0", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "admin@gmail.com", "Admin", "AQAAAAEAACcQAAAAENtmLQYszmEAolRJi3I4zdWa/0Z/bwhbeFMCChb7Xr71RdjHr1uQvBQ5bmZJe7R/ZA==", null, false, "", false, "Admin" },
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "31922de8-ea70-44cb-8151-e689898ad463", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "staff@gmail.com", "Staff", "AQAAAAEAACcQAAAAELKznmZFpkTxphvNPvc4nXYo3p1LhhZG5odQ9AkLCNDsP2SPYj01voTszaIAl/AIyw==", null, false, "", false, "Staff" }
-                });
+                table: "Reviews",
+                columns: new[] { "review_id", "review_Comment", "review_UserId" },
+                values: new object[] { 1, "Good", "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff" });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "360E601E-92F2-4F08-832B-604A21293258", "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff" });
+                values: new object[,]
+                {
+                    { "360E601E-92F2-4F08-832B-604A21293258", "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff" },
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff" }
+                });
 
             migrationBuilder.InsertData(
-                table: "UserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff" });
+                table: "Wishlists",
+                columns: new[] { "wl_Id", "wl_UserId" },
+                values: new object[] { 1, "658771FF-AB71-43EA-AD96-0893F460274E" });
+
+            migrationBuilder.InsertData(
+                table: "ProductInCart",
+                columns: new[] { "pic_CartId", "pic_ProductId", "pic_amount" },
+                values: new object[] { 1, 1, 10 });
+
+            migrationBuilder.InsertData(
+                table: "ProductInWishlist",
+                columns: new[] { "piw_ProductId", "piw_WishlistId", "piw_amount" },
+                values: new object[] { 1, 1, 0 });
+
+            migrationBuilder.InsertData(
+                table: "ReviewInproduct",
+                columns: new[] { "rip_ProductId", "rip_ReviewId" },
+                values: new object[] { 1, 1 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bills_bill_UserId",
+                table: "Bills",
+                column: "bill_UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Carts_cart_UserID",
+                table: "Carts",
+                column: "cart_UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductInCart_pic_ProductId",
+                table: "ProductInCart",
+                column: "pic_ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductInWishlist_piw_ProductId",
+                table: "ProductInWishlist",
+                column: "piw_ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductsInCategories_pic_CategoriesId",
+                table: "ProductsInCategories",
+                column: "pic_CategoriesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReviewInproduct_rip_ReviewId",
+                table: "ReviewInproduct",
+                column: "rip_ReviewId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_review_UserId",
+                table: "Reviews",
+                column: "review_UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
@@ -415,6 +607,11 @@ namespace Web_Shoes.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Wishlists_wl_UserId",
+                table: "Wishlists",
+                column: "wl_UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -426,25 +623,22 @@ namespace Web_Shoes.Migrations
                 name: "Bills");
 
             migrationBuilder.DropTable(
-                name: "Carts");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
-
-            migrationBuilder.DropTable(
                 name: "ContactSystems");
 
             migrationBuilder.DropTable(
                 name: "ContactUsers");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "ProductInCart");
+
+            migrationBuilder.DropTable(
+                name: "ProductInWishlist");
 
             migrationBuilder.DropTable(
                 name: "ProductsInCategories");
 
             migrationBuilder.DropTable(
-                name: "Reviews");
+                name: "ReviewInproduct");
 
             migrationBuilder.DropTable(
                 name: "RoleClaims");
@@ -462,7 +656,19 @@ namespace Web_Shoes.Migrations
                 name: "UserTokens");
 
             migrationBuilder.DropTable(
+                name: "Carts");
+
+            migrationBuilder.DropTable(
                 name: "Wishlists");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Reviews");
 
             migrationBuilder.DropTable(
                 name: "Roles");
