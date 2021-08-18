@@ -24,7 +24,7 @@ namespace Web_Shoes.Controllers
         }
 
 
-        [Route("/usersmanagement")]
+        [Route("/usermanagement")]
         [HttpGet]
         // GET: UserManagementController
         public ActionResult IndexAsync()
@@ -36,12 +36,21 @@ namespace Web_Shoes.Controllers
         }
 
         // GET: UserManagementController/Details/5
-        public ActionResult Details(int id)
+        [Route("/usermanagement/details/{id:guid}")]
+        [HttpGet]
+        public ActionResult Details(string id)
         {
-            return View();
+
+            var userQuery = _context.AppUser.FirstOrDefault(a => a.Id == id);
+
+
+
+            return View(userQuery);
         }
 
         // GET: UserManagementController/Create
+        [Route("/usermanagement/create")]
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
