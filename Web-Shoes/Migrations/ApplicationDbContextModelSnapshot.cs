@@ -208,6 +208,18 @@ namespace Web_Shoes.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
+                            RoleId = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd"
+                        },
+                        new
+                        {
+                            UserId = "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff",
+                            RoleId = "360E601E-92F2-4F08-832B-604A21293258"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -247,6 +259,14 @@ namespace Web_Shoes.Migrations
                     b.HasKey("about_id");
 
                     b.ToTable("About");
+
+                    b.HasData(
+                        new
+                        {
+                            about_id = 1,
+                            about_Description = "string",
+                            about_Img = "string"
+                        });
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.Bills", b =>
@@ -301,6 +321,22 @@ namespace Web_Shoes.Migrations
                     b.HasKey("cg_Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            cg_Id = 1,
+                            cg_Name = "Wonman",
+                            cg_Sale = "",
+                            cg_Type = ""
+                        },
+                        new
+                        {
+                            cg_Id = 2,
+                            cg_Name = "Man",
+                            cg_Sale = "",
+                            cg_Type = ""
+                        });
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.ContactSystem", b =>
@@ -415,6 +451,71 @@ namespace Web_Shoes.Migrations
                     b.HasKey("pd_Id");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            pd_Id = 1,
+                            pd_Brand = "1",
+                            pd_Color = "1",
+                            pd_Description = "1",
+                            pd_Img1 = "1",
+                            pd_Img2 = "1",
+                            pd_Img3 = "1",
+                            pd_Img4 = "1",
+                            pd_Material = "1",
+                            pd_MenuFacturer = "1",
+                            pd_Name = "1",
+                            pd_Price = 10000,
+                            pd_Rate = 1,
+                            pd_ReducePrice = 1000,
+                            pd_ShortDescription = "1",
+                            pd_Size = "1",
+                            pd_Style = "1",
+                            pd_Technologies = "1"
+                        },
+                        new
+                        {
+                            pd_Id = 2,
+                            pd_Brand = "2",
+                            pd_Color = "2",
+                            pd_Description = "2",
+                            pd_Img1 = "2",
+                            pd_Img2 = "2",
+                            pd_Img3 = "2",
+                            pd_Img4 = "2",
+                            pd_Material = "2",
+                            pd_MenuFacturer = "2",
+                            pd_Name = "2",
+                            pd_Price = 10000,
+                            pd_Rate = 2,
+                            pd_ReducePrice = 1000,
+                            pd_ShortDescription = "2",
+                            pd_Size = "2",
+                            pd_Style = "2",
+                            pd_Technologies = "2"
+                        },
+                        new
+                        {
+                            pd_Id = 3,
+                            pd_Brand = "3",
+                            pd_Color = "3",
+                            pd_Description = "3",
+                            pd_Img1 = "3",
+                            pd_Img2 = "3",
+                            pd_Img3 = "3",
+                            pd_Img4 = "3",
+                            pd_Material = "3",
+                            pd_MenuFacturer = "3",
+                            pd_Name = "3",
+                            pd_Price = 10000,
+                            pd_Rate = 3,
+                            pd_ReducePrice = 1000,
+                            pd_ShortDescription = "3",
+                            pd_Size = "3",
+                            pd_Style = "3",
+                            pd_Technologies = "3"
+                        });
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.ProductsInCategories", b =>
@@ -428,6 +529,23 @@ namespace Web_Shoes.Migrations
                     b.HasKey("pic_productId", "pic_CategoriesId");
 
                     b.ToTable("ProductsInCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            pic_productId = 1,
+                            pic_CategoriesId = 1
+                        },
+                        new
+                        {
+                            pic_productId = 2,
+                            pic_CategoriesId = 1
+                        },
+                        new
+                        {
+                            pic_productId = 3,
+                            pic_CategoriesId = 2
+                        });
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.Reviews", b =>
@@ -471,14 +589,30 @@ namespace Web_Shoes.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("AppRole");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd",
+                            ConcurrencyStamp = "f5cd1860-c984-4d39-adcd-5f7379d5212c",
+                            Name = "staff",
+                            Description = "Staff"
+                        },
+                        new
+                        {
+                            Id = "360E601E-92F2-4F08-832B-604A21293258",
+                            ConcurrencyStamp = "6684b7df-1b9c-4e40-a715-21ad42cd5a77",
+                            Name = "admin",
+                            Description = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.AppUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("DoB")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DoB")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -487,6 +621,46 @@ namespace Web_Shoes.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("AppUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3d62b131-3e7a-4467-b9bb-00aaf9f98bd0",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "admin@gmail.com",
+                            NormalizedUserName = "Admin",
+                            PasswordHash = "AQAAAAEAACcQAAAAENtmLQYszmEAolRJi3I4zdWa/0Z/bwhbeFMCChb7Xr71RdjHr1uQvBQ5bmZJe7R/ZA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin",
+                            DoB = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "admin",
+                            LastName = "admin"
+                        },
+                        new
+                        {
+                            Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "31922de8-ea70-44cb-8151-e689898ad463",
+                            Email = "staff@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "staff@gmail.com",
+                            NormalizedUserName = "Staff",
+                            PasswordHash = "AQAAAAEAACcQAAAAELKznmZFpkTxphvNPvc4nXYo3p1LhhZG5odQ9AkLCNDsP2SPYj01voTszaIAl/AIyw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "Staff",
+                            DoB = new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "staff",
+                            LastName = "staff"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

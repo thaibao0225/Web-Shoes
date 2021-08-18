@@ -175,7 +175,7 @@ namespace Web_Shoes.Migrations
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DoB = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DoB = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -314,6 +314,68 @@ namespace Web_Shoes.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "About",
+                columns: new[] { "about_id", "about_Description", "about_Img" },
+                values: new object[] { 1, "string", "string" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "cg_Id", "cg_Name", "cg_Sale", "cg_Type" },
+                values: new object[,]
+                {
+                    { 1, "Wonman", "", "" },
+                    { 2, "Man", "", "" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "pd_Id", "pd_Brand", "pd_Color", "pd_Description", "pd_Img1", "pd_Img2", "pd_Img3", "pd_Img4", "pd_Material", "pd_MenuFacturer", "pd_Name", "pd_Price", "pd_Rate", "pd_ReducePrice", "pd_ShortDescription", "pd_Size", "pd_Style", "pd_Technologies" },
+                values: new object[,]
+                {
+                    { 1, "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", 10000, 1, 1000, "1", "1", "1", "1" },
+                    { 2, "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", 10000, 2, 1000, "2", "2", "2", "2" },
+                    { 3, "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", 10000, 3, 1000, "3", "3", "3", "3" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductsInCategories",
+                columns: new[] { "pic_CategoriesId", "pic_productId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 1, 2 },
+                    { 2, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Description", "Discriminator", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "f5cd1860-c984-4d39-adcd-5f7379d5212c", "Staff", "AppRole", "staff", null },
+                    { "360E601E-92F2-4F08-832B-604A21293258", "6684b7df-1b9c-4e40-a715-21ad42cd5a77", "admin", "AppRole", "admin", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff", 0, "3d62b131-3e7a-4467-b9bb-00aaf9f98bd0", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "admin@gmail.com", "Admin", "AQAAAAEAACcQAAAAENtmLQYszmEAolRJi3I4zdWa/0Z/bwhbeFMCChb7Xr71RdjHr1uQvBQ5bmZJe7R/ZA==", null, false, "", false, "Admin" },
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "31922de8-ea70-44cb-8151-e689898ad463", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "staff@gmail.com", "Staff", "AQAAAAEAACcQAAAAELKznmZFpkTxphvNPvc4nXYo3p1LhhZG5odQ9AkLCNDsP2SPYj01voTszaIAl/AIyw==", null, false, "", false, "Staff" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "360E601E-92F2-4F08-832B-604A21293258", "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff" });
+
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",

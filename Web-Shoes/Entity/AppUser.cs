@@ -10,7 +10,7 @@ namespace Web_Shoes.Entity
     {
         public string FirstName { set; get; }
         public string LastName { set; get; }
-        public string DoB { set; get; }
+        public DateTime DoB { set; get; }
 
     }
 }
