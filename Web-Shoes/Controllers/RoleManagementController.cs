@@ -81,18 +81,32 @@ namespace Web_Shoes.Controllers
         }
 
         // GET: RoleManagementController/Edit/5
-        public ActionResult Edit(int id)
+        [Route("/rolemanagement/edit/{id:guid}")]
+        [HttpGet]
+        public ActionResult Edit(string id)
         {
-            return View();
+            var roleQuery = _context.AppRole.FirstOrDefault(x => x.Id == id);
+
+            return View(roleQuery);
         }
 
         // POST: RoleManagementController/Edit/5
-        [HttpPost]
+        [HttpPost("/rolemanagement/edit/{id:guid}")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(string id, AppRole appRole)
         {
             try
             {
+                var roleQuery = _context.AppRole.FirstOrDefault(a => a.Id == id);
+
+
+                roleQuery.Description = appRole.Description;
+                roleQuery.Name = appRole.Name;
+                roleQuery.NormalizedName = appRole.NormalizedName;
+                roleQuery.ConcurrencyStamp = appRole.ConcurrencyStamp;
+
+                _context.SaveChanges();
+
                 return RedirectToAction(nameof(Index));
             }
             catch
