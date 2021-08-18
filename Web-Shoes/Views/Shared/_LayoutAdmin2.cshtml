@@ -22,10 +22,9 @@
 <body>
 
     <div id="wrapper">
-        @if (IsSectionDefined("scripts"))
-        {
+
             <partial name="_Header-menu-admin-Partial" />
-        }
+        
         
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
@@ -33,10 +32,9 @@
 
 
                 <div>
-                    @if (IsSectionDefined("scripts"))
-                    {
+
                         @RenderBody()
-                    }
+                    
 
                 </div>
 

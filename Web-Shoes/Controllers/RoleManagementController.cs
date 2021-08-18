@@ -29,10 +29,14 @@ namespace Web_Shoes.Controllers
             return View(roleQuery);
         }
 
-        // GET: RoleManagementController/Details/5
-        public ActionResult Details(int id)
+
+       // GET: RoleManagementController/Details/5
+       [Route("/rolemanagement/details/{id:guid?}")]
+        [HttpGet]
+        public ActionResult Details(string id)
         {
-            return View();
+            var roleQuery = _context.AppRole.FirstOrDefault(a => a.Id == id);
+            return View(roleQuery);
         }
 
         // GET: RoleManagementController/Create
