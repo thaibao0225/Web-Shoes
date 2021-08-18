@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Web_Shoes.Data;
+using Web_Shoes.Entity;
 
 namespace Web_Shoes.Controllers
 {
@@ -40,18 +41,37 @@ namespace Web_Shoes.Controllers
         }
 
         // GET: RoleManagementController/Create
+        [Route("/rolemanagement/create")]
+        [HttpGet]
         public ActionResult Create()
         {
+
             return View();
         }
 
         // POST: RoleManagementController/Create
-        [HttpPost]
+        [HttpPost("/rolemanagement/create")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(AppRole appRole)
         {
             try
             {
+                appRole = new AppRole()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Description = appRole.Description,
+                    Name = appRole.Name,
+                    NormalizedName = appRole.NormalizedName,
+                    ConcurrencyStamp = appRole.ConcurrencyStamp
+
+                };
+
+
+                _context.AppRole.Add(appRole);
+
+                await _context.SaveChangesAsync();
+
+
                 return RedirectToAction(nameof(Index));
             }
             catch
