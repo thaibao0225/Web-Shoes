@@ -27,7 +27,7 @@ namespace Web_Shoes.Controllers
         [Route("/usermanagement")]
         [HttpGet]
         // GET: UserManagementController
-        public ActionResult IndexAsync()
+        public ActionResult Index()
         {
             var userQuery = from a in _context.AppUser select a;
 
@@ -84,7 +84,7 @@ namespace Web_Shoes.Controllers
                 _context.AppUser.Add(CreateUser);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(IndexAsync));
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -121,7 +121,7 @@ namespace Web_Shoes.Controllers
 
                 _context.SaveChanges();
 
-                return RedirectToAction(nameof(IndexAsync));
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -130,19 +130,28 @@ namespace Web_Shoes.Controllers
         }
 
         // GET: UserManagementController/Delete/5
-        public ActionResult Delete(int id)
+        [Route("/usermanagement/delete/{id:guid}")]
+        [HttpGet]
+        public ActionResult Delete(string id)
         {
-            return View();
+
+            var userQuery = _context.Users.FirstOrDefault(x => x.Id == id);
+
+            return View(userQuery);
         }
 
         // POST: UserManagementController/Delete/5
-        [HttpPost]
+        [HttpPost("/usermanagement/delete/{id:guid}")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(string id, IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(IndexAsync));
+
+                var userQuery = _context.Users.FirstOrDefault(x => x.Id == id);
+                _context.Users.Remove(userQuery);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
