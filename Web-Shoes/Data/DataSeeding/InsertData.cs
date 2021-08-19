@@ -137,30 +137,31 @@ namespace Web_Shoes.Data.DataSeeding
             var hasher = new PasswordHasher<AppUser>();
 
             builder.Entity<AppUser>().HasData(
-            new AppUser{
+            new AppUser
+            {
                 Id = IdAdmin,
                 UserName = "Admin",
-                NormalizedUserName = "Admin",
-                NormalizedEmail = "admin@gmail.com",
+                NormalizedUserName = "ADMIN@GMAIL.COM",
+                NormalizedEmail = "ADMIN@GMAIL.COM",
                 Email = "admin@gmail.com",
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "123456Aa@"),
-                SecurityStamp = string.Empty,
+                SecurityStamp = Guid.NewGuid().ToString(),
                 FirstName = "admin",
                 LastName = "admin",
-                DoB = new DateTime(2020,01,02)
+                DoB = new DateTime(2020, 01, 02)
 
             },
             new AppUser
             {
                 Id = IdStaff,
                 UserName = "Staff",
-                NormalizedUserName = "Staff",
-                NormalizedEmail = "staff@gmail.com",
+                NormalizedUserName = "STAFF@GMAIL.COM",
+                NormalizedEmail = "STAFF@GMAIL.COM",
                 Email = "staff@gmail.com",
                 EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "123456Aa"),
-                SecurityStamp = string.Empty,
+                PasswordHash = hasher.HashPassword(null, "123456Aa@"),
+                SecurityStamp = Guid.NewGuid().ToString(),
                 FirstName = "staff",
                 LastName = "staff",
                 DoB = new DateTime(2020, 03, 02)

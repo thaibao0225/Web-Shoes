@@ -63,14 +63,13 @@ namespace Web_Shoes.Data
 
 
 
-
-
-
             //builder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
             //builder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRole").HasKey(x => new { x.UserId, x.RoleId });
             //builder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
             //builder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppUserRoleClaims");
             //builder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
+
+
 
 
             builder.Seed();

@@ -754,14 +754,14 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd",
-                            ConcurrencyStamp = "b0c470af-f247-498a-bf2b-4b370db4dfb4",
+                            ConcurrencyStamp = "e11e5c96-c975-4042-b318-5529d440ec8e",
                             Name = "staff",
                             Description = "Staff"
                         },
                         new
                         {
                             Id = "360E601E-92F2-4F08-832B-604A21293258",
-                            ConcurrencyStamp = "6c492882-fa2e-4425-885a-047b78c22bdc",
+                            ConcurrencyStamp = "14949853-da69-41b3-86e0-c2b50dd49939",
                             Name = "admin",
                             Description = "admin"
                         });
@@ -787,15 +787,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "DE544998-A3CC-4E12-ABB4-0642E57BD222",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d7dc24f2-e8b4-4729-be4c-6476852bfe2e",
+                            ConcurrencyStamp = "34968638-7f20-4f74-9dc2-bd56fe395704",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedEmail = "admin@gmail.com",
-                            NormalizedUserName = "Admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG7GoO+q+2AXL/+Og+4osMHOo+j7IlMntlgAWx5VKW833941oGUPCfvF7JP/xN1Y1A==",
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFQGS8vhUzHsUSHcj7QNX3Sk1IdHyz121epGhYlPnFvWrbyVoLtESAelP045Ytrmqw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "",
+                            SecurityStamp = "9ea73673-dccb-4a81-b8d8-d23dca375715",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             DoB = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -806,15 +806,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7948d5b1-e94e-4051-9d8f-9f60582aa7e0",
+                            ConcurrencyStamp = "e909c048-8b0f-43ec-b8cf-73fb56f254bf",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedEmail = "staff@gmail.com",
-                            NormalizedUserName = "Staff",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEcEVJDis2JQ0993g4QArQzxS/WchiFMyDCr85TjTpIW1NxPQRys986RIW2z8EM3DQ==",
+                            NormalizedEmail = "STAFF@GMAIL.COM",
+                            NormalizedUserName = "STAFF@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEApR7hGj/dTSMbofxZH9UtUBwxOXTRWDaH4WJanQFuv0uDyaBAsmwgbyXDgTLNtq/w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "",
+                            SecurityStamp = "c417eda4-5e57-4ae8-992c-bdfc5d82e568",
                             TwoFactorEnabled = false,
                             UserName = "Staff",
                             DoB = new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
