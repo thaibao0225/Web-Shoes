@@ -93,6 +93,7 @@ namespace Web_Shoes.Data
         public DbSet<ProductInCart> ProductInCart { set; get; }
         public DbSet<ProductsInCategories> ProductsInCategories { set; get; }
         public DbSet<ProductInWishlist> ProductInWishlist { set; get; }
+        public DbSet<Web_Shoes.Models.UserInRoleModel> UserInRoleModel { get; set; }
         //public DbSet<AppUserRole> AppUserRole { set; get; }
 
     }

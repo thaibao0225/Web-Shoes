@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Web_Shoes.Migrations
 {
-    public partial class HH : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -112,6 +112,22 @@ namespace Web_Shoes.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserInRoleModel",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NameRole = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserInRoleModel", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -464,8 +480,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Discriminator", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "c907c662-393f-49e1-93d4-1beed7f56a66", "Staff", "AppRole", "staff", null },
-                    { "360E601E-92F2-4F08-832B-604A21293258", "88b4cfcb-8dde-4abb-9c2c-2894bcafaa5f", "admin", "AppRole", "admin", null }
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "b0c470af-f247-498a-bf2b-4b370db4dfb4", "Staff", "AppRole", "staff", null },
+                    { "360E601E-92F2-4F08-832B-604A21293258", "6c492882-fa2e-4425-885a-047b78c22bdc", "admin", "AppRole", "admin", null }
                 });
 
             migrationBuilder.InsertData(
@@ -473,22 +489,19 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "658771FF-AB71-43EA-AD96-0893F460274E", 0, "a563a3a3-82bb-46b7-9481-b5a492fd06d3", "AppUser", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, "1", "1", false, null, null, null, null, null, false, "f76fa0a4-f5ef-4016-bedb-18c3e0ce575e", false, null },
-                    { "A37A6031-61EF-4917-ACA7-916228E16694", 0, "19786e38-4b49-43c5-8fd2-80bbdf0d3d0d", "AppUser", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, "2", "2", false, null, null, null, null, null, false, "b4c020bd-1859-4cf0-81ae-d1daa0f5c73c", false, null },
-                    { "9033DB4C-7C78-4123-8953-2C1957C9068A", 0, "575e42e4-a3af-4390-b3e3-16c42af3e5a7", "AppUser", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, "3", "3", false, null, null, null, null, null, false, "14f104b8-eea0-42a2-803e-c91d7545b884", false, null },
-                    { "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff", 0, "adce939c-a069-4064-87fc-4dbfd0209ac8", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "admin@gmail.com", "Admin", "AQAAAAEAACcQAAAAENodKUkqjyC5pYSdvopeKwyBbLMvlO6OkNan43mLGCKskmYA1hAxzSQFwoLppm990A==", null, false, "", false, "Admin" },
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "00ecfe66-330c-46d2-b5be-6ca9a65f04ad", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "staff@gmail.com", "Staff", "AQAAAAEAACcQAAAAEHbddIwx3bBrYi78FNxhuxOkkmm9EjrTOLEzWtlSUbneJ+TwE0ohF9SJ9Ju153cHsA==", null, false, "", false, "Staff" }
+                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "d7dc24f2-e8b4-4729-be4c-6476852bfe2e", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "admin@gmail.com", "Admin", "AQAAAAEAACcQAAAAEG7GoO+q+2AXL/+Og+4osMHOo+j7IlMntlgAWx5VKW833941oGUPCfvF7JP/xN1Y1A==", null, false, "", false, "Admin" },
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "7948d5b1-e94e-4051-9d8f-9f60582aa7e0", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "staff@gmail.com", "Staff", "AQAAAAEAACcQAAAAEEcEVJDis2JQ0993g4QArQzxS/WchiFMyDCr85TjTpIW1NxPQRys986RIW2z8EM3DQ==", null, false, "", false, "Staff" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Bills",
                 columns: new[] { "bill_Id", "bill_Paid", "bill_UserId" },
-                values: new object[] { 1, 10000, "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff" });
+                values: new object[] { 1, 10000, "DE544998-A3CC-4E12-ABB4-0642E57BD222" });
 
             migrationBuilder.InsertData(
                 table: "Carts",
                 columns: new[] { "cart_Id", "cart_UserID" },
-                values: new object[] { 1, "658771FF-AB71-43EA-AD96-0893F460274E" });
+                values: new object[] { 1, "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff" });
 
             migrationBuilder.InsertData(
                 table: "ProductsInCategories",
@@ -503,21 +516,21 @@ namespace Web_Shoes.Migrations
             migrationBuilder.InsertData(
                 table: "Reviews",
                 columns: new[] { "review_id", "review_Comment", "review_UserId" },
-                values: new object[] { 1, "Good", "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff" });
+                values: new object[] { 1, "Good", "DE544998-A3CC-4E12-ABB4-0642E57BD222" });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "360E601E-92F2-4F08-832B-604A21293258", "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff" },
+                    { "360E601E-92F2-4F08-832B-604A21293258", "DE544998-A3CC-4E12-ABB4-0642E57BD222" },
                     { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Wishlists",
                 columns: new[] { "wl_Id", "wl_UserId" },
-                values: new object[] { 1, "658771FF-AB71-43EA-AD96-0893F460274E" });
+                values: new object[] { 1, "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff" });
 
             migrationBuilder.InsertData(
                 table: "ProductInCart",
@@ -645,6 +658,9 @@ namespace Web_Shoes.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserClaims");
+
+            migrationBuilder.DropTable(
+                name: "UserInRoleModel");
 
             migrationBuilder.DropTable(
                 name: "UserLogins");

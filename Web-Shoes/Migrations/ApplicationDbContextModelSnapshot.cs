@@ -217,7 +217,7 @@ namespace Web_Shoes.Migrations
                         },
                         new
                         {
-                            UserId = "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff",
+                            UserId = "DE544998-A3CC-4E12-ABB4-0642E57BD222",
                             RoleId = "360E601E-92F2-4F08-832B-604A21293258"
                         });
                 });
@@ -293,7 +293,7 @@ namespace Web_Shoes.Migrations
                         {
                             bill_Id = 1,
                             bill_Paid = 10000,
-                            bill_UserId = "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff"
+                            bill_UserId = "DE544998-A3CC-4E12-ABB4-0642E57BD222"
                         });
                 });
 
@@ -317,7 +317,7 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             cart_Id = 1,
-                            cart_UserID = "658771FF-AB71-43EA-AD96-0893F460274E"
+                            cart_UserID = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff"
                         });
                 });
 
@@ -688,7 +688,7 @@ namespace Web_Shoes.Migrations
                         {
                             review_id = 1,
                             review_Comment = "Good",
-                            review_UserId = "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff"
+                            review_UserId = "DE544998-A3CC-4E12-ABB4-0642E57BD222"
                         });
                 });
 
@@ -712,8 +712,33 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             wl_Id = 1,
-                            wl_UserId = "658771FF-AB71-43EA-AD96-0893F460274E"
+                            wl_UserId = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff"
                         });
+                });
+
+            modelBuilder.Entity("Web_Shoes.Models.UserInRoleModel", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameRole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("UserInRoleModel");
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.AppRole", b =>
@@ -729,14 +754,14 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd",
-                            ConcurrencyStamp = "c907c662-393f-49e1-93d4-1beed7f56a66",
+                            ConcurrencyStamp = "b0c470af-f247-498a-bf2b-4b370db4dfb4",
                             Name = "staff",
                             Description = "Staff"
                         },
                         new
                         {
                             Id = "360E601E-92F2-4F08-832B-604A21293258",
-                            ConcurrencyStamp = "88b4cfcb-8dde-4abb-9c2c-2894bcafaa5f",
+                            ConcurrencyStamp = "6c492882-fa2e-4425-885a-047b78c22bdc",
                             Name = "admin",
                             Description = "admin"
                         });
@@ -760,57 +785,15 @@ namespace Web_Shoes.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "658771FF-AB71-43EA-AD96-0893F460274E",
+                            Id = "DE544998-A3CC-4E12-ABB4-0642E57BD222",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a563a3a3-82bb-46b7-9481-b5a492fd06d3",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "f76fa0a4-f5ef-4016-bedb-18c3e0ce575e",
-                            TwoFactorEnabled = false,
-                            DoB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "1",
-                            LastName = "1"
-                        },
-                        new
-                        {
-                            Id = "A37A6031-61EF-4917-ACA7-916228E16694",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "19786e38-4b49-43c5-8fd2-80bbdf0d3d0d",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "b4c020bd-1859-4cf0-81ae-d1daa0f5c73c",
-                            TwoFactorEnabled = false,
-                            DoB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "2",
-                            LastName = "2"
-                        },
-                        new
-                        {
-                            Id = "9033DB4C-7C78-4123-8953-2C1957C9068A",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "575e42e4-a3af-4390-b3e3-16c42af3e5a7",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "14f104b8-eea0-42a2-803e-c91d7545b884",
-                            TwoFactorEnabled = false,
-                            DoB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "3",
-                            LastName = "3"
-                        },
-                        new
-                        {
-                            Id = "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "adce939c-a069-4064-87fc-4dbfd0209ac8",
+                            ConcurrencyStamp = "d7dc24f2-e8b4-4729-be4c-6476852bfe2e",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "Admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAENodKUkqjyC5pYSdvopeKwyBbLMvlO6OkNan43mLGCKskmYA1hAxzSQFwoLppm990A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG7GoO+q+2AXL/+Og+4osMHOo+j7IlMntlgAWx5VKW833941oGUPCfvF7JP/xN1Y1A==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -823,13 +806,13 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "00ecfe66-330c-46d2-b5be-6ca9a65f04ad",
+                            ConcurrencyStamp = "7948d5b1-e94e-4051-9d8f-9f60582aa7e0",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "staff@gmail.com",
                             NormalizedUserName = "Staff",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHbddIwx3bBrYi78FNxhuxOkkmm9EjrTOLEzWtlSUbneJ+TwE0ohF9SJ9Ju153cHsA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEcEVJDis2JQ0993g4QArQzxS/WchiFMyDCr85TjTpIW1NxPQRys986RIW2z8EM3DQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

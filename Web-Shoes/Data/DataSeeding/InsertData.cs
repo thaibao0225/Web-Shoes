@@ -19,32 +19,6 @@ namespace Web_Shoes.Data.DataSeeding
 
 
 
-            builder.Entity<AppUser>().HasData(
-              new AppUser()
-              {
-                  Id = "658771FF-AB71-43EA-AD96-0893F460274E",
-                  FirstName = "1",
-                  LastName = "1",
-
-
-              },
-
-              new AppUser()
-              {
-                  Id = "A37A6031-61EF-4917-ACA7-916228E16694",
-                  FirstName = "2",
-                  LastName = "2",
-
-              },
-
-              new AppUser()
-              {
-                  Id = "9033DB4C-7C78-4123-8953-2C1957C9068A",
-                  FirstName = "3",
-                  LastName = "3",
-
-              }
-              );
 
 
 
@@ -156,7 +130,7 @@ namespace Web_Shoes.Data.DataSeeding
 
 
             var IdStaff = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff";
-            var IdAdmin = "f49e4348-718f-43e3-b1f6-6dc89cfBb5ff";
+            var IdAdmin = "DE544998-A3CC-4E12-ABB4-0642E57BD222";
 
             //Table AppUser 2222222222222222222222222222222222222222222222222222222222222222222
 
@@ -226,12 +200,14 @@ namespace Web_Shoes.Data.DataSeeding
                 new Cart()
                 {
                     cart_Id = 1,
-                    cart_UserID = "658771FF-AB71-43EA-AD96-0893F460274E"
+                    cart_UserID = IdStaff
 
                 });
 
 
             //Table Categories
+
+
 
 
 
@@ -316,7 +292,7 @@ namespace Web_Shoes.Data.DataSeeding
                 new Wishlists()
                 {
                     wl_Id = 1,
-                    wl_UserId = "658771FF-AB71-43EA-AD96-0893F460274E"
+                    wl_UserId = IdStaff
 
                 });
 

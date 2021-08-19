@@ -148,13 +148,80 @@ namespace Web_Shoes.Controllers
             try
             {
 
-                var userQuery = _context.Users.FirstOrDefault(x => x.Id == id);
-                _context.Users.Remove(userQuery);
+                var userQuery = _context.AppUser.FirstOrDefault(x => x.Id == id);
+
+                string aa = userQuery.LastName;
+
+
+                _context.AppUser.Remove(userQuery);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
+                return View();
+            }
+        }
+
+        [BindProperty]
+        public string RoleName { set; get; }
+
+        // GET: RoleManagementController/userinrole/5
+        [Route("/usermanagement/userinrole/{id:guid}")]
+        [HttpGet]
+        public ActionResult UserInRole(string id)
+        {
+            //var roleQuery = _context.AppRole.FirstOrDefault(a => a.Id == id);
+
+
+            var userQuery = _context.AppUser.FirstOrDefault(a => a.Id == id);
+
+            var roleQuery = from a in _context.AppRole select a;
+
+
+            ViewBag.Id = id;
+            ViewBag.UserName = userQuery.UserName;
+            ViewBag.FirstName = userQuery.FirstName;
+            ViewBag.LastName = userQuery.LastName;
+            ViewBag.Email = userQuery.Email;
+
+            return View(roleQuery);
+        }
+
+        // POST: RoleManagementController/userinrole/511
+
+        [HttpPost("/usermanagement/userinrole/{id:guid}")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UserInRoleAsync(string id, IFormCollection collection,AppRole appRole)
+        {
+
+
+            try
+            {
+                var roleQuery = _context.AppRole.FirstOrDefault(a => a.Id == id);
+
+                string idUser = Request.Form["id_User"];
+
+                string RoleName = Request.Form["NameSelect"];
+
+                var roleQueryId = _context.AppRole.FirstOrDefault(a => a.Name == RoleName);
+
+                var createUserRole = new IdentityUserRole<string>
+                {
+                    RoleId = roleQueryId.ToString(),
+                    UserId = idUser
+                };
+
+                _context.UserRoles.Add(createUserRole);
+
+                await _context.SaveChangesAsync();
+
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch 
+            {
+
                 return View();
             }
         }
