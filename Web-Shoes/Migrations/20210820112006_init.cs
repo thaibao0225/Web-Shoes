@@ -451,7 +451,7 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "cg_Id", "cg_Name", "cg_Sale", "cg_Type" },
                 values: new object[,]
                 {
-                    { 1, "Wonman", "", "" },
+                    { 1, "women", "", "" },
                     { 2, "Man", "", "" }
                 });
 
@@ -492,8 +492,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Discriminator", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "360E601E-92F2-4F08-832B-604A21293258", "0b4ca554-295c-4543-86c3-d826e34cdac5", "admin", "AppRole", "admin", null },
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "d93ce3f6-02d1-40e0-a5d7-299a8659f90e", "Staff", "AppRole", "staff", null }
+                    { "360E601E-92F2-4F08-832B-604A21293258", "24f7e4b7-7b4f-4349-ac7c-70a46867dfbf", "admin", "AppRole", "admin", null },
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "9ca53e47-0f8d-4595-96c2-f95a44d3b552", "Staff", "AppRole", "staff", null }
                 });
 
             migrationBuilder.InsertData(
@@ -501,8 +501,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "fa1f4f04-d007-4047-94ea-dc77c66e79bc", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEOT/pXAM24zaN2S3bk6dXJOABM79DBcUKbSJcFUB0I7gUVAMtc3aibDg7oxaplW0Sw==", null, false, "53e049df-1ab6-4f2c-8b63-87d5b38bb96f", false, "Staff" },
-                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "6e34a29d-cd69-41a9-ba0f-06876e3c37f5", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEM4lxwwA54ox0NF9yFeIvd//z0D8Fxs1yVI74Ip6IEjOgPcozzgw4kepiSbpoR0oFw==", null, false, "19dff933-9667-4205-96a3-7804d8ac1b38", false, "Admin" }
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "46136eeb-8970-4288-8a3b-2e06ee5c79ed", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEJMu4s+aoJ73BhZG69greVY/xeUlZKVsu9xgzr3pXRa8FIduXZTc08bHu5IdHl5o1w==", null, false, "9c7d5bed-64fb-406d-8f03-84f13724e94a", false, "Staff" },
+                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "0ed569ec-3f84-47f1-a884-e091455ee498", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEABpPksZdTIflcqNoVQZhGgNN180dRuuFAhH6G4sljjyf4i3YKTmXYG/kPM305gbnQ==", null, false, "4c802996-d7a1-4bc3-b7ac-1dbffa0ef012", false, "Admin" }
                 });
 
             migrationBuilder.InsertData(

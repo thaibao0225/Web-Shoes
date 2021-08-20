@@ -10,7 +10,7 @@ using Web_Shoes.Data;
 namespace Web_Shoes.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210820052026_init")]
+    [Migration("20210820112006_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -347,7 +347,7 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             cg_Id = 1,
-                            cg_Name = "Wonman",
+                            cg_Name = "women",
                             cg_Sale = "",
                             cg_Type = ""
                         },
@@ -1008,14 +1008,14 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd",
-                            ConcurrencyStamp = "d93ce3f6-02d1-40e0-a5d7-299a8659f90e",
+                            ConcurrencyStamp = "9ca53e47-0f8d-4595-96c2-f95a44d3b552",
                             Name = "staff",
                             Description = "Staff"
                         },
                         new
                         {
                             Id = "360E601E-92F2-4F08-832B-604A21293258",
-                            ConcurrencyStamp = "0b4ca554-295c-4543-86c3-d826e34cdac5",
+                            ConcurrencyStamp = "24f7e4b7-7b4f-4349-ac7c-70a46867dfbf",
                             Name = "admin",
                             Description = "admin"
                         });
@@ -1041,15 +1041,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "DE544998-A3CC-4E12-ABB4-0642E57BD222",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6e34a29d-cd69-41a9-ba0f-06876e3c37f5",
+                            ConcurrencyStamp = "0ed569ec-3f84-47f1-a884-e091455ee498",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEM4lxwwA54ox0NF9yFeIvd//z0D8Fxs1yVI74Ip6IEjOgPcozzgw4kepiSbpoR0oFw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEABpPksZdTIflcqNoVQZhGgNN180dRuuFAhH6G4sljjyf4i3YKTmXYG/kPM305gbnQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "19dff933-9667-4205-96a3-7804d8ac1b38",
+                            SecurityStamp = "4c802996-d7a1-4bc3-b7ac-1dbffa0ef012",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             DoB = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1060,15 +1060,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fa1f4f04-d007-4047-94ea-dc77c66e79bc",
+                            ConcurrencyStamp = "46136eeb-8970-4288-8a3b-2e06ee5c79ed",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@GMAIL.COM",
                             NormalizedUserName = "STAFF@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOT/pXAM24zaN2S3bk6dXJOABM79DBcUKbSJcFUB0I7gUVAMtc3aibDg7oxaplW0Sw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJMu4s+aoJ73BhZG69greVY/xeUlZKVsu9xgzr3pXRa8FIduXZTc08bHu5IdHl5o1w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "53e049df-1ab6-4f2c-8b63-87d5b38bb96f",
+                            SecurityStamp = "9c7d5bed-64fb-406d-8f03-84f13724e94a",
                             TwoFactorEnabled = false,
                             UserName = "Staff",
                             DoB = new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),

@@ -8,6 +8,10 @@ namespace Web_Shoes.Controllers
 {
     public class ContactController : Controller
     {
+
+
+        [Route("/contact")]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();

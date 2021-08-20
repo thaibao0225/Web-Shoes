@@ -492,7 +492,7 @@ namespace Web_Shoes.Data.DataSeeding
                 new Categories()
                 {
                     cg_Id = 1,
-                    cg_Name = "Wonman",
+                    cg_Name = "women",
                     cg_Type = "",
                     cg_Sale = ""
 
