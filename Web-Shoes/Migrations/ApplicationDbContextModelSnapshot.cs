@@ -318,6 +318,11 @@ namespace Web_Shoes.Migrations
                         {
                             cart_Id = 1,
                             cart_UserID = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff"
+                        },
+                        new
+                        {
+                            cart_Id = 2,
+                            cart_UserID = "DE544998-A3CC-4E12-ABB4-0642E57BD222"
                         });
                 });
 
@@ -448,6 +453,24 @@ namespace Web_Shoes.Migrations
                     b.ToTable("ProductInCart");
 
                     b.HasData(
+                        new
+                        {
+                            pic_CartId = 2,
+                            pic_ProductId = 1,
+                            pic_amount = 2
+                        },
+                        new
+                        {
+                            pic_CartId = 2,
+                            pic_ProductId = 2,
+                            pic_amount = 3
+                        },
+                        new
+                        {
+                            pic_CartId = 2,
+                            pic_ProductId = 3,
+                            pic_amount = 1
+                        },
                         new
                         {
                             pic_CartId = 1,
@@ -1006,14 +1029,14 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd",
-                            ConcurrencyStamp = "9ca53e47-0f8d-4595-96c2-f95a44d3b552",
+                            ConcurrencyStamp = "243ea8d9-dd2c-4ec8-b01c-a4fbd8082785",
                             Name = "staff",
                             Description = "Staff"
                         },
                         new
                         {
                             Id = "360E601E-92F2-4F08-832B-604A21293258",
-                            ConcurrencyStamp = "24f7e4b7-7b4f-4349-ac7c-70a46867dfbf",
+                            ConcurrencyStamp = "9e55e06d-18eb-4bfb-9be2-a3384f1c4d94",
                             Name = "admin",
                             Description = "admin"
                         });
@@ -1039,15 +1062,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "DE544998-A3CC-4E12-ABB4-0642E57BD222",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0ed569ec-3f84-47f1-a884-e091455ee498",
+                            ConcurrencyStamp = "2121c657-1697-43a9-8047-e73cf3b69713",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEABpPksZdTIflcqNoVQZhGgNN180dRuuFAhH6G4sljjyf4i3YKTmXYG/kPM305gbnQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBt+oXo70KNxpC5aXDhiB7RryAEi252h989ey0Iz3pxC7kex7n4zZH/5n5cxPjL4fw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4c802996-d7a1-4bc3-b7ac-1dbffa0ef012",
+                            SecurityStamp = "382d93bf-fbcd-4d49-931f-99b7187f469d",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             DoB = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1058,15 +1081,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "46136eeb-8970-4288-8a3b-2e06ee5c79ed",
+                            ConcurrencyStamp = "627dd0d2-fdf7-4f20-90c4-69c4a28d4e02",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@GMAIL.COM",
                             NormalizedUserName = "STAFF@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJMu4s+aoJ73BhZG69greVY/xeUlZKVsu9xgzr3pXRa8FIduXZTc08bHu5IdHl5o1w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM3gFiiPffRS/RmsvmGbFCWprvSjhppoXAjoEUHVprBPOK3gKVj6LeoTOt4jgintHg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9c7d5bed-64fb-406d-8f03-84f13724e94a",
+                            SecurityStamp = "6e9a685c-d4e3-4924-a922-7db4870889cb",
                             TwoFactorEnabled = false,
                             UserName = "Staff",
                             DoB = new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),

@@ -479,6 +479,38 @@ namespace Web_Shoes.Data.DataSeeding
                     cart_Id = 1,
                     cart_UserID = IdStaff
 
+                },
+                new Cart()
+                {
+                    cart_Id = 2,
+                    cart_UserID = IdAdmin
+
+                });
+
+
+            //Table Product In Cart
+
+            builder.Entity<ProductInCart>().HasData(
+                new ProductInCart()
+                {
+                     pic_CartId = 2,
+                     pic_ProductId =1,
+                     pic_amount = 2
+
+                },
+                new ProductInCart()
+                {
+                    pic_CartId = 2,
+                    pic_ProductId = 2,
+                    pic_amount = 3
+
+                },
+                new ProductInCart()
+                {
+                    pic_CartId = 2,
+                    pic_ProductId = 3,
+                    pic_amount = 1
+
                 });
 
 

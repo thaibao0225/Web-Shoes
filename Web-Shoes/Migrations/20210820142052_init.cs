@@ -492,8 +492,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Discriminator", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "360E601E-92F2-4F08-832B-604A21293258", "24f7e4b7-7b4f-4349-ac7c-70a46867dfbf", "admin", "AppRole", "admin", null },
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "9ca53e47-0f8d-4595-96c2-f95a44d3b552", "Staff", "AppRole", "staff", null }
+                    { "360E601E-92F2-4F08-832B-604A21293258", "9e55e06d-18eb-4bfb-9be2-a3384f1c4d94", "admin", "AppRole", "admin", null },
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "243ea8d9-dd2c-4ec8-b01c-a4fbd8082785", "Staff", "AppRole", "staff", null }
                 });
 
             migrationBuilder.InsertData(
@@ -501,8 +501,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "46136eeb-8970-4288-8a3b-2e06ee5c79ed", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEJMu4s+aoJ73BhZG69greVY/xeUlZKVsu9xgzr3pXRa8FIduXZTc08bHu5IdHl5o1w==", null, false, "9c7d5bed-64fb-406d-8f03-84f13724e94a", false, "Staff" },
-                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "0ed569ec-3f84-47f1-a884-e091455ee498", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEABpPksZdTIflcqNoVQZhGgNN180dRuuFAhH6G4sljjyf4i3YKTmXYG/kPM305gbnQ==", null, false, "4c802996-d7a1-4bc3-b7ac-1dbffa0ef012", false, "Admin" }
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "627dd0d2-fdf7-4f20-90c4-69c4a28d4e02", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEM3gFiiPffRS/RmsvmGbFCWprvSjhppoXAjoEUHVprBPOK3gKVj6LeoTOt4jgintHg==", null, false, "6e9a685c-d4e3-4924-a922-7db4870889cb", false, "Staff" },
+                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "2121c657-1697-43a9-8047-e73cf3b69713", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEBt+oXo70KNxpC5aXDhiB7RryAEi252h989ey0Iz3pxC7kex7n4zZH/5n5cxPjL4fw==", null, false, "382d93bf-fbcd-4d49-931f-99b7187f469d", false, "Admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -513,7 +513,11 @@ namespace Web_Shoes.Migrations
             migrationBuilder.InsertData(
                 table: "Carts",
                 columns: new[] { "cart_Id", "cart_UserID" },
-                values: new object[] { 1, "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff" });
+                values: new object[,]
+                {
+                    { 2, "DE544998-A3CC-4E12-ABB4-0642E57BD222" },
+                    { 1, "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff" }
+                });
 
             migrationBuilder.InsertData(
                 table: "ProductsInCategories",
@@ -547,7 +551,13 @@ namespace Web_Shoes.Migrations
             migrationBuilder.InsertData(
                 table: "ProductInCart",
                 columns: new[] { "pic_CartId", "pic_ProductId", "pic_amount" },
-                values: new object[] { 1, 1, 10 });
+                values: new object[,]
+                {
+                    { 2, 1, 2 },
+                    { 2, 2, 3 },
+                    { 2, 3, 1 },
+                    { 1, 1, 10 }
+                });
 
             migrationBuilder.InsertData(
                 table: "ProductInWishlist",
