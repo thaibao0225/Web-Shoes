@@ -80,7 +80,6 @@ namespace Web_Shoes.Data
         public DbSet<AppRole> AppRole { set; get; }
         public DbSet<AppUser> AppUser { set; get; }
         public DbSet<Bills> Bills { set; get; }
-        public DbSet<Cart> Cart { set; get; }
         public DbSet<Categories> Categories { set; get; }
         public DbSet<ContactSystem> ContactSystem { set; get; }
         public DbSet<ContactUsers> ContactUsers { set; get; }
@@ -92,6 +91,8 @@ namespace Web_Shoes.Data
         public DbSet<ProductInCart> ProductInCart { set; get; }
         public DbSet<ProductsInCategories> ProductsInCategories { set; get; }
         public DbSet<ProductInWishlist> ProductInWishlist { set; get; }
+        public DbSet<Cart> Cart { set; get; }
+
         public DbSet<Web_Shoes.Models.UserInRoleModel> UserInRoleModel { get; set; }
         //public DbSet<AppUserRole> AppUserRole { set; get; }
 

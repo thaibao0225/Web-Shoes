@@ -7,7 +7,7 @@ namespace Web_Shoes.Entity
 {
     public class Cart
     {
-        public int cart_Id { set; get; }
+        public string cart_Id { set; get; }
         public AppUser AppUserC { get; set; }
         public string cart_UserID { set; get; }
         public List<ProductInCart> ProductInCartC { get; set; }

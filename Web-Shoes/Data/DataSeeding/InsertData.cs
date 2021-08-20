@@ -470,19 +470,22 @@ namespace Web_Shoes.Data.DataSeeding
                     bill_Paid = 10000
                 });
 
+            var IdCart1 = "72309286-ECBB-4D20-AD95-2819D31E3400";
+            var IdCart2 = "D355458F-1DD3-4834-AA28-6DA34B6357FF";
+
 
             //Table Cart
 
             builder.Entity<Cart>().HasData(
                 new Cart()
                 {
-                    cart_Id = 1,
+                    cart_Id = IdCart1,
                     cart_UserID = IdStaff
 
                 },
                 new Cart()
                 {
-                    cart_Id = 2,
+                    cart_Id = IdCart2,
                     cart_UserID = IdAdmin
 
                 });
@@ -493,21 +496,21 @@ namespace Web_Shoes.Data.DataSeeding
             builder.Entity<ProductInCart>().HasData(
                 new ProductInCart()
                 {
-                     pic_CartId = 2,
+                     pic_CartId = IdCart2,
                      pic_ProductId =1,
                      pic_amount = 2
 
                 },
                 new ProductInCart()
                 {
-                    pic_CartId = 2,
+                    pic_CartId = IdCart2,
                     pic_ProductId = 2,
                     pic_amount = 3
 
                 },
                 new ProductInCart()
                 {
-                    pic_CartId = 2,
+                    pic_CartId = IdCart2,
                     pic_ProductId = 3,
                     pic_amount = 1
 
@@ -643,18 +646,7 @@ namespace Web_Shoes.Data.DataSeeding
                     piw_WishlistId = 1
                 });
 
-            //Table ProductInCart
 
-
-
-            builder.Entity<ProductInCart>().HasData(
-                new ProductInCart()
-                {
-                    pic_CartId = 1,
-                    pic_ProductId = 1,
-                    pic_amount = 10,
-
-                });
 
 
             //Table ReviewInproduct

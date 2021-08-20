@@ -43,46 +43,65 @@ namespace Web_Shoes.Controllers
             return View(productDetailQuery);
         }
 
-        [HttpPost("{id}")]
-        public IActionResult Index(int id, int quantity)
+        [Route("/productdetailadd")]
+        [HttpGet("{productid}&{quantity}")]
+        public async Task<IActionResult> Index(int productid, int quantity)
         {
 
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            var userName = User.FindFirstValue(ClaimTypes.Name);
-
-
-            var query = from a in _context.Products
-                        join b in _context.ProductInCart on a.pd_Id equals b.pic_ProductId
-                        join c in _context.Cart on b.pic_CartId equals c.cart_Id
-                        join d in _context.AppUser on c.cart_UserID equals d.Id
-                        select new { a,b, c, d };
+                var userName = User.FindFirstValue(ClaimTypes.Name);
 
 
-            query = query.Where(x => x.d.Id == userId);
+                int quantityProduct = 1;
 
 
 
-            var productInCartModelQuery = query
-                .Select(x => new ProductInCartModel()
+                string cartId = Guid.NewGuid().ToString();
+
+
+                //Create cart
+                var cartCreate = new Cart()
                 {
-                    ProductId = x.a.pd_Id,
-                    ProductName = x.a.pd_Name,
-                    ProductPrice = x.a.pd_Price,
-                    Quantity = x.b.pic_amount,
-                    UserId = x.d.Id
+                    cart_Id = cartId,
+                    cart_UserID = userId
+                };
 
-                });
+                _context.Cart.Add(cartCreate);
+
+               // await _context.SaveChangesAsync();
+
+                //Create ProductInCart
+
+                var ProductInCartCreate = new ProductInCart()
+                {
+                    pic_CartId = cartId,
+                    pic_ProductId = productid,
+                    pic_amount = quantityProduct
+                };
+
+                _context.ProductInCart.Add(ProductInCartCreate);
+
+                await _context.SaveChangesAsync();
+
+                //var productDetailQuery = _context.Products.FirstOrDefault(a => a.pd_Id == id);
+
+
+                return Redirect("/cart");
+            }
+            catch 
+            {
+
+
+                var productDetailQuery = _context.Products.FirstOrDefault(a => a.pd_Id == productid);
 
 
 
-
-
-            //var productDetailQuery = _context.Products.FirstOrDefault(a => a.pd_Id == id);
-
-
-            return View();
+                return View(productDetailQuery);
+            }
+           
         }
 
     }
