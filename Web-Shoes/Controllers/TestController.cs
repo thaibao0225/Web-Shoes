@@ -9,7 +9,7 @@ namespace Web_Shoes.Controllers
     public class TestController : Controller
     {
 
-        [Route("Test")]
+        [Route("/test")]
         public IActionResult Index()
         {
             return View();
