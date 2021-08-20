@@ -35,11 +35,17 @@ namespace Web_Shoes.Controllers
             return View(userQuery);
         }
 
-        // GET: UserManagementController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        //// GET: UserManagementController/Details/5
+        //[Route("/usersmanagement/detail/{id:apha?}/")]
+        //[HttpGet]
+        //public ActionResult Details(string id)
+        //{
+        //    var userQuery = _context.AppUser.Select(s => s.Id == id);  ;
+
+
+
+        //    return View(userQuery);
+        //}
 
         // GET: UserManagementController/Create
         public ActionResult Create()

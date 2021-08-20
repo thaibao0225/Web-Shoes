@@ -10,8 +10,8 @@ using Web_Shoes.Data;
 namespace Web_Shoes.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210817055756_init")]
-    partial class init
+    [Migration("20210817183716_HH")]
+    partial class HH
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

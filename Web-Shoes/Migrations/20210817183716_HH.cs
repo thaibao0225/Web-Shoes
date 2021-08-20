@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Web_Shoes.Migrations
 {
-    public partial class init : Migration
+    public partial class HH : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

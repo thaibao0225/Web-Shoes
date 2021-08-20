@@ -54,6 +54,8 @@ namespace Web_Shoes.Controllers
             return View();
         }
 
+
+
         [Route("productmanagement/Create")]
         // GET: ProductManagementController/Create
         [HttpGet]

@@ -41,7 +41,8 @@ namespace Web_Shoes.Data
                 }
             }
 
-
+            //dotnet ef migrations add[migration name]
+            //dotnet ef database update
 
             builder.ApplyConfiguration(new AboutConfigurations());
             builder.ApplyConfiguration(new AppRoleConfigurations());
