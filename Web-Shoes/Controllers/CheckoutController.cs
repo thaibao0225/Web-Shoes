@@ -8,6 +8,11 @@ namespace Web_Shoes.Controllers
 {
     public class CheckoutController : Controller
     {
+
+
+
+        [Route("/checkout")]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-
+    int sumprice = 0;
 }
 
 
@@ -84,7 +84,18 @@
                         </div>
                         <div class="one-eight text-center">
                             <div class="display-tc">
-                                <span class="price">$@(@item.ProductPrice*@item.Quantity)</span>
+                                <span class="price">
+                                    @{ 
+                                        int a = item.ProductPrice;
+                                        int b = item.Quantity;
+
+                                        int sum = a * b;
+
+                                        sumprice += sum;
+
+                                        <a> $@sumprice</a>
+                                    }
+                                </span>
                             </div>
                         </div>
                         <div class="one-eight text-center">
@@ -93,7 +104,7 @@
                             </div>
                         </div>
                     </div>
-                }
+}
 
 
             </div>
@@ -109,7 +120,7 @@
                                         <input type="text" name="quantity" class="form-control input-number" placeholder="Your Coupon Number...">
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="submit" value="Apply Coupon" class="btn btn-primary">
+                                        <a href="#" class="btn btn-primary">Paid</a> 
                                     </div>
                                 </div>
                             </form>
@@ -117,12 +128,12 @@
                         <div class="col-sm-4 text-center">
                             <div class="total">
                                 <div class="sub">
-                                    <p><span>Subtotal:</span> <span>$200.00</span></p>
+                                    <p><span>Subtotal:</span> <span>$@sumprice</span></p>
                                     <p><span>Delivery:</span> <span>$0.00</span></p>
-                                    <p><span>Discount:</span> <span>$45.00</span></p>
+                                    <p><span>Discount:</span> <span>$0.00</span></p>
                                 </div>
                                 <div class="grand-total">
-                                    <p><span><strong>Total:</strong></span> <span>$450.00</span></p>
+                                    <p><span><strong>Total:</strong></span> <span>$@sumprice</span></p>
                                 </div>
                             </div>
                         </div>
