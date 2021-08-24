@@ -18,11 +18,6 @@ namespace Web_Shoes.Data.DataSeeding
 
 
 
-
-
-
-
-
             //Table Products
             builder.Entity<Products>().HasData(
                 new Products()
@@ -379,8 +374,9 @@ namespace Web_Shoes.Data.DataSeeding
                 new About()
                 {
                     about_id=1,
-                    about_Img="string",
-                    about_Description="string"
+                    about_Url= "https://www.youtube.com/watch?v=F1vcruph8JA",
+                    about_Title = "Footwear the leading eCommerce Store around the Globe",
+                    about_Description = "The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way. \n \n When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove,the headline of Alphabet Village and the subline of her own road,the Line Lane.Pityful a rethoric question ran over her cheek,then she continued her way."
                 });
 
             var IdRoleStaff = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd";
@@ -551,7 +547,7 @@ namespace Web_Shoes.Data.DataSeeding
                 new ContactSystem()
                 {
                     Contact_Id = 1,
-                    Contact_Address = "HCM",
+                    Contact_Address = " 123, An Lac A Ward, Binh Tan District, HCM",
                     Contact_Phone = "0123456789",
                     Contact_Email = "admin@gmail.com",
                     Contact_Website = "https://shoes.com"

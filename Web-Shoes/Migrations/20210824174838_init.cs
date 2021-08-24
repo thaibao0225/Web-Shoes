@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Web_Shoes.Migrations
 {
-    public partial class inti : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,8 @@ namespace Web_Shoes.Migrations
                 {
                     about_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    about_Img = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    about_Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    about_Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     about_Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -442,8 +443,8 @@ namespace Web_Shoes.Migrations
 
             migrationBuilder.InsertData(
                 table: "About",
-                columns: new[] { "about_id", "about_Description", "about_Img" },
-                values: new object[] { 1, "string", "string" });
+                columns: new[] { "about_id", "about_Description", "about_Title", "about_Url" },
+                values: new object[] { 1, "The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way. \n \n When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove,the headline of Alphabet Village and the subline of her own road,the Line Lane.Pityful a rethoric question ran over her cheek,then she continued her way.", "Footwear the leading eCommerce Store around the Globe", "https://www.youtube.com/watch?v=F1vcruph8JA" });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -457,7 +458,7 @@ namespace Web_Shoes.Migrations
             migrationBuilder.InsertData(
                 table: "ContactSystems",
                 columns: new[] { "Contact_Id", "Contact_Address", "Contact_Email", "Contact_Phone", "Contact_Website" },
-                values: new object[] { 1, "HCM", "admin@gmail.com", "0123456789", "https://shoes.com" });
+                values: new object[] { 1, " 123, P An Lạc A, Quận Bình Tân, HCM", "admin@gmail.com", "0123456789", "https://shoes.com" });
 
             migrationBuilder.InsertData(
                 table: "ContactUsers",
@@ -491,8 +492,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Discriminator", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "360E601E-92F2-4F08-832B-604A21293258", "6ab2c8fc-2192-4112-ab8a-703c29926dc4", "admin", "AppRole", "admin", null },
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "7ee7e6ca-e926-4d7d-82ea-b166db9e3a57", "Staff", "AppRole", "staff", null }
+                    { "360E601E-92F2-4F08-832B-604A21293258", "918ddec3-35d8-4f7e-913e-352e3818ec0b", "admin", "AppRole", "admin", null },
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "06fa6dd7-4ba5-49fa-8656-c4ab48664121", "Staff", "AppRole", "staff", null }
                 });
 
             migrationBuilder.InsertData(
@@ -500,8 +501,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "32d5c8e2-8ddd-4461-93b3-27d63a6e4cb2", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEG6XWfyz1ST+/d+nm/fILLFNmOPUPhdniCcYGIahvTUKmoHJSOrHrLdeOMqzUAHCKg==", null, false, "df272baf-78b1-4bcc-81b1-f1ae6247ad2f", false, "Staff" },
-                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "39e05d38-6f4c-4dee-b9b3-8792e91bd568", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEHDoyuZP/xzWcuPqhRFKDMooKtwbNhIbIIlH5uEZfmPlWwccdYaJQ2ApXpFxB24iMw==", null, false, "2fade997-99f7-43ec-b3e4-f8dad354c0ab", false, "Admin" }
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "f2f58653-93e8-4ad6-9b34-44dfe3e94f37", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAELPHQT1HrBIQTeKjEQlORpBMcDKM7u7enc+wIt+s01IXIzGxra5603pfDY2wC2S7rA==", null, false, "516cfa29-6126-4ace-a877-c3f0e9d7cf73", false, "Staff" },
+                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "95897710-4114-4884-9725-a415a1340835", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEIf60Rq7x6yysLr8RzBq7CMSwvszSatV71q1zw/v1PLwcdYrN9VT7CL0ArxhlIcyzQ==", null, false, "8f4eb042-ca32-4ae6-a5b2-ba9b8827bef2", false, "Admin" }
                 });
 
             migrationBuilder.InsertData(

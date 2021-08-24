@@ -10,8 +10,8 @@ using Web_Shoes.Data;
 namespace Web_Shoes.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210821074448_inti")]
-    partial class inti
+    [Migration("20210824174838_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -255,7 +255,10 @@ namespace Web_Shoes.Migrations
                     b.Property<string>("about_Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("about_Img")
+                    b.Property<string>("about_Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("about_Url")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("about_id");
@@ -266,8 +269,9 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             about_id = 1,
-                            about_Description = "string",
-                            about_Img = "string"
+                            about_Description = "The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way. \n \n When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove,the headline of Alphabet Village and the subline of her own road,the Line Lane.Pityful a rethoric question ran over her cheek,then she continued her way.",
+                            about_Title = "Footwear the leading eCommerce Store around the Globe",
+                            about_Url = "https://www.youtube.com/watch?v=F1vcruph8JA"
                         });
                 });
 
@@ -390,7 +394,7 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             Contact_Id = 1,
-                            Contact_Address = "HCM",
+                            Contact_Address = " 123, P An Lạc A, Quận Bình Tân, HCM",
                             Contact_Email = "admin@gmail.com",
                             Contact_Phone = "0123456789",
                             Contact_Website = "https://shoes.com"
@@ -1023,14 +1027,14 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd",
-                            ConcurrencyStamp = "7ee7e6ca-e926-4d7d-82ea-b166db9e3a57",
+                            ConcurrencyStamp = "06fa6dd7-4ba5-49fa-8656-c4ab48664121",
                             Name = "staff",
                             Description = "Staff"
                         },
                         new
                         {
                             Id = "360E601E-92F2-4F08-832B-604A21293258",
-                            ConcurrencyStamp = "6ab2c8fc-2192-4112-ab8a-703c29926dc4",
+                            ConcurrencyStamp = "918ddec3-35d8-4f7e-913e-352e3818ec0b",
                             Name = "admin",
                             Description = "admin"
                         });
@@ -1056,15 +1060,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "DE544998-A3CC-4E12-ABB4-0642E57BD222",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "39e05d38-6f4c-4dee-b9b3-8792e91bd568",
+                            ConcurrencyStamp = "95897710-4114-4884-9725-a415a1340835",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHDoyuZP/xzWcuPqhRFKDMooKtwbNhIbIIlH5uEZfmPlWwccdYaJQ2ApXpFxB24iMw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIf60Rq7x6yysLr8RzBq7CMSwvszSatV71q1zw/v1PLwcdYrN9VT7CL0ArxhlIcyzQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2fade997-99f7-43ec-b3e4-f8dad354c0ab",
+                            SecurityStamp = "8f4eb042-ca32-4ae6-a5b2-ba9b8827bef2",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             DoB = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1075,15 +1079,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "32d5c8e2-8ddd-4461-93b3-27d63a6e4cb2",
+                            ConcurrencyStamp = "f2f58653-93e8-4ad6-9b34-44dfe3e94f37",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@GMAIL.COM",
                             NormalizedUserName = "STAFF@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG6XWfyz1ST+/d+nm/fILLFNmOPUPhdniCcYGIahvTUKmoHJSOrHrLdeOMqzUAHCKg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELPHQT1HrBIQTeKjEQlORpBMcDKM7u7enc+wIt+s01IXIzGxra5603pfDY2wC2S7rA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "df272baf-78b1-4bcc-81b1-f1ae6247ad2f",
+                            SecurityStamp = "516cfa29-6126-4ace-a877-c3f0e9d7cf73",
                             TwoFactorEnabled = false,
                             UserName = "Staff",
                             DoB = new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
