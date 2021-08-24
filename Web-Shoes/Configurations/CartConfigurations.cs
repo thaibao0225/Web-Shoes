@@ -14,6 +14,8 @@ namespace Web_Shoes.Configurations
         {
             builder.ToTable("Carts");
             builder.HasKey(t => new { t.cart_Id });
+            builder.HasOne(t => t.AppUserC).WithMany(ur => ur.CartU)
+     .HasForeignKey(pc => pc.cart_UserID);
         }
     }
 }

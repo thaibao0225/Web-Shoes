@@ -14,6 +14,8 @@ namespace Web_Shoes.Configurations
         {
             builder.ToTable("Wishlists");
             builder.HasKey(t => new { t.wl_Id });
+            builder.HasOne(t => t.UserW).WithMany(ur => ur.WishlistsU)
+                .HasForeignKey(pc => pc.wl_UserId);
 
         }
     }

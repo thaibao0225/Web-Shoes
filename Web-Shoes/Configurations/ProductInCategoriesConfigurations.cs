@@ -14,7 +14,10 @@ namespace Web_Shoes.Configurations
         {
             builder.ToTable("ProductsInCategories");
             builder.HasKey(t => new { t.pic_productId,t.pic_CategoriesId });
-
+            builder.HasOne(t => t.ProductsPIC).WithMany(ur => ur.ProductsInCategoriesP)
+     .HasForeignKey(pc => pc.pic_productId);
+            builder.HasOne(t => t.CategoriesPIC).WithMany(ur => ur.ProductsInCategoriesC)
+     .HasForeignKey(pc => pc.pic_CategoriesId);
         }
     }
 }

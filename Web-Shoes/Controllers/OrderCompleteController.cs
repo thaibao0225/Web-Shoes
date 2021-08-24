@@ -8,6 +8,10 @@ namespace Web_Shoes.Controllers
 {
     public class OrderCompleteController : Controller
     {
+
+
+        [Route("/OrderComplete")]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();

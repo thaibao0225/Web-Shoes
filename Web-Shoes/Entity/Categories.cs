@@ -11,6 +11,8 @@ namespace Web_Shoes.Entity
         public string cg_Name { set; get; }
         public string cg_Type { set; get; }
         public string cg_Sale { set; get; }
+        public List<ProductsInCategories> ProductsInCategoriesC { get; set; }
+
 
     }
 }

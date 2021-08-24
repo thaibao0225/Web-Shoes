@@ -58,6 +58,10 @@ namespace Web_Shoes.Entity
 
         public string pd_Technologies { set; get; }
 
+        public List<ProductsInCategories> ProductsInCategoriesP { get; set; }
+        public List<ProductInWishlist> ProductInWishlistP { get; set; }
+        public List<ProductInCart> ProductInCartP { get; set; }
+        public List<ReviewInproduct> ReviewInproductP { get; set; }
 
 
     }
