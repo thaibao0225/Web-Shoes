@@ -30,16 +30,26 @@ namespace Web_Shoes.Controllers
             return View(about);
         }
 
-        [HttpGet("/aboutmanagement/edit/")]
+        [Route("/aboutmanagement")]
+        [HttpGet]
+        public IActionResult IndexAdmin()
+        {
+            var about = from a in _context.About select a;
+
+            return View(about);
+        }
+
+
+        [HttpGet("/aboutmanagement/edit/{id:int?}")]
         // GET: ProductManagementController/Edit/5
         public ActionResult Edit(int id)
         {
             try
             {
 
-                //var productQuery = _context.Products.FirstOrDefault(x => x.pd_Id == id);
+                var aboutQuery = _context.About.FirstOrDefault(x => x.about_id == id);
 
-                return View();
+                return View(aboutQuery);
             }
             catch (Exception)
             {
@@ -53,13 +63,21 @@ namespace Web_Shoes.Controllers
         // POST: ProductManagementController/Edit/5
         [HttpPost("/aboutmanagement/edit/{id:int?}")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, About productModel)
+        public ActionResult Edit(int id, About about)
         {
             try
             {
+                var aboutQuery = _context.About.FirstOrDefault(x => x.about_id == id);
 
 
-                return RedirectToAction(nameof(Index));
+                aboutQuery.about_Url = about.about_Url;
+                aboutQuery.about_Title = about.about_Title;
+                aboutQuery.about_Description = about.about_Description;
+
+                _context.SaveChanges();
+
+
+                return RedirectToAction(nameof(IndexAdmin));
             }
             catch
             {
