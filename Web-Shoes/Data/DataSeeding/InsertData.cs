@@ -574,18 +574,35 @@ namespace Web_Shoes.Data.DataSeeding
 
 
 
-            
 
 
-            //Table Reviews
+
+            //Table Reviews new DateTime(2020, 01, 02)
 
 
             builder.Entity<Reviews>().HasData(
                 new Reviews()
                 {
                     review_id = 1,
-                    review_Comment = "Good",
-                    review_UserId = IdAdmin
+                    review_Comment = "Good1",
+                    review_UserId = IdAdmin,
+                    review_UploadTime = new DateTime(2020, 01, 02)
+
+                },
+                new Reviews()
+                {
+                    review_id = 2,
+                    review_Comment = "Good2",
+                    review_UserId = IdStaff,
+                    review_UploadTime = new DateTime(2020, 01, 02)
+
+                },
+                new Reviews()
+                {
+                    review_id = 3,
+                    review_Comment = "Good3",
+                    review_UserId = IdAdmin,
+                    review_UploadTime = new DateTime(2020, 01, 02)
 
                 });
 
@@ -654,6 +671,16 @@ namespace Web_Shoes.Data.DataSeeding
                 {
                     rip_ProductId = 1,
                     rip_ReviewId = 1,
+                },
+                new ReviewInproduct()
+                {
+                    rip_ProductId = 1,
+                    rip_ReviewId = 2,
+                },
+                new ReviewInproduct()
+                {
+                    rip_ProductId = 1,
+                    rip_ReviewId = 3,
                 });
 
 

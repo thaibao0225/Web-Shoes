@@ -250,7 +250,8 @@ namespace Web_Shoes.Migrations
                     review_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     review_Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    review_UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    review_UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    review_UploadTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -458,7 +459,7 @@ namespace Web_Shoes.Migrations
             migrationBuilder.InsertData(
                 table: "ContactSystems",
                 columns: new[] { "Contact_Id", "Contact_Address", "Contact_Email", "Contact_Phone", "Contact_Website" },
-                values: new object[] { 1, " 123, P An Lạc A, Quận Bình Tân, HCM", "admin@gmail.com", "0123456789", "https://shoes.com" });
+                values: new object[] { 1, " 123, An Lac A Ward, Binh Tan District, HCM", "admin@gmail.com", "0123456789", "https://shoes.com" });
 
             migrationBuilder.InsertData(
                 table: "ContactUsers",
@@ -492,8 +493,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Discriminator", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "360E601E-92F2-4F08-832B-604A21293258", "918ddec3-35d8-4f7e-913e-352e3818ec0b", "admin", "AppRole", "admin", null },
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "06fa6dd7-4ba5-49fa-8656-c4ab48664121", "Staff", "AppRole", "staff", null }
+                    { "360E601E-92F2-4F08-832B-604A21293258", "cbed7eb2-497a-4349-8dc5-d058042043cd", "admin", "AppRole", "admin", null },
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "fddd38dd-2d24-4a2f-8b38-41d6bd0f5834", "Staff", "AppRole", "staff", null }
                 });
 
             migrationBuilder.InsertData(
@@ -501,8 +502,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "f2f58653-93e8-4ad6-9b34-44dfe3e94f37", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAELPHQT1HrBIQTeKjEQlORpBMcDKM7u7enc+wIt+s01IXIzGxra5603pfDY2wC2S7rA==", null, false, "516cfa29-6126-4ace-a877-c3f0e9d7cf73", false, "Staff" },
-                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "95897710-4114-4884-9725-a415a1340835", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEIf60Rq7x6yysLr8RzBq7CMSwvszSatV71q1zw/v1PLwcdYrN9VT7CL0ArxhlIcyzQ==", null, false, "8f4eb042-ca32-4ae6-a5b2-ba9b8827bef2", false, "Admin" }
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "0667cdc5-25d7-4386-9a22-8ed510e4d83e", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEKndzWLJklJbk8ylQqxkdGegQ7jjs6wlumsvCv9+/KibaUmgxnl+WIXsOG3n/SAfDQ==", null, false, "8e9e69ad-e461-4a9e-b99e-7d5c1f29805c", false, "Staff" },
+                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "88fcb77f-3a24-4153-bd33-00b41c25b16e", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEJ5wzWEv5ub9nkl+9PharzFDFvDI0pSE+RN6wpKL9YQm0tfekpaaFsq9acvHXPRbQQ==", null, false, "51a6e732-e04c-4794-9e87-607bf68cf7cc", false, "Admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -531,8 +532,13 @@ namespace Web_Shoes.Migrations
 
             migrationBuilder.InsertData(
                 table: "Reviews",
-                columns: new[] { "review_id", "review_Comment", "review_UserId" },
-                values: new object[] { 1, "Good", "DE544998-A3CC-4E12-ABB4-0642E57BD222" });
+                columns: new[] { "review_id", "review_Comment", "review_UploadTime", "review_UserId" },
+                values: new object[,]
+                {
+                    { 1, "Good1", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "DE544998-A3CC-4E12-ABB4-0642E57BD222" },
+                    { 3, "Good3", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "DE544998-A3CC-4E12-ABB4-0642E57BD222" },
+                    { 2, "Good2", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff" }
+                });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
@@ -566,7 +572,12 @@ namespace Web_Shoes.Migrations
             migrationBuilder.InsertData(
                 table: "ReviewInproduct",
                 columns: new[] { "rip_ProductId", "rip_ReviewId" },
-                values: new object[] { 1, 1 });
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 1, 3 },
+                    { 1, 2 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bills_bill_UserId",

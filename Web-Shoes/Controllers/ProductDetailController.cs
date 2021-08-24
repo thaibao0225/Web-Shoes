@@ -39,8 +39,37 @@ namespace Web_Shoes.Controllers
             var productDetailQuery = _context.Products.FirstOrDefault(a => a.pd_Id == id);
 
 
+            ViewBag.Id = productDetailQuery.pd_Id;
+            ViewBag.Img1 = productDetailQuery.pd_Img1;
+            ViewBag.Img2 = productDetailQuery.pd_Img2;
+            ViewBag.Img3 = productDetailQuery.pd_Img3;
+            ViewBag.Img4 = productDetailQuery.pd_Img4;
 
-            return View(productDetailQuery);
+            ViewBag.NameProduct = productDetailQuery.pd_Name;
+            ViewBag.Price = productDetailQuery.pd_Price;
+            ViewBag.Rate = productDetailQuery.pd_Rate;
+            ViewBag.ShortDescription = productDetailQuery.pd_ShortDescription;
+            ViewBag.Description = productDetailQuery.pd_Description;
+
+            var review = from a in _context.AppUser
+                         join b in _context.Reviews on a.Id equals b.review_UserId
+                         join c in _context.ReviewInproduct on b.review_id equals c.rip_ReviewId
+                         join d in _context.Products on c.rip_ProductId equals d.pd_Id
+                         select new {a,b,c,d };
+
+            review = review.Where(x => x.d.pd_Id == id);
+
+            var reviewQuery = review.Select(x => new ReviewModel()
+            { 
+                review_id = x.b.review_id,
+                review_UserId = x.a.Id,
+                review_ProductId = x.d.pd_Id,
+                review_Comment = x.b.review_Comment,
+                review_UserName = x.a.UserName,
+                review_UploadTime = x.b.review_UploadTime
+            });
+
+            return View(reviewQuery);
         }
 
         [Route("/productdetailadd")]
