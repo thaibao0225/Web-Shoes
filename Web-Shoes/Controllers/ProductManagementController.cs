@@ -49,9 +49,11 @@ namespace Web_Shoes.Controllers
 
 
         // GET: ProductManagementController/Details/5
+        [HttpGet("/productmanagement/details/{id:int?}/")]
         public ActionResult Details(int id)
         {
-            return View();
+            var productQuery = _context.Products.FirstOrDefault(x => x.pd_Id == id);
+            return View(productQuery);
         }
 
         [Route("productmanagement/Create")]
