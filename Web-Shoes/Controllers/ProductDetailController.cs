@@ -16,7 +16,6 @@ namespace Web_Shoes.Controllers
     {
 
         private readonly ApplicationDbContext _context;
-
         private readonly SignInManager<AppUser> _SignInManager;
         private readonly UserManager<AppUser> _UserManager;
 
@@ -51,16 +50,20 @@ namespace Web_Shoes.Controllers
             ViewBag.ShortDescription = productDetailQuery.pd_ShortDescription;
             ViewBag.Description = productDetailQuery.pd_Description;
 
+            //ViewBag.UrlWeb = HttpContext.Current.Request.Url.AbsoluteUri;
+            
+
+
             var review = from a in _context.AppUser
                          join b in _context.Reviews on a.Id equals b.review_UserId
                          join c in _context.ReviewInproduct on b.review_id equals c.rip_ReviewId
                          join d in _context.Products on c.rip_ProductId equals d.pd_Id
-                         select new {a,b,c,d };
+                         select new { a, b, c, d };
 
             review = review.Where(x => x.d.pd_Id == id);
 
             var reviewQuery = review.Select(x => new ReviewModel()
-            { 
+            {
                 review_id = x.b.review_id,
                 review_UserId = x.a.Id,
                 review_ProductId = x.d.pd_Id,
@@ -100,7 +103,7 @@ namespace Web_Shoes.Controllers
 
                 _context.Cart.Add(cartCreate);
 
-               // await _context.SaveChangesAsync();
+                // await _context.SaveChangesAsync();
 
                 //Create ProductInCart
 
@@ -120,7 +123,7 @@ namespace Web_Shoes.Controllers
 
                 return Redirect("/cart");
             }
-            catch 
+            catch
             {
 
 
@@ -130,8 +133,66 @@ namespace Web_Shoes.Controllers
 
                 return View(productDetailQuery);
             }
-           
+
         }
+
+        [Route("/productcomment")]
+        [HttpPost]
+        public async Task<IActionResult> Comment()
+        {
+            
+            try
+            {
+
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                var userName = User.FindFirstValue(ClaimTypes.Name);
+
+                string reviewId = Guid.NewGuid().ToString();
+
+                var reviews = new Reviews()
+                {
+                    review_id = reviewId,
+                    review_Comment = Request.Form["comment"],
+                    review_UserId = userId,
+                    review_UploadTime = DateTime.Now
+                };
+
+
+
+                string idproduct = Request.Form["idproduct"];
+                
+                int idProductInt = Int32.Parse(idproduct);
+
+                _context.Reviews.Add(reviews);
+
+                var reviewInProduct = new ReviewInproduct()
+                {
+                    rip_ProductId = idProductInt,
+                    rip_ReviewId = reviewId
+                };
+                _context.ReviewInproduct.Add(reviewInProduct);
+
+                
+                await _context.SaveChangesAsync();
+
+                return Redirect("/productdetail?id=" + idproduct);
+            }
+            catch
+            {
+                ViewBag.thongbao = "Cann't create";
+                return View();
+            }
+
+
+
+
+
+
+
+
+        }
+
 
     }
 }

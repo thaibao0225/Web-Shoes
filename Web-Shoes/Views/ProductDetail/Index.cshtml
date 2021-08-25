@@ -220,7 +220,14 @@
                                                 </div>
                                             }
 
-
+                                            <div class="review">
+                                                <form asp-controller="ProductDetail" asp-action="Comment" method="post">
+                                                    <label>User: </label>
+                                                    <input type="text" name="idproduct" value="@ViewBag.Id" hidden/>
+                                                    <input type="text" name="comment" value="" />
+                                                    <input type="submit" name="name" value="Comment" />
+                                                </form>
+                                            </div>
 
 
 

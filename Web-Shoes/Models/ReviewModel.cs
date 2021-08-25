@@ -7,7 +7,7 @@ namespace Web_Shoes.Models
 {
     public class ReviewModel
     {
-        public int review_id { set; get; }
+        public string review_id { set; get; }
         public string review_Comment { set; get; }
         public string review_UserId { set; get; }
         public int review_ProductId { set; get; }

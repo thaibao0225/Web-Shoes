@@ -1,6 +1,6 @@
 ﻿@{
 
-    Layout = "_LayoutAdmin";
+    Layout = "_Layout";
 }
 
 
@@ -12,7 +12,11 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <img src="https://drive.google.com/uc?export=download&id=1FPqHYAwfLV5SetqQA3r7aKmI8RpOPfsE" alt="Alternate Text" />
+        
+
+        <form asp-action="search" method="post">
+            <input type="submit" name="submit" value="Submit" />
+        </form>
     </div>
 
 </div>
