@@ -30,20 +30,6 @@ namespace Web_Shoes.Controllers
         }
 
 
-        [Route("/search")]
-        [HttpPost]
-        public IActionResult search()
-        {
-            string search = Request.Form["search"];
 
-            var searchQuery = _context.Products.Where(a => a.pd_Name.Contains("a"));
-
-            foreach (var item in searchQuery)
-            {
-                string aaa = item.pd_Name;
-            }
-
-            return Redirect("/");
-        }
     }
 }
