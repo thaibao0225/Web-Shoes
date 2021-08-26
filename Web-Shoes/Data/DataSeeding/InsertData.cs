@@ -494,22 +494,27 @@ namespace Web_Shoes.Data.DataSeeding
                 {
                      pic_CartId = IdCart2,
                      pic_ProductId =1,
-                     pic_amount = 2
+                     pic_amount = 2,
+                     pic_size = "7",
+                     pic_color = "blue"
 
                 },
                 new ProductInCart()
                 {
                     pic_CartId = IdCart2,
                     pic_ProductId = 2,
-                    pic_amount = 3
+                    pic_amount = 3,
+                    pic_size = "7.5",
+                    pic_color = "blue"
 
                 },
                 new ProductInCart()
                 {
                     pic_CartId = IdCart2,
                     pic_ProductId = 3,
-                    pic_amount = 1
-
+                    pic_amount = 1,
+                    pic_size = "8",
+                    pic_color = "blue"
                 });
 
 
@@ -572,20 +577,41 @@ namespace Web_Shoes.Data.DataSeeding
                 });
 
 
+            var ReviewId1 = "EEBA6608-AB75-4E83-909F-604B1A06F16C";
+
+            var ReviewId2 = "9EED8607-D2BB-45EE-AEE3-C59D858A7F97";
+
+            var ReviewId3 = "C2A543C2-B1E2-4DC5-A131-9137E4673FA6";
 
 
-            
 
 
-            //Table Reviews
+            //Table Reviews new DateTime(2020, 01, 02)
 
 
             builder.Entity<Reviews>().HasData(
                 new Reviews()
                 {
-                    review_id = 1,
-                    review_Comment = "Good",
-                    review_UserId = IdAdmin
+                    review_id = ReviewId1,
+                    review_Comment = "Good1",
+                    review_UserId = IdAdmin,
+                    review_UploadTime = new DateTime(2020, 01, 02)
+
+                },
+                new Reviews()
+                {
+                    review_id = ReviewId2,
+                    review_Comment = "Good2",
+                    review_UserId = IdStaff,
+                    review_UploadTime = new DateTime(2020, 01, 02)
+
+                },
+                new Reviews()
+                {
+                    review_id = ReviewId3,
+                    review_Comment = "Good3",
+                    review_UserId = IdAdmin,
+                    review_UploadTime = new DateTime(2020, 01, 02)
 
                 });
 
@@ -653,7 +679,17 @@ namespace Web_Shoes.Data.DataSeeding
                 new ReviewInproduct()
                 {
                     rip_ProductId = 1,
-                    rip_ReviewId = 1,
+                    rip_ReviewId = ReviewId1,
+                },
+                new ReviewInproduct()
+                {
+                    rip_ProductId = 1,
+                    rip_ReviewId = ReviewId2,
+                },
+                new ReviewInproduct()
+                {
+                    rip_ProductId = 1,
+                    rip_ReviewId = ReviewId3,
                 });
 
 

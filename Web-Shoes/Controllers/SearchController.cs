@@ -8,54 +8,40 @@ using Web_Shoes.Data;
 
 namespace Web_Shoes.Controllers
 {
-    public class AllProductsController : Controller
+    public class SearchController : Controller
     {
+
         private readonly ApplicationDbContext _context;
 
-        public AllProductsController(ApplicationDbContext context)
-        {
 
+        public SearchController(ApplicationDbContext context)
+        {
             _context = context;
         }
 
-
-
-        // GET: AllProductsController
-        [Route("/allproduct")]
-        [HttpGet]
+        // GET: SearchController
         public ActionResult Index()
         {
-
-            var AllProductQuery = from a in _context.Products select a;
-            return View(AllProductQuery);
+            return View();
         }
 
 
-        [Route("/search")]
-        [HttpPost]
-        public IActionResult search()
-        {
-            string search = Request.Form["search"];
-
-            var searchQuery = _context.Products.Where(a => a.pd_Name.Contains(search) || a.pd_Description.Contains(search)||a.pd_Price.ToString() == search);
-
-            return View(searchQuery);
-        }
 
 
-        // GET: AllProductsController/Details/5
+
+        // GET: SearchController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: AllProductsController/Create
+        // GET: SearchController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: AllProductsController/Create
+        // POST: SearchController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -70,13 +56,13 @@ namespace Web_Shoes.Controllers
             }
         }
 
-        // GET: AllProductsController/Edit/5
+        // GET: SearchController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: AllProductsController/Edit/5
+        // POST: SearchController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -91,13 +77,13 @@ namespace Web_Shoes.Controllers
             }
         }
 
-        // GET: AllProductsController/Delete/5
+        // GET: SearchController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: AllProductsController/Delete/5
+        // POST: SearchController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

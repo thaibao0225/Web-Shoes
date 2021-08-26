@@ -59,7 +59,7 @@ namespace Web_Shoes.Controllers
 
         [Route("/contactusersmanagement")]
         [HttpGet]
-        public IActionResult contactManagement()
+        public IActionResult IndexAdminUser()
         {
             var contact = from a in _context.ContactUsers select a;
 

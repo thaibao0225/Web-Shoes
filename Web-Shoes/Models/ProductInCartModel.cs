@@ -17,6 +17,10 @@ namespace Web_Shoes.Models
 
         public string UserId { set; get; }
 
-        
+        public string Color { set; get; }
+
+        public string Size { set; get; }
+
+
     }
 }
