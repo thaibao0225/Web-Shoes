@@ -71,5 +71,33 @@ namespace Web_Shoes.Controllers
 
             return View(productInCartModelQuery);
         }
+
+
+
+        [Route("/cart/remove")]
+        [HttpGet("{productid}&{quantity}")]
+        public IActionResult RemoveProduct(int productid, int quantity)
+        {
+
+            int aa = productid;
+
+            try
+            {
+                var productQuery = _context.ProductInCart.FirstOrDefault(a => a.pic_ProductId == productid);
+                 _context.ProductInCart.Remove(productQuery);
+                _context.SaveChanges();
+
+
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            ////
+            
+        }
     }
 }
