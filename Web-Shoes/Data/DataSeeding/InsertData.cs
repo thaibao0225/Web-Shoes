@@ -693,7 +693,19 @@ namespace Web_Shoes.Data.DataSeeding
                 });
 
 
-
+            builder.Entity<Coupons>().HasData(
+                new Coupons()
+                {
+                    couponId = Guid.NewGuid().ToString(),
+                    couponCode ="code10",
+                    couponPrice = 10
+                },
+                new Coupons()
+                {
+                    couponId = Guid.NewGuid().ToString(),
+                    couponCode = "code50",
+                    couponPrice = 50
+                });
 
 
 
