@@ -61,7 +61,9 @@ namespace Web_Shoes.Controllers
                     ProductPrice = x.a.pd_Price,
                     ProductImg1 = x.a.pd_Img1,
                     Quantity = x.b.pic_amount,
-                    UserId = x.d.Id
+                    UserId = x.d.Id,
+                    Color = x.b.pic_color,
+                    Size = x.b.pic_size
 
                 });
 

@@ -14,5 +14,9 @@ namespace Web_Shoes.Entity
 
         public int pic_amount { get; set; }
 
+        public string pic_size { get; set; }
+
+        public string pic_color { get; set; }
+
     }
 }

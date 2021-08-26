@@ -373,7 +373,9 @@ namespace Web_Shoes.Migrations
                 {
                     pic_CartId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     pic_ProductId = table.Column<int>(type: "int", nullable: false),
-                    pic_amount = table.Column<int>(type: "int", nullable: false)
+                    pic_amount = table.Column<int>(type: "int", nullable: false),
+                    pic_size = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    pic_color = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -492,8 +494,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Discriminator", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "360E601E-92F2-4F08-832B-604A21293258", "0fd4362a-4238-48dd-8779-bf4e1c060bcd", "admin", "AppRole", "admin", null },
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "0e8f1fa2-3945-4cc7-aabb-f1895d8dd9c3", "Staff", "AppRole", "staff", null }
+                    { "360E601E-92F2-4F08-832B-604A21293258", "ce88bcbe-1ca1-4913-926f-3989fa259981", "admin", "AppRole", "admin", null },
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "ff4a9067-ab66-4715-84d0-da187005eb4e", "Staff", "AppRole", "staff", null }
                 });
 
             migrationBuilder.InsertData(
@@ -501,8 +503,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "dfd1575d-0c70-4072-ba71-e39af14d4641", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEGtpTxZir6vnug+crGLeUV4VS2GCMqoBTrfnZwSxjryDZ4RCdku4FXqLQP6Ll1XJHw==", null, false, "f38cbae1-dcc2-4512-86be-1eea7cda5f52", false, "Staff" },
-                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "d1006f9e-f0e5-4c87-a071-2f3068e95c1a", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEO6r3jxZUDFb8E8UhkAoxk2ttPGheeGYFk1K7oXMPVFhRLudmW+xHyJkP3L5l0MmTw==", null, false, "3427a8f4-0caa-4c9c-a310-d34b1d550416", false, "Admin" }
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "2846f1a9-9aca-4c49-90bd-3592864d323c", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAELHYh3WTZkz2gcK7yBT5wksIt9+8CU3ahzAqFnVHIhkApQGtLnonEBL9XMEbiXDEfA==", null, false, "1c81eebc-ee78-48d4-a9c3-4b6a6f01a535", false, "Staff" },
+                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "41818616-090b-4813-94f6-f2ffe87e8ed7", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEDpSrpzx4RVo6K3cyrMETKjRt0z0WzI2rVJlEtOfmWJWRj5qKPmwWrE1opaEI4j2xg==", null, false, "2312c493-131d-4bff-9a5c-8e84549e9edb", false, "Admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -555,12 +557,12 @@ namespace Web_Shoes.Migrations
 
             migrationBuilder.InsertData(
                 table: "ProductInCart",
-                columns: new[] { "pic_CartId", "pic_ProductId", "pic_amount" },
+                columns: new[] { "pic_CartId", "pic_ProductId", "pic_amount", "pic_color", "pic_size" },
                 values: new object[,]
                 {
-                    { "D355458F-1DD3-4834-AA28-6DA34B6357FF", 1, 2 },
-                    { "D355458F-1DD3-4834-AA28-6DA34B6357FF", 2, 3 },
-                    { "D355458F-1DD3-4834-AA28-6DA34B6357FF", 3, 1 }
+                    { "D355458F-1DD3-4834-AA28-6DA34B6357FF", 1, 2, "blue", "7" },
+                    { "D355458F-1DD3-4834-AA28-6DA34B6357FF", 2, 3, "blue", "7.5" },
+                    { "D355458F-1DD3-4834-AA28-6DA34B6357FF", 3, 1, "blue", "8" }
                 });
 
             migrationBuilder.InsertData(

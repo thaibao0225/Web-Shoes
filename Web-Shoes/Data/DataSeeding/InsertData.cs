@@ -494,22 +494,27 @@ namespace Web_Shoes.Data.DataSeeding
                 {
                      pic_CartId = IdCart2,
                      pic_ProductId =1,
-                     pic_amount = 2
+                     pic_amount = 2,
+                     pic_size = "7",
+                     pic_color = "blue"
 
                 },
                 new ProductInCart()
                 {
                     pic_CartId = IdCart2,
                     pic_ProductId = 2,
-                    pic_amount = 3
+                    pic_amount = 3,
+                    pic_size = "7.5",
+                    pic_color = "blue"
 
                 },
                 new ProductInCart()
                 {
                     pic_CartId = IdCart2,
                     pic_ProductId = 3,
-                    pic_amount = 1
-
+                    pic_amount = 1,
+                    pic_size = "8",
+                    pic_color = "blue"
                 });
 
 

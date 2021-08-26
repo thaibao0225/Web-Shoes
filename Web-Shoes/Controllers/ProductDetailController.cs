@@ -76,12 +76,17 @@ namespace Web_Shoes.Controllers
         }
 
         [Route("/productdetailadd")]
-        [HttpGet("{productid}&{quantity}")]
-        public async Task<IActionResult> Index(int productid, int quantity)
+        [HttpGet("{productid}&{quantity}&{color}&{size}")]
+        public async Task<IActionResult> Index(int productid, string quantity,string color,string size)
         {
 
             try
             {
+
+                string a = quantity;
+                string a2 = color;
+                string a3 = size;
+
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
                 var userName = User.FindFirstValue(ClaimTypes.Name);
@@ -111,7 +116,9 @@ namespace Web_Shoes.Controllers
                 {
                     pic_CartId = cartId,
                     pic_ProductId = productid,
-                    pic_amount = quantityProduct
+                    pic_amount = quantityProduct,
+                    pic_size = size,
+                    pic_color = color
                 };
 
                 _context.ProductInCart.Add(ProductInCartCreate);

@@ -103,30 +103,34 @@
                         <div class="block-26 mb-2">
                             <h4>Size</h4>
                             <ul>
-                                <li><a href="#">7</a></li>
-                                <li><a href="#">7.5</a></li>
-                                <li><a href="#">8</a></li>
-                                <li><a href="#">8.5</a></li>
-                                <li><a href="#">9</a></li>
-                                <li><a href="#">9.5</a></li>
-                                <li><a href="#">10</a></li>
-                                <li><a href="#">10.5</a></li>
-                                <li><a href="#">11</a></li>
-                                <li><a href="#">11.5</a></li>
-                                <li><a href="#">12</a></li>
-                                <li><a href="#">12.5</a></li>
-                                <li><a href="#">13</a></li>
-                                <li><a href="#">13.5</a></li>
-                                <li><a href="#">14</a></li>
+                                <li onclick="size(7)" ><a href="#">7</a></li>
+                                <li onclick="size(7.5)"><a href="#">7.5</a></li>
+                                <li onclick="size(8)"><a href="#">8</a></li>
+                                <li onclick="size(8.5)"><a href="#">8.5</a></li>
+                                <li onclick="size(9)"><a href="#">9</a></li>
+                                <li onclick="size(9.5)"><a href="#">9.5</a></li>
+                                <li onclick="size(10)"><a href="#">10</a></li>
+                                <li onclick="size(10.5)"><a href="#">10.5</a></li>
+                                <li onclick="size(11)"><a href="#">11</a></li>
+                                <li onclick="size(11.5)"><a href="#">11.5</a></li>
+                                <li onclick="size(12)"><a href="#">12</a></li>
+                                <li onclick="size(12.5)"><a href="#">12.5</a></li>
+                                <li onclick="size(13)"><a href="#">13</a></li>
+                                <li onclick="size(13.5)"><a href="#">13.5</a></li>
+                                <li onclick="size(14)"><a href="#">14</a></li>
                             </ul>
                         </div>
 
 
+
+
+
                         <div class="block-26 mb-4">
-                            <h4>Width</h4>
+                            <h4>Color</h4>
                             <ul>
-                                <li><a href="#">M</a></li>
-                                <li><a href="#">W</a></li>
+                                <li onclick="color('red')"><a href="#">Red</a></li>
+                                <li onclick="color('blue')"><a href="#">Blue</a></li>
+                                <li onclick="color('green')"><a href="#">Green</a></li>
                             </ul>
                         </div>
 
@@ -141,7 +145,7 @@
                             </button>
                         </span>
 
-                        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
+                        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="2" min="1" max="100">
                         <span class="input-group-btn ml-1">
                             <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
                                 <i class="icon-plus2"></i>
@@ -150,7 +154,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12 text-center">
-                            <p class="addtocart"><a href="/productdetailadd?productid=@ViewBag.Id&quantity=1" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
+                            <p class="addtocart"><a href="" class="btn btn-primary btn-addtocart" id="addtocartbutton" onclick="addtocart()"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
 
                         </div>
                     </div>
@@ -229,52 +233,6 @@
                                                 </form>
                                             </div>
 
-
-
-
-                                            @*<div class="review">
-                                                <div class="user-img" style="background-image: url(images/person2.jpg)"></div>
-                                                <div class="desc">
-                                                    <h4>
-                                                        <span class="text-left">Jacob Webb</span>
-                                                        <span class="text-right">14 March 2018</span>
-                                                    </h4>
-                                                    <p class="star">
-                                                        <span>
-                                                            <i class="icon-star-full"></i>
-                                                            <i class="icon-star-full"></i>
-                                                            <i class="icon-star-full"></i>
-                                                            <i class="icon-star-half"></i>
-                                                            <i class="icon-star-empty"></i>
-                                                        </span>
-                                                        <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-                                                    </p>
-                                                    <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="review">
-                                                <div class="user-img" style="background-image: url(images/person3.jpg)"></div>
-                                                <div class="desc">
-                                                    <h4>
-                                                        <span class="text-left">Jacob Webb</span>
-                                                        <span class="text-right">14 March 2018</span>
-                                                    </h4>
-                                                    <p class="star">
-                                                        <span>
-                                                            <i class="icon-star-full"></i>
-                                                            <i class="icon-star-full"></i>
-                                                            <i class="icon-star-full"></i>
-                                                            <i class="icon-star-half"></i>
-                                                            <i class="icon-star-empty"></i>
-                                                        </span>
-                                                        <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-                                                    </p>
-                                                    <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-                                                </div>
-                                            </div>*@
                                         </div>
 
 
@@ -351,3 +309,50 @@
         </div>
     </div>
 </div>
+
+
+<script>
+
+    var ProductColor;
+    var ProductSize;
+    var ProductAmount;
+
+
+    function color(color) {
+
+
+        ProductColor = color;
+
+
+    }
+
+    function size(size) {
+
+
+
+
+        ProductSize = size;
+
+
+    }
+
+    function amount() {
+
+        var a = document.querySelector("#quantity");
+
+
+        ProductAmount = a.value;
+    }
+
+    function addtocart() {
+
+        amount();
+
+
+
+
+        var a = document.querySelector("#addtocartbutton");
+        a.href = "/productdetailadd?productid=@ViewBag.Id&quantity=" + ProductAmount + "&color=" + ProductColor + "&size=" + ProductSize;
+
+    }
+</script>
