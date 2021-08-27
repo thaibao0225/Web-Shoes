@@ -137,14 +137,16 @@
                     <div class="row">
                         <div class="col-sm-8">
                             <form action="#">
+
                                 <div class="row form-group">
                                     <div class="col-sm-9">
-                                        <input type="text" name="quantity" class="form-control input-number" placeholder="Your Coupon Number...">
+                                        <input type="text" name="coupon" class="form-control input-number" placeholder="Your Coupon Number...">
                                     </div>
                                     <div class="col-sm-3">
-                                        <a href="#" class="btn btn-primary">Paid</a> 
+                                        <a href="#" name="paidButton" class="btn btn-primary" onclick="addPaid()">Paid</a> 
                                     </div>
                                 </div>
+
                             </form>
                         </div>
                         <div class="col-sm-4 text-center">
@@ -152,7 +154,7 @@
                                 <div class="sub">
                                     <p><span>Subtotal:</span> <span>$@sumprice</span></p>
                                     <p><span>Delivery:</span> <span>$0.00</span></p>
-                                    <p><span>Discount:</span> <span>$0.00</span></p>
+                                    @*<p><span>Discount:</span> <span>$0.00</span></p>*@
                                 </div>
                                 <div class="grand-total">
                                     <p><span><strong>Total:</strong></span> <span>$@sumprice</span></p>
@@ -169,6 +171,8 @@
                 <h2>Related Products</h2>
             </div>
         </div>
+
+
         <div class="row">
             <div class="col-md-3 col-lg-3 mb-4 text-center">
                 <div class="product-entry border">
@@ -181,6 +185,8 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="col-md-3 col-lg-3 mb-4 text-center">
                 <div class="product-entry border">
                     <a href="#" class="prod-img">
@@ -192,6 +198,8 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="col-md-3 col-lg-3 mb-4 text-center">
                 <div class="product-entry border">
                     <a href="#" class="prod-img">
@@ -203,6 +211,8 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="col-md-3 col-lg-3 mb-4 text-center">
                 <div class="product-entry border">
                     <a href="#" class="prod-img">
@@ -214,6 +224,19 @@
                     </div>
                 </div>
             </div>
+
+
+
         </div>
     </div>
 </div>
+
+
+<script>
+    function addPaid() {
+        var couponCode = document.querySelector("#page > div.colorlib-product > div > div:nth-child(3) > div > div > div > div.col-sm-8 > form > div > div.col-sm-9 > input").value;
+
+        var paidButton = document.querySelector("#page > div.colorlib-product > div > div:nth-child(3) > div > div > div > div.col-sm-8 > form > div > div.col-sm-3 > a");
+        paidButton.href = "/cart/paid?coupon=" + couponCode;
+    }
+</script>

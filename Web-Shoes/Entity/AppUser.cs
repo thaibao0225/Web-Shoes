@@ -11,6 +11,8 @@ namespace Web_Shoes.Entity
         public string FirstName { set; get; }
         public string LastName { set; get; }
         public DateTime DoB { set; get; }
+
+
         public List<Wishlists> WishlistsU { get; set; }
         public List<Bills> BillsAU { get; set; }
         public List<Reviews> ReviewsU { get; set; }

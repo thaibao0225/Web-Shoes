@@ -61,6 +61,8 @@ namespace Web_Shoes.Data
             builder.ApplyConfiguration(new ReviewInproductConfigurations());
             builder.ApplyConfiguration(new WishlistsConfigurations());
             builder.ApplyConfiguration(new CouponsConfigurations());
+            builder.ApplyConfiguration(new DeviceConfigurations());
+            builder.ApplyConfiguration(new UserInDeviceConfigurations());
 
 
 
@@ -94,6 +96,8 @@ namespace Web_Shoes.Data
         public DbSet<ProductInWishlist> ProductInWishlist { set; get; }
         public DbSet<Cart> Cart { set; get; }
         public DbSet<Coupons> Coupons { set; get; }
+        public DbSet<Device> Devices { set; get; }
+        public DbSet<UserInDevice> UserInDevices { set; get; }
 
         public DbSet<Web_Shoes.Models.UserInRoleModel> UserInRoleModel { get; set; }
         //public DbSet<AppUserRole> AppUserRole { set; get; }

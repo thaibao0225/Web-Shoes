@@ -456,15 +456,7 @@ namespace Web_Shoes.Data.DataSeeding
 
 
 
-            //Table Bills
 
-            builder.Entity<Bills>().HasData(
-                new Bills()
-                {
-                    bill_Id = 1,
-                    bill_UserId = IdAdmin,
-                    bill_Paid = 10000
-                });
 
             var IdCart1 = "72309286-ECBB-4D20-AD95-2819D31E3400";
             var IdCart2 = "D355458F-1DD3-4834-AA28-6DA34B6357FF";
@@ -708,6 +700,31 @@ namespace Web_Shoes.Data.DataSeeding
                 });
 
 
+
+            string billId = "D269BF93-A5E2-4C4A-8146-9967DDE80D30";
+
+            //Table Bills
+
+            builder.Entity<Bills>().HasData(
+                new Bills()
+                {
+                    bill_Id = billId,
+                    bill_UserId = IdStaff,
+                    bill_City = "HCM",
+                    bill_CompanyName = "Project",
+                    bill_Country = "Viet Nam",
+                    bill_Email = "staff@gmail.com",
+                    bill_PhoneNumber ="0123456789",
+                    bill_PostalCode ="700000",
+                    bill_Productlist = "1|1|2|2|1|3",
+                    bill_Shipping = 5,
+                    bill_State = "Binh Tan",
+                    bill_PaidTotal = 100
+                    
+                    
+                    
+
+                });
 
 
 

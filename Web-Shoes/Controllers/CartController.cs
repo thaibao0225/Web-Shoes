@@ -30,7 +30,7 @@ namespace Web_Shoes.Controllers
 
         [Route("/cart")]
         [HttpGet("{productid}&{quantity}")]
-        public IActionResult Index(int productid,int quantity)
+        public IActionResult Index(int productid, int quantity)
         {
 
             int aa = productid;
@@ -84,7 +84,7 @@ namespace Web_Shoes.Controllers
             try
             {
                 var productQuery = _context.ProductInCart.FirstOrDefault(a => a.pic_ProductId == productid);
-                 _context.ProductInCart.Remove(productQuery);
+                _context.ProductInCart.Remove(productQuery);
                 _context.SaveChanges();
 
 
@@ -97,6 +97,35 @@ namespace Web_Shoes.Controllers
             }
 
             ////
+
+        }
+
+        [Route("/cart/paid")]
+        [HttpGet("{coupon}&{quantity}")]
+        public IActionResult addpaid(string coupon, int quantity)
+        {
+
+            try
+            {
+                int ReducePrice = 0;
+
+                var couponQuery = _context.Coupons.FirstOrDefault(a => a.couponCode == coupon);
+
+                if (couponQuery != null)
+                {
+                    ReducePrice = couponQuery.couponPrice;
+                }
+
+
+
+
+                return Redirect("/checkout?reduceprice="+ ReducePrice);
+            }
+            catch 
+            {
+
+                return RedirectToAction(nameof(Index));
+            }
             
         }
     }
