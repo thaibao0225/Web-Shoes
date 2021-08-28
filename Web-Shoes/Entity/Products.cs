@@ -63,6 +63,7 @@ namespace Web_Shoes.Entity
         public List<ProductInCart> ProductInCartP { get; set; }
         public List<ReviewInproduct> ReviewInproductP { get; set; }
 
+        public List<ProductInCartDevices> ProductInCartDevicesP { get; set; }
 
     }
 }

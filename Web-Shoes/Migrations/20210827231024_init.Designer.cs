@@ -10,7 +10,7 @@ using Web_Shoes.Data;
 namespace Web_Shoes.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210827020304_init")]
+    [Migration("20210827231024_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -280,34 +280,16 @@ namespace Web_Shoes.Migrations
                     b.Property<string>("bill_Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("bill_City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("bill_CompanyName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("bill_Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("bill_Email")
+                    b.Property<string>("bill_Discount")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("bill_PaidTotal")
                         .HasColumnType("int");
 
-                    b.Property<string>("bill_PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("bill_PostalCode")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("bill_Productlist")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("bill_Shipping")
-                        .HasColumnType("int");
-
-                    b.Property<string>("bill_State")
+                    b.Property<string>("bill_Shipping")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("bill_UserId")
@@ -318,23 +300,6 @@ namespace Web_Shoes.Migrations
                     b.HasIndex("bill_UserId");
 
                     b.ToTable("Bills");
-
-                    b.HasData(
-                        new
-                        {
-                            bill_Id = "D269BF93-A5E2-4C4A-8146-9967DDE80D30",
-                            bill_City = "HCM",
-                            bill_CompanyName = "Project",
-                            bill_Country = "Viet Nam",
-                            bill_Email = "staff@gmail.com",
-                            bill_PaidTotal = 100,
-                            bill_PhoneNumber = "0123456789",
-                            bill_PostalCode = "700000",
-                            bill_Productlist = "1|1|2|2|1|3",
-                            bill_Shipping = 5,
-                            bill_State = "Binh Tan",
-                            bill_UserId = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff"
-                        });
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.Cart", b =>
@@ -362,6 +327,23 @@ namespace Web_Shoes.Migrations
                             cart_Id = "D355458F-1DD3-4834-AA28-6DA34B6357FF",
                             cart_UserID = "DE544998-A3CC-4E12-ABB4-0642E57BD222"
                         });
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.CartsDevice", b =>
+                {
+                    b.Property<int>("cartd_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("cartd_DeviceId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("cartd_Id");
+
+                    b.HasIndex("cartd_DeviceId");
+
+                    b.ToTable("CartsDevice");
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.Categories", b =>
@@ -491,13 +473,13 @@ namespace Web_Shoes.Migrations
                     b.HasData(
                         new
                         {
-                            couponId = "55132add-a36e-41b8-b064-c8c2f790cea4",
+                            couponId = "36097870-df32-461d-acbd-c2cb2b5e021a",
                             couponCode = "code10",
                             couponPrice = 10
                         },
                         new
                         {
-                            couponId = "b8e3f397-3d12-4e1e-aa8a-883997a303f3",
+                            couponId = "9bf5e3c2-68f8-4881-88ef-37a65750f997",
                             couponCode = "code50",
                             couponPrice = 50
                         });
@@ -508,10 +490,31 @@ namespace Web_Shoes.Migrations
                     b.Property<string>("deviceId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("deviceBillId")
+                    b.Property<string>("deviceAddress1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("deviceAddress2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("deviceCity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("deviceCompanyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("deviceCountry")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("deviceName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("devicePhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("devicePostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("deviceState")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("deviceId");
@@ -567,6 +570,24 @@ namespace Web_Shoes.Migrations
                             pic_color = "blue",
                             pic_size = "8"
                         });
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.ProductInCartDevices", b =>
+                {
+                    b.Property<int>("picd_CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("picd_ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("picd_amount")
+                        .HasColumnType("int");
+
+                    b.HasKey("picd_CartId", "picd_ProductId");
+
+                    b.HasIndex("picd_ProductId");
+
+                    b.ToTable("ProductInCartDevices");
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.ProductInWishlist", b =>
@@ -1083,19 +1104,6 @@ namespace Web_Shoes.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Web_Shoes.Entity.UserInDevice", b =>
-                {
-                    b.Property<string>("uid_DeviceId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("uid_UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("uid_DeviceId", "uid_UserId");
-
-                    b.ToTable("UserInDevice");
-                });
-
             modelBuilder.Entity("Web_Shoes.Entity.Wishlists", b =>
                 {
                     b.Property<int>("wl_Id")
@@ -1158,14 +1166,14 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd",
-                            ConcurrencyStamp = "77462638-c863-46d0-814a-2a0f31163462",
+                            ConcurrencyStamp = "3fdf112b-d476-4226-a888-1a709a401258",
                             Name = "staff",
                             Description = "Staff"
                         },
                         new
                         {
                             Id = "360E601E-92F2-4F08-832B-604A21293258",
-                            ConcurrencyStamp = "d00a10a5-06ef-4df0-8c10-751d7e7a602a",
+                            ConcurrencyStamp = "cff0624d-3310-4c68-a4d2-4dab1fea2210",
                             Name = "admin",
                             Description = "admin"
                         });
@@ -1184,6 +1192,30 @@ namespace Web_Shoes.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("bill_Address1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_Address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_CompanyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_State")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasDiscriminator().HasValue("AppUser");
 
                     b.HasData(
@@ -1191,15 +1223,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "DE544998-A3CC-4E12-ABB4-0642E57BD222",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3687ed9b-51dc-41b8-83dc-59c28c56925b",
+                            ConcurrencyStamp = "fa0367bd-22b9-4f45-b2bd-c77b1796ee5d",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEETEEjjS/Q/nJ5YHfRmFvMpeY22U8Nl8oncBhkDHw+PNzw0EPyZ51rM2HH3wbJrxdw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAED+219LG1l3RPuWY24TUV6n7NYdOx+Kk4ED5qaixX8y8icuCOZh3VT6A4YRIhqJ5ew==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6db2dcfb-dc19-40cf-a1f9-42dacb5ec397",
+                            SecurityStamp = "58b6e0ac-b6a5-4786-98b7-4ea8f6b49ead",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             DoB = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1210,15 +1242,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "885022cb-9912-45f9-9d4b-4ed1ff3940bc",
+                            ConcurrencyStamp = "689ece03-5a77-4c49-b91d-573501392712",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@GMAIL.COM",
                             NormalizedUserName = "STAFF@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHiMzBhF0yoRs8Rlro5CnAN4C8zeWEWXPYKyYTxkKVT55yutkm+Dg8F8GVdkhvC8pw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDhs3CyZcAx7P+Xbr8eJ+t4UK6ezVNDY7gGVZpqkmRRudo2E8zNa7CTpt35YdR3FgQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c0023a3c-406d-4fb1-8f05-758f1a762db9",
+                            SecurityStamp = "c8742ef9-fe7c-4d59-b84b-e630c29a8943",
                             TwoFactorEnabled = false,
                             UserName = "Staff",
                             DoB = new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1296,6 +1328,15 @@ namespace Web_Shoes.Migrations
                     b.Navigation("AppUserC");
                 });
 
+            modelBuilder.Entity("Web_Shoes.Entity.CartsDevice", b =>
+                {
+                    b.HasOne("Web_Shoes.Entity.Device", "DeviceCD")
+                        .WithMany("CartsDeviceD")
+                        .HasForeignKey("cartd_DeviceId");
+
+                    b.Navigation("DeviceCD");
+                });
+
             modelBuilder.Entity("Web_Shoes.Entity.ProductInCart", b =>
                 {
                     b.HasOne("Web_Shoes.Entity.Cart", "CartPICart")
@@ -1313,6 +1354,25 @@ namespace Web_Shoes.Migrations
                     b.Navigation("CartPICart");
 
                     b.Navigation("ProductsPICart");
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.ProductInCartDevices", b =>
+                {
+                    b.HasOne("Web_Shoes.Entity.CartsDevice", "CartsDevicePICD")
+                        .WithMany("ProductInCartDevicesCD")
+                        .HasForeignKey("picd_CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Web_Shoes.Entity.Products", "ProductsPICD")
+                        .WithMany("ProductInCartDevicesP")
+                        .HasForeignKey("picd_ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CartsDevicePICD");
+
+                    b.Navigation("ProductsPICD");
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.ProductInWishlist", b =>
@@ -1395,13 +1455,25 @@ namespace Web_Shoes.Migrations
                     b.Navigation("ProductInCartC");
                 });
 
+            modelBuilder.Entity("Web_Shoes.Entity.CartsDevice", b =>
+                {
+                    b.Navigation("ProductInCartDevicesCD");
+                });
+
             modelBuilder.Entity("Web_Shoes.Entity.Categories", b =>
                 {
                     b.Navigation("ProductsInCategoriesC");
                 });
 
+            modelBuilder.Entity("Web_Shoes.Entity.Device", b =>
+                {
+                    b.Navigation("CartsDeviceD");
+                });
+
             modelBuilder.Entity("Web_Shoes.Entity.Products", b =>
                 {
+                    b.Navigation("ProductInCartDevicesP");
+
                     b.Navigation("ProductInCartP");
 
                     b.Navigation("ProductInWishlistP");

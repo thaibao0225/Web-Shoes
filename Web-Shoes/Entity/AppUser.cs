@@ -13,6 +13,15 @@ namespace Web_Shoes.Entity
         public DateTime DoB { set; get; }
 
 
+        public string bill_Country { set; get; }
+        public string bill_CompanyName { set; get; }
+        public string bill_City { set; get; }
+        public string bill_State { set; get; }
+        public string bill_PostalCode { set; get; }
+        public string bill_PhoneNumber { set; get; }
+        public string bill_Address1 { set; get; }
+        public string bill_Address2 { set; get; }
+
         public List<Wishlists> WishlistsU { get; set; }
         public List<Bills> BillsAU { get; set; }
         public List<Reviews> ReviewsU { get; set; }

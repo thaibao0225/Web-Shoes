@@ -89,7 +89,14 @@ namespace Web_Shoes.Migrations
                 {
                     deviceId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     deviceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    deviceBillId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    deviceCountry = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    deviceCompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    deviceCity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    deviceState = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    devicePostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    devicePhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    deviceAddress1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    deviceAddress2 = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -142,18 +149,6 @@ namespace Web_Shoes.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserInDevice",
-                columns: table => new
-                {
-                    uid_UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    uid_DeviceId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserInDevice", x => new { x.uid_DeviceId, x.uid_UserId });
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserInRoleModel",
                 columns: table => new
                 {
@@ -178,6 +173,14 @@ namespace Web_Shoes.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DoB = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    bill_Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_State = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_Address1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_Address2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -196,6 +199,25 @@ namespace Web_Shoes.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CartsDevice",
+                columns: table => new
+                {
+                    cartd_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    cartd_DeviceId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartsDevice", x => x.cartd_Id);
+                    table.ForeignKey(
+                        name: "FK_CartsDevice_Device_cartd_DeviceId",
+                        column: x => x.cartd_DeviceId,
+                        principalTable: "Device",
+                        principalColumn: "deviceId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -250,15 +272,9 @@ namespace Web_Shoes.Migrations
                     bill_Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     bill_UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     bill_PaidTotal = table.Column<int>(type: "int", nullable: false),
-                    bill_Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    bill_CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    bill_City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    bill_State = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    bill_PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    bill_Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    bill_PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    bill_Shipping = table.Column<int>(type: "int", nullable: false),
-                    bill_Productlist = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    bill_Productlist = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_Shipping = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_Discount = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -414,6 +430,31 @@ namespace Web_Shoes.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductInCartDevices",
+                columns: table => new
+                {
+                    picd_CartId = table.Column<int>(type: "int", nullable: false),
+                    picd_ProductId = table.Column<int>(type: "int", nullable: false),
+                    picd_amount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductInCartDevices", x => new { x.picd_CartId, x.picd_ProductId });
+                    table.ForeignKey(
+                        name: "FK_ProductInCartDevices_CartsDevice_picd_CartId",
+                        column: x => x.picd_CartId,
+                        principalTable: "CartsDevice",
+                        principalColumn: "cartd_Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductInCartDevices_Products_picd_ProductId",
+                        column: x => x.picd_ProductId,
+                        principalTable: "Products",
+                        principalColumn: "pd_Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductInCart",
                 columns: table => new
                 {
@@ -518,8 +559,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "couponId", "couponCode", "couponPrice" },
                 values: new object[,]
                 {
-                    { "55132add-a36e-41b8-b064-c8c2f790cea4", "code10", 10 },
-                    { "b8e3f397-3d12-4e1e-aa8a-883997a303f3", "code50", 50 }
+                    { "36097870-df32-461d-acbd-c2cb2b5e021a", "code10", 10 },
+                    { "9bf5e3c2-68f8-4881-88ef-37a65750f997", "code50", 50 }
                 });
 
             migrationBuilder.InsertData(
@@ -549,23 +590,18 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Discriminator", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "360E601E-92F2-4F08-832B-604A21293258", "d00a10a5-06ef-4df0-8c10-751d7e7a602a", "admin", "AppRole", "admin", null },
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "77462638-c863-46d0-814a-2a0f31163462", "Staff", "AppRole", "staff", null }
+                    { "360E601E-92F2-4F08-832B-604A21293258", "cff0624d-3310-4c68-a4d2-4dab1fea2210", "admin", "AppRole", "admin", null },
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "3fdf112b-d476-4226-a888-1a709a401258", "Staff", "AppRole", "staff", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "bill_Address1", "bill_Address2", "bill_City", "bill_CompanyName", "bill_Country", "bill_PhoneNumber", "bill_PostalCode", "bill_State" },
                 values: new object[,]
                 {
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "885022cb-9912-45f9-9d4b-4ed1ff3940bc", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEHiMzBhF0yoRs8Rlro5CnAN4C8zeWEWXPYKyYTxkKVT55yutkm+Dg8F8GVdkhvC8pw==", null, false, "c0023a3c-406d-4fb1-8f05-758f1a762db9", false, "Staff" },
-                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "3687ed9b-51dc-41b8-83dc-59c28c56925b", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEETEEjjS/Q/nJ5YHfRmFvMpeY22U8Nl8oncBhkDHw+PNzw0EPyZ51rM2HH3wbJrxdw==", null, false, "6db2dcfb-dc19-40cf-a1f9-42dacb5ec397", false, "Admin" }
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "689ece03-5a77-4c49-b91d-573501392712", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEDhs3CyZcAx7P+Xbr8eJ+t4UK6ezVNDY7gGVZpqkmRRudo2E8zNa7CTpt35YdR3FgQ==", null, false, "c8742ef9-fe7c-4d59-b84b-e630c29a8943", false, "Staff", null, null, null, null, null, null, null, null },
+                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "fa0367bd-22b9-4f45-b2bd-c77b1796ee5d", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAED+219LG1l3RPuWY24TUV6n7NYdOx+Kk4ED5qaixX8y8icuCOZh3VT6A4YRIhqJ5ew==", null, false, "58b6e0ac-b6a5-4786-98b7-4ea8f6b49ead", false, "Admin", null, null, null, null, null, null, null, null }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Bills",
-                columns: new[] { "bill_Id", "bill_City", "bill_CompanyName", "bill_Country", "bill_Email", "bill_PaidTotal", "bill_PhoneNumber", "bill_PostalCode", "bill_Productlist", "bill_Shipping", "bill_State", "bill_UserId" },
-                values: new object[] { "D269BF93-A5E2-4C4A-8146-9967DDE80D30", "HCM", "Project", "Viet Nam", "staff@gmail.com", 100, "0123456789", "700000", "1|1|2|2|1|3", 5, "Binh Tan", "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff" });
 
             migrationBuilder.InsertData(
                 table: "Carts",
@@ -646,9 +682,19 @@ namespace Web_Shoes.Migrations
                 column: "cart_UserID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CartsDevice_cartd_DeviceId",
+                table: "CartsDevice",
+                column: "cartd_DeviceId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductInCart_pic_ProductId",
                 table: "ProductInCart",
                 column: "pic_ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductInCartDevices_picd_ProductId",
+                table: "ProductInCartDevices",
+                column: "picd_ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductInWishlist_piw_ProductId",
@@ -733,10 +779,10 @@ namespace Web_Shoes.Migrations
                 name: "Coupons");
 
             migrationBuilder.DropTable(
-                name: "Device");
+                name: "ProductInCart");
 
             migrationBuilder.DropTable(
-                name: "ProductInCart");
+                name: "ProductInCartDevices");
 
             migrationBuilder.DropTable(
                 name: "ProductInWishlist");
@@ -754,9 +800,6 @@ namespace Web_Shoes.Migrations
                 name: "UserClaims");
 
             migrationBuilder.DropTable(
-                name: "UserInDevice");
-
-            migrationBuilder.DropTable(
                 name: "UserInRoleModel");
 
             migrationBuilder.DropTable(
@@ -772,6 +815,9 @@ namespace Web_Shoes.Migrations
                 name: "Carts");
 
             migrationBuilder.DropTable(
+                name: "CartsDevice");
+
+            migrationBuilder.DropTable(
                 name: "Wishlists");
 
             migrationBuilder.DropTable(
@@ -785,6 +831,9 @@ namespace Web_Shoes.Migrations
 
             migrationBuilder.DropTable(
                 name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "Device");
 
             migrationBuilder.DropTable(
                 name: "Users");

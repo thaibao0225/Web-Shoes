@@ -705,26 +705,28 @@ namespace Web_Shoes.Data.DataSeeding
 
             //Table Bills
 
-            builder.Entity<Bills>().HasData(
-                new Bills()
-                {
-                    bill_Id = billId,
-                    bill_UserId = IdStaff,
-                    bill_City = "HCM",
-                    bill_CompanyName = "Project",
-                    bill_Country = "Viet Nam",
-                    bill_Email = "staff@gmail.com",
-                    bill_PhoneNumber ="0123456789",
-                    bill_PostalCode ="700000",
-                    bill_Productlist = "1|1|2|2|1|3",
-                    bill_Shipping = 5,
-                    bill_State = "Binh Tan",
-                    bill_PaidTotal = 100
+            //builder.Entity<Bills>().HasData(
+            //    new Bills()
+            //    {
+            //        bill_Id = billId,
+            //        bill_UserId = IdStaff,
+            //        bill_City = "HCM",
+            //        bill_CompanyName = "Project",
+            //        bill_Country = "Viet Nam",
+            //        bill_Email = "staff@gmail.com",
+            //        bill_PhoneNumber ="0123456789",
+            //        bill_Address1 = "123/123",
+            //        bill_Address2 = "1234/1234",
+            //        bill_PostalCode ="700000",
+            //        bill_Productlist = "1|1|2|2|1|3",
+            //        bill_Shipping = 5,
+            //        bill_State = "Binh Tan",
+            //        bill_PaidTotal = 100
                     
                     
                     
 
-                });
+            //    });
 
 
 

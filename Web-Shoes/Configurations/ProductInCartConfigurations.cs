@@ -18,6 +18,7 @@ namespace Web_Shoes.Configurations
      .HasForeignKey(pc => pc.pic_ProductId);
             builder.HasOne(t => t.CartPICart).WithMany(ur => ur.ProductInCartC)
      .HasForeignKey(pc => pc.pic_CartId);
+           
         }
     }
 }
