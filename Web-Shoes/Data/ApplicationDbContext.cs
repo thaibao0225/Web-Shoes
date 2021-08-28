@@ -65,6 +65,7 @@ namespace Web_Shoes.Data
             builder.ApplyConfiguration(new DeviceConfigurations());
             builder.ApplyConfiguration(new CartsDeviceConfigurations());
             builder.ApplyConfiguration(new ProductInCartDevicesConfigurations());
+            builder.ApplyConfiguration(new ShippingConfigurations());
 
 
 
@@ -103,6 +104,8 @@ namespace Web_Shoes.Data
         public DbSet<Device> Devices { set; get; }
         public DbSet<CartsDevice> CartsDevice { set; get; }
         public DbSet<ProductInCartDevices> ProductInCartDevices { set; get; }
+
+        public DbSet<Shipping> Shipping { set; get; }
 
 
         public DbSet<Web_Shoes.Models.UserInRoleModel> UserInRoleModel { get; set; }

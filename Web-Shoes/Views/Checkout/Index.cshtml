@@ -1,7 +1,10 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Web_Shoes.Models.CheckOutModel>
+
 @{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
 }
 
 <div class="breadcrumbs">
@@ -73,7 +76,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="fname">First Name</label>
-                                <input type="text" id="fname" class="form-control" placeholder="Your firstname">
+                                <input type="text" id="fname" class="form-control" placeholder="Your firstname" name="FirstName">
                             </div>
                         </div>
 
@@ -83,14 +86,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="lname">Last Name</label>
-                                <input type="text" id="lname" class="form-control" placeholder="Your lastname">
+                                <input type="text" id="lname" class="form-control" placeholder="Your lastname" name="LastName">
                             </div>
                         </div>
 
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="companyname">Company Name</label>
-                                <input type="text" id="companyname" class="form-control" placeholder="Company Name">
+                                <input type="text" id="companyname" class="form-control" placeholder="Company Name" name="CompanyName">
                             </div>
                         </div>
 
@@ -98,10 +101,10 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="fname">Address</label>
-                                <input type="text" id="address" class="form-control" placeholder="Enter Your Address">
+                                <input type="text" id="address" class="form-control" placeholder="Enter Your Address" name="Address1">
                             </div>
                             <div class="form-group">
-                                <input type="text" id="address2" class="form-control" placeholder="Second Address">
+                                <input type="text" id="address2" class="form-control" placeholder="Second Address" name="Address2">
                             </div>
                         </div>
 
@@ -109,7 +112,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="companyname">Town/City</label>
-                                <input type="text" id="towncity" class="form-control" placeholder="Town or City">
+                                <input type="text" id="towncity" class="form-control" placeholder="Town or City" name="City">
                             </div>
                         </div>
 
@@ -117,7 +120,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="stateprovince">State/Province</label>
-                                <input type="text" id="fname" class="form-control" placeholder="State Province">
+                                <input type="text" id="fname" class="form-control" placeholder="State Province" name="State">
                             </div>
                         </div>
 
@@ -125,14 +128,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="lname">Zip/Postal Code</label>
-                                <input type="text" id="zippostalcode" class="form-control" placeholder="Zip / Postal">
+                                <input type="text" id="zippostalcode" class="form-control" placeholder="Zip / Postal" name="Postal ">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="email">E-mail Address</label>
-                                <input type="text" id="email" class="form-control" placeholder="State Province">
+                                <input type="text" id="email" class="form-control" placeholder="E-mail Address" name="Email">
                             </div>
                         </div>
 
@@ -140,7 +143,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="Phone">Phone Number</label>
-                                <input type="text" id="zippostalcode" class="form-control" placeholder="">
+                                <input type="text" id="zippostalcode" class="form-control" placeholder="0123456789" name="Phone">
                             </div>
                         </div>
 
@@ -164,19 +167,26 @@
                             <h2>Cart Total</h2>
                             <ul>
                                 <li>
-                                    <span>Subtotal</span> <span>$100.00</span>
+                                    <span>Subtotal</span> <span>$@ViewBag.Retotal</span>
                                     <ul>
-                                        <li><span>1 x Product Name</span> <span>$99.00</span></li>
-                                        <li><span>1 x Product Name</span> <span>$78.00</span></li>
+                                        @foreach (var item in Model)
+                                        {
+
+                                            <li><span>@item.checkout_Quantity x @item.checkout_ProductName</span> <span>$@item.checkout_Price</span></li>
+
+
+                                        }
                                     </ul>
+
                                 </li>
 
 
 
 
 
-                                <li><span>Shipping</span> <span>$0.00</span></li>
-                                <li><span>Order Total</span> <span>$180.00</span></li>
+                                <li><span>Shipping</span> <span>$@ViewBag.Ship</span></li>
+                                <li><span>Discount</span> <span>$@ViewBag.Discount</span></li>
+                                <li><span>Order Total</span> <span>$@ViewBag.Total</span></li>
                             </ul>
                         </div>
                     </div>
@@ -186,13 +196,15 @@
                     <div class="col-md-12">
                         <div class="cart-detail">
                             <h2>Payment Method</h2>
-                            <div class="form-group">
+
+                            @*<div class="form-group">
                                 <div class="col-md-12">
                                     <div class="radio">
                                         <label><input type="radio" name="optradio"> Direct Bank Tranfer</label>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
+
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <div class="radio">
@@ -200,13 +212,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+
+                            @*<div class="form-group">
                                 <div class="col-md-12">
                                     <div class="radio">
                                         <label><input type="radio" name="optradio"> Paypal</label>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
+
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <div class="checkbox">
@@ -219,7 +233,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <p><a href="#" class="btn btn-primary">Place an order</a></p>
+                        <p><a href="/checkout/Add" class="btn btn-primary">Place an order</a></p>
                     </div>
                 </div>
             </div>

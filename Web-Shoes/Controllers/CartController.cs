@@ -33,9 +33,7 @@ namespace Web_Shoes.Controllers
         public IActionResult Index(int productid, int quantity)
         {
 
-            int aa = productid;
 
-            int bb = quantity;
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -66,6 +64,7 @@ namespace Web_Shoes.Controllers
                     Size = x.b.pic_size
 
                 });
+
 
 
 

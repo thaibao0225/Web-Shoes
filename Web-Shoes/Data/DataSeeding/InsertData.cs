@@ -722,13 +722,21 @@ namespace Web_Shoes.Data.DataSeeding
             //        bill_Shipping = 5,
             //        bill_State = "Binh Tan",
             //        bill_PaidTotal = 100
-                    
-                    
-                    
+
+
+
 
             //    });
 
+            string shipId = "7CF94A7D-9239-446E-A404-086518F84652";
 
+            builder.Entity<Shipping>().HasData(
+                new Shipping()
+                {
+                    ship_Id = shipId,
+                    ship_Name ="Ship",
+                    ship_Price = 5
+                });
 
 
         }    
