@@ -12,8 +12,8 @@ namespace Web_Shoes.Entity
         public string bill_UserId { set; get; }
         public int bill_PaidTotal { set; get; }
         public string bill_Productlist { set; get; }
-        public string bill_Shipping { set; get; }
-        public string bill_Discount { set; get; }
+        public int bill_Shipping { set; get; }
+        public int bill_Discount { set; get; }
 
     }
 }

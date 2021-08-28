@@ -10,7 +10,7 @@ using Web_Shoes.Data;
 namespace Web_Shoes.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210828025047_init")]
+    [Migration("20210828043911_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -280,8 +280,8 @@ namespace Web_Shoes.Migrations
                     b.Property<string>("bill_Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("bill_Discount")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("bill_Discount")
+                        .HasColumnType("int");
 
                     b.Property<int>("bill_PaidTotal")
                         .HasColumnType("int");
@@ -289,8 +289,8 @@ namespace Web_Shoes.Migrations
                     b.Property<string>("bill_Productlist")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("bill_Shipping")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("bill_Shipping")
+                        .HasColumnType("int");
 
                     b.Property<string>("bill_UserId")
                         .HasColumnType("nvarchar(450)");
@@ -473,13 +473,13 @@ namespace Web_Shoes.Migrations
                     b.HasData(
                         new
                         {
-                            couponId = "7d9ddc20-b0ee-4801-b608-9ae1a8459b42",
+                            couponId = "a09591df-4d4e-4f72-a29b-c43fba99e8b5",
                             couponCode = "code10",
                             couponPrice = 10
                         },
                         new
                         {
-                            couponId = "4ebcf174-121a-405a-8eb5-c43ffe99ea1a",
+                            couponId = "f150397e-76eb-4dd5-896d-b433497727c2",
                             couponCode = "code50",
                             couponPrice = 50
                         });
@@ -1190,14 +1190,14 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd",
-                            ConcurrencyStamp = "b62e04aa-cab4-4566-b039-8c34f4191008",
+                            ConcurrencyStamp = "96a8f55a-0ec0-4e73-a2a4-255a19850d00",
                             Name = "staff",
                             Description = "Staff"
                         },
                         new
                         {
                             Id = "360E601E-92F2-4F08-832B-604A21293258",
-                            ConcurrencyStamp = "bc90a848-672b-49ee-b435-ca5ba60a0d25",
+                            ConcurrencyStamp = "f1300a16-8407-49f4-983f-839298c2d6bf",
                             Name = "admin",
                             Description = "admin"
                         });
@@ -1247,15 +1247,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "DE544998-A3CC-4E12-ABB4-0642E57BD222",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "755a7f05-8716-4e92-b721-5d83e03afdf1",
+                            ConcurrencyStamp = "9a4cae9a-b7c8-4c03-b4ca-b06871b134cc",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN0ZqNOOlUVL8PA4m2xQ8UsuoU7vsXkusENihEbkr0ZMwO89Rwc6NysVJ/Xp5GmJig==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIp+zKrFLURpY4I2Ons09s4SliZ/vm6enUBIOPbSrcOCbIunbPI2lffl1Z0eH4EZOw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d7b599fb-8984-4304-b3c3-304d3e66a669",
+                            SecurityStamp = "d2c33fe3-d45d-4046-821a-9cecae080c26",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             DoB = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1266,15 +1266,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ff61b925-b081-43e1-a721-49e1c4693205",
+                            ConcurrencyStamp = "912c70b0-8dfa-4464-ab8a-c508e199caf4",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@GMAIL.COM",
                             NormalizedUserName = "STAFF@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH3vvKYYfy1ykVxfGhxytp7AZetvxRF4Cl7ij0EV1sPoizLrm3iORwvl+FUyXR/tXA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKCXMJl+0EJH+7FQ/02UO9zcZeKM1ryLr0JBtqJqRdduUDUmn9PQtggC9kjW58hbAA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1629d101-33e7-4f7f-bd39-204483c5476b",
+                            SecurityStamp = "fcce7085-33ed-47ad-b9b2-60d32244b7ed",
                             TwoFactorEnabled = false,
                             UserName = "Staff",
                             DoB = new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
