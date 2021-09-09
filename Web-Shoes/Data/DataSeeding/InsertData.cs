@@ -701,7 +701,7 @@ namespace Web_Shoes.Data.DataSeeding
 
 
 
-            string billId = "D269BF93-A5E2-4C4A-8146-9967DDE80D30";
+            //string billId = "D269BF93-A5E2-4C4A-8146-9967DDE80D30";
 
             //Table Bills
 
