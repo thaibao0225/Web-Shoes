@@ -8,12 +8,23 @@ function checkform(theform) {
     }
     if (theform.CaptchaInput.value != "") {
         if (ValidCaptcha(theform.CaptchaInput.value) == false) {
+            checkCount();
             why += "- The CAPTCHA Code Does Not Match.\n";
         }
     }
     if (why != "") {
         alert(why);
         return false;
+    }
+}
+
+var countCaptcha = 1;
+
+function checkCount() {
+    countCaptcha++;
+    if (countCaptcha ==4) {
+        location.reload();
+        countCaptcha = 1;
     }
 }
 
