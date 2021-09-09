@@ -1,22 +1,30 @@
 ﻿@{
 
-    Layout = "_Layout";
+    Layout = null;
 }
+<link href="~/css/productDetailPage.css" rel="stylesheet" />
 
 
-<div class="row">
-    <div class="col-md-12">
-        test1
-    </div>
+<!-- Trigger the Modal -->
+<img id="myImg" src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/b89cb68c-2da6-4dac-9e64-b9c2ce7df166/wearallday-shoe-NpvSP5.png" alt="Snow" style="width:100%;max-width:300px" hidden>
+<img id="myImg1" src="https://c.files.bbci.co.uk/44CF/production/_117751671_satan-shoes1.jpg" alt="Snow" style="width:100%;max-width:300px" hidden>
+
+<button onclick="modalImage('myImg')"> Click1</button>
+<button onclick="modalImage('myImg1')"> Click2</button>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- The Close Button -->
+    <span class="close">&times;</span>
+
+    <!-- Modal Content (The Image) -->
+    <img class="modal-content" id="img01">
+
+    <!-- Modal Caption (Image Text) -->
+    <div id="caption"></div>
+
     
 </div>
-<div class="row">
-    <div class="col-md-12">
-        
 
-        <form asp-action="search" method="post">
-            <input type="submit" name="submit" value="Submit" />
-        </form>
-    </div>
+<script src="~/js/productDetailPage.js"></script>
 
-</div>

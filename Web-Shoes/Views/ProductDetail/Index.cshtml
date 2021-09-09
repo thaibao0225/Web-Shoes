@@ -6,6 +6,8 @@
 
 
 }
+<link href="~/css/productDetailPage.css" rel="stylesheet" />
+
 
 <div class="breadcrumbs">
     <div class="container">
@@ -103,7 +105,7 @@
                         <div class="block-26 mb-2">
                             <h4>Size</h4>
                             <ul>
-                                <li onclick="size(7)" ><a href="#">7</a></li>
+                                <li onclick="size(7)"><a href="#">7</a></li>
                                 <li onclick="size(7.5)"><a href="#">7.5</a></li>
                                 <li onclick="size(8)"><a href="#">8</a></li>
                                 <li onclick="size(8.5)"><a href="#">8.5</a></li>
@@ -122,15 +124,71 @@
                         </div>
 
 
+                        @if (@ViewBag.Img1 != null)
+                        {
+                            <img id="red" src=@ViewBag.Img1 alt="Snow" style="width:100%;max-width:300px" hidden>
+                        }
+
+                        @if (@ViewBag.Img2 != null)
+                        {
+                            <img id="blue" src=@ViewBag.Img2 alt="Snow" style="width:100%;max-width:300px" hidden>
+                        }
+
+                        @if (@ViewBag.Img3 != null)
+                        {
+                            <img id="green" src=@ViewBag.Img3 alt="Snow" style="width:100%;max-width:300px" hidden>
+                        }
+
+                        @if (@ViewBag.Img4 != null)
+                        {
+                            <img id="yellow" src=@ViewBag.Img4 alt="Snow" style="width:100%;max-width:300px" hidden>
+                        }
+
+                        
+                        
+                        
+                        
+
+                        <div id="myModal" class="modal">
+
+                            <!-- The Close Button -->
+                            <span class="close">&times;</span>
+
+                            <!-- Modal Content (The Image) -->
+                            <img class="modal-content" id="img01">
+
+                            <!-- Modal Caption (Image Text) -->
+                            <div id="caption"></div>
 
 
+                        </div>
 
-                        <div class="block-26 mb-4">
+                        <div class="block-26 mb-4 ">
                             <h4>Color</h4>
                             <ul>
-                                <li onclick="color('red')"><a href="#">Red</a></li>
-                                <li onclick="color('blue')"><a href="#">Blue</a></li>
-                                <li onclick="color('green')"><a href="#">Green</a></li>
+                                @if (@ViewBag.Img1 != null)
+                                {
+                                    <li onclick="color('red','buttonRed','buttonBlue','buttonGreen','buttonYellow',1)" id="buttonRed" ><a href="#">Red</a></li>
+                                }
+
+                                @if (@ViewBag.Img2 != null)
+                                {
+                                    <li onclick="color('blue','buttonRed','buttonBlue','buttonGreen','buttonYellow',2)" id="buttonBlue"><a href="#">Blue</a></li>
+                                }
+
+                                @if (@ViewBag.Img3 != null)
+                                {
+                                    <li onclick="color('green','buttonRed','buttonBlue','buttonGreen','buttonYellow',3)" id="buttonGreen"><a href="#">Green</a></li>
+                                }
+
+                                @if (@ViewBag.Img4 != null)
+                                {
+                                    <li onclick="color('yellow','buttonRed','buttonBlue','buttonGreen','buttonYellow',4)" id="buttonYellow"><a href="#">Yellow</a></li>
+                                }
+
+
+
+
                             </ul>
                         </div>
 
@@ -224,14 +282,16 @@
                                                 </div>
                                             }
 
-                                            <div class="review">
-                                                <form asp-controller="ProductDetail" asp-action="Comment" method="post">
-                                                    <label>User: </label>
-                                                    <input type="text" name="idproduct" value="@ViewBag.Id" hidden/>
-                                                    <input type="text" name="comment" value="" />
-                                                    <input type="submit" name="name" value="Comment" />
-                                                </form>
-                                            </div>
+                                        <div class="review">
+                                            <form asp-controller="ProductDetail" asp-action="Comment" method="post">
+                                                <div class="form-group">
+                                                    <label for="comment">Your Comment</label>
+                                                    <input type="text" name="idproduct" value="@ViewBag.Id" hidden />
+                                                    <textarea name="comment" class="form-control" rows="3"></textarea>
+                                                </div>
+                                                <button type="submit" class="btn btn-default">Send</button>
+                                            </form>
+                                        </div>
 
                                         </div>
 
@@ -309,7 +369,7 @@
         </div>
     </div>
 </div>
-
+<script src="~/js/productDetailPage.js"></script>
 
 <script>
 
@@ -318,11 +378,77 @@
     var ProductAmount;
 
 
-    function color(color) {
+    function color(color, idbutton1, idbutton2, idbutton3, idbutton4,indexbutton) {
+
+        switch (indexbutton) {
+            case 1:
+                // code block
+                var button1 = document.getElementById(idbutton1); //click
+                button1.style = 'background-color: #4CAF50;';
+
+                var button2 = document.getElementById(idbutton2); 
+                button2.style = '';
+
+                var button3 = document.getElementById(idbutton3); 
+                button3.style = '';
+
+                var button4 = document.getElementById(idbutton4); 
+                button4.style = '';
+                break;
+
+            case 2:
+                // code block
+                var button1 = document.getElementById(idbutton1); 
+                button1.style = '';
+
+                var button2 = document.getElementById(idbutton2); //click
+                button2.style = 'background-color: #4CAF50;';
+
+                var button3 = document.getElementById(idbutton3);
+                button3.style = '';
+
+                var button4 = document.getElementById(idbutton4);
+                button4.style = '';
+                break;
+            case 3:
+                // code block
+                var button1 = document.getElementById(idbutton1); 
+                button1.style = '';
+
+                var button2 = document.getElementById(idbutton2);
+                button2.style = '';
+
+                var button3 = document.getElementById(idbutton3); //click
+                button3.style = 'background-color: #4CAF50;';
+
+                var button4 = document.getElementById(idbutton4);
+                button4.style = '';
+                break;
+
+            case 4:
+                // code block
+                var button1 = document.getElementById(idbutton1); 
+                button1.style = '';
+
+                var button2 = document.getElementById(idbutton2);
+                button2.style = '';
+
+                var button3 = document.getElementById(idbutton3);
+                button3.style = '';
+
+                var button4 = document.getElementById(idbutton4);  //click
+                button4.style = 'background-color: #4CAF50;';
+                break;
+            default:
+            // code block
+        }
+
+        
+
 
 
         ProductColor = color;
-
+        modalImage(color)
 
     }
 
