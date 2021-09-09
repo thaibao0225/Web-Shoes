@@ -71,6 +71,39 @@ namespace Web_Shoes.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Coupons",
+                columns: table => new
+                {
+                    couponId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    couponCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    couponPrice = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Coupons", x => x.couponId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Device",
+                columns: table => new
+                {
+                    deviceId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    deviceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    deviceCountry = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    deviceCompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    deviceCity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    deviceState = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    devicePostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    devicePhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    deviceAddress1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    deviceAddress2 = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Device", x => x.deviceId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -88,11 +121,28 @@ namespace Web_Shoes.Migrations
                     pd_MenuFacturer = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     pd_ShortDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     pd_Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    pd_Size7 = table.Column<bool>(type: "bit", nullable: false),
+                    pd_Size7_5 = table.Column<bool>(type: "bit", nullable: false),
+                    pd_Size8 = table.Column<bool>(type: "bit", nullable: false),
+                    pd_Size8_5 = table.Column<bool>(type: "bit", nullable: false),
+                    pd_Size9 = table.Column<bool>(type: "bit", nullable: false),
+                    pd_Size9_5 = table.Column<bool>(type: "bit", nullable: false),
+                    pd_Size10 = table.Column<bool>(type: "bit", nullable: false),
+                    pd_Size10_5 = table.Column<bool>(type: "bit", nullable: false),
+                    pd_Size11 = table.Column<bool>(type: "bit", nullable: false),
+                    pd_Size11_5 = table.Column<bool>(type: "bit", nullable: false),
+                    pd_Size12 = table.Column<bool>(type: "bit", nullable: false),
+                    pd_Size12_5 = table.Column<bool>(type: "bit", nullable: false),
+                    pd_Size13 = table.Column<bool>(type: "bit", nullable: false),
+                    pd_Size13_5 = table.Column<bool>(type: "bit", nullable: false),
+                    pd_Size14 = table.Column<bool>(type: "bit", nullable: false),
+                    pd_Size14_5 = table.Column<bool>(type: "bit", nullable: false),
                     pd_Brand = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     pd_Style = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     pd_Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     pd_Material = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    pd_Technologies = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    pd_Technologies = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    pd_WaitForConfirmation = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -113,6 +163,19 @@ namespace Web_Shoes.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Shipping",
+                columns: table => new
+                {
+                    ship_Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ship_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ship_Price = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Shipping", x => x.ship_Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -140,6 +203,14 @@ namespace Web_Shoes.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DoB = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    bill_Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_State = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_Address1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_Address2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -158,6 +229,25 @@ namespace Web_Shoes.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CartsDevice",
+                columns: table => new
+                {
+                    cartd_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    cartd_DeviceId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartsDevice", x => x.cartd_Id);
+                    table.ForeignKey(
+                        name: "FK_CartsDevice_Device_cartd_DeviceId",
+                        column: x => x.cartd_DeviceId,
+                        principalTable: "Device",
+                        principalColumn: "deviceId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,10 +299,17 @@ namespace Web_Shoes.Migrations
                 name: "Bills",
                 columns: table => new
                 {
-                    bill_Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    bill_Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     bill_UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    bill_Paid = table.Column<int>(type: "int", nullable: false)
+                    bill_PaidTotal = table.Column<int>(type: "int", nullable: false),
+                    bill_Productlist = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_Shipping = table.Column<int>(type: "int", nullable: false),
+                    bill_Discount = table.Column<int>(type: "int", nullable: false),
+                    bill_WaitForConfirmation = table.Column<bool>(type: "bit", nullable: false),
+                    bill_WaitPickup = table.Column<bool>(type: "bit", nullable: false),
+                    bill_Delivering = table.Column<bool>(type: "bit", nullable: false),
+                    bill_Delivered = table.Column<bool>(type: "bit", nullable: false),
+                    bill_Cancelled = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -368,6 +465,31 @@ namespace Web_Shoes.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductInCartDevices",
+                columns: table => new
+                {
+                    picd_CartId = table.Column<int>(type: "int", nullable: false),
+                    picd_ProductId = table.Column<int>(type: "int", nullable: false),
+                    picd_amount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductInCartDevices", x => new { x.picd_CartId, x.picd_ProductId });
+                    table.ForeignKey(
+                        name: "FK_ProductInCartDevices_CartsDevice_picd_CartId",
+                        column: x => x.picd_CartId,
+                        principalTable: "CartsDevice",
+                        principalColumn: "cartd_Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductInCartDevices_Products_picd_ProductId",
+                        column: x => x.picd_ProductId,
+                        principalTable: "Products",
+                        principalColumn: "pd_Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductInCart",
                 columns: table => new
                 {
@@ -468,25 +590,34 @@ namespace Web_Shoes.Migrations
                 values: new object[] { 1, "Description", "Email", "FirstName", "LastName", "Subject" });
 
             migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "pd_Id", "pd_Brand", "pd_Color", "pd_Description", "pd_Img1", "pd_Img2", "pd_Img3", "pd_Img4", "pd_Material", "pd_MenuFacturer", "pd_Name", "pd_Price", "pd_Rate", "pd_ReducePrice", "pd_ShortDescription", "pd_Size", "pd_Style", "pd_Technologies" },
+                table: "Coupons",
+                columns: new[] { "couponId", "couponCode", "couponPrice" },
                 values: new object[,]
                 {
-                    { 13, "Nike", "Beach/Topaz Gold/Bright Crimson/Black", "The Nike SB Nyjah Free 2 is a sequel worthy of its predecessor. Inspired by the iconic Nike Air Zoom Spiridon, the original rubber design has been updated with mesh panels to help your feet stay cool through your hottest skate sessions.", "https://drive.google.com/uc?export=download&id=1tSgTxHUCeZU591E9hQI4Ax22NiD9wspM", "https://drive.google.com/uc?export=download&id=1xDl63HP0U_CkYQMetWNkVH-3p8aFtTSh", "https://drive.google.com/uc?export=download&id=15ZOwySMtoHQ9gL9SgNcyR_VZKMH_C4Nf", "https://drive.google.com/uc?export=download&id=1sziE_7UxXlHpSSLbn3ca12o34F0Q25Ya", "3", "3", "Nike SB Nyjah Free 2", 10000, 4, 500, "The Nike SB Nyjah Free 2 is a sequel worthy of its predecessor. Inspired by the iconic Nike Air Zoom Spiridon, the original rubber design has been updated with mesh panels to help your feet stay cool through your hottest skate sessions.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", "BV2078-200", "3" },
-                    { 12, "Nike", "Ghost/Ashen Slate/Obsidian Mist/Obsidian", "We could use a lot of superlatives to describe the Nike Air Max 2021.We could tell you that we've incorporated recycled materials to design a sneaker with at least 20% recycled content.Or that the new Air cushioning unit underfoot is our most revolutionary.Perhaps we'd call it the the pinnacle of comfort waxing poetic about the cored-out foam midsole that gives you the lightest, softest feel.But maybe we just say it's modern meets technical with a splash of heritage DNA.What fun is there in giving away the surprises?", "https://drive.google.com/uc?export=download&id=1IfOLISEQfFw1xol1gIopWvnLjcPxIhvx", "https://drive.google.com/uc?export=download&id=184n1JhhW9eVPiPU01g2LsrQaga75xZoT", "https://drive.google.com/uc?export=download&id=1vQa7rOZejxU29875pv8ne4fyrxt8WEdH", "https://drive.google.com/uc?export=download&id=1shZnWARtq5SwsibFewT6Km0duAMAkpoZ", "3", "3", "Nike Air Max 2021", 10000, 4, 500, "We could use a lot of superlatives to describe the Nike Air Max 2021.We could tell you that we've incorporated recycled materials to design a sneaker with at least 20% recycled content.Or that the new Air cushioning unit underfoot is our most revolutionary.Perhaps we'd call it the the pinnacle of comfort; waxing poetic about the cored-out foam midsole that gives you the lightest, softest feel.But maybe we just say it's modern meets technical with a splash of heritage DNA.What fun is there in giving away the surprises?", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", "DA1925-002", "3" },
-                    { 11, "Nike", "Black/Wolf Grey/Cool Grey/White", "Inspired by the community art spaces of Barcelona, the Nike SB Zoom Blazer Mid Premium is made from a collage of materials like suede, leather and canvas.The design is elevated with a multi-coloured Nike embroidery on the heel and a mismatched Swoosh, capped off by a contrasting herringbone sole.", "https://drive.google.com/uc?export=download&id=1Ij5hmx63q8idVVTLu7nKiv0OJsqOdor6", "https://drive.google.com/uc?export=download&id=1EERkVDnTn-m3dfv2eUCxIGIKZuENwZIu", "https://drive.google.com/uc?export=download&id=1B6Ae6KBW8vwsPz9K1btBZuSC9OZPn5Hu", "https://drive.google.com/uc?export=download&id=1WS6keGw5BUnYs04Ji-yuVf8_CFdh-mRz", "3", "3", "Nike SB Zoom Blazer Mid Premium", 10000, 4, 500, "Inspired by the community art spaces of Barcelona, the Nike SB Zoom Blazer Mid Premium is made from a collage of materials like suede, leather and canvas.The design is elevated with a multi-coloured Nike embroidery on the heel and a mismatched Swoosh, capped off by a contrasting herringbone sole.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", "DA8854-001", "3" },
-                    { 10, "Nike", "Light Mulberry/Flash Crimson", "Fast, rugged and just as at home in the city as it is in deserts, canyons and mountains, the Nike ACG Mountain Fly Low is ready for whatever you throw at it.The lightweight Ripstop and synthetic upper is durable and airy, while the easy-to-cinch lacing system adds on-the-go personalisation.The sticky rubber outsole brings crag-inspired traction as the soft Nike React foam sole delivers undisputed comfort whether you're pounding the pavement in the city wilds or leaping rock to rock in Joshua Tree.", "https://drive.google.com/uc?export=download&id=1l9m448SGsvJOMrAK4TRpAMTgptxq2yFN", "https://drive.google.com/uc?export=download&id=1nm4RlNHYo8JP3KtJvT_bvFqOQ5vEGY2m", "https://drive.google.com/uc?export=download&id=1DcJqtgAnjTxw_zZyvTEsktIcR5pljTk6", "https://drive.google.com/uc?export=download&id=1bjUxZvzpqdlFxn5GrukZilFWpwx5UyvX", "3", "3", "Nike ACG Mountain Fly Low", 10000, 4, 500, "Fast, rugged and just as at home in the city as it is in deserts, canyons and mountains, the Nike ACG Mountain Fly Low is ready for whatever you throw at it.The lightweight Ripstop and synthetic upper is durable and airy, while the easy-to-cinch lacing system adds on-the-go personalisation.The sticky rubber outsole brings crag-inspired traction as the soft Nike React foam sole delivers undisputed comfort whether you're pounding the pavement in the city wilds or leaping rock to rock in Joshua Tree.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", "DC9045-500", "3" },
-                    { 9, "Nike", "Grey Fog/Melon Tint/Metallic Silver", "Take on the tough terrain of the outdoors.The Nike ACG Air Nasu 2 steps up the durability with Ripstop on the upper and reinforced details to stand up to the rigours of the trail.It has mesh elements up top and a lining within to help keep you on your path with a breathable, supportive feel.A sticky rubber outsole is highlighted with lugs that are designed to help give you traction when navigating wet and rocky surfaces.", "https://drive.google.com/uc?export=download&id=1-dFkb3D0lzmlOTVMeqxEZaWAbQDWIjhF", "https://drive.google.com/uc?export=download&id=1kRRsPNYRT0V5f7LKVRmJp82QMWJVYxeQ", "https://drive.google.com/uc?export=download&id=15wsxpi791SMVlR2Cn7k6FAbCOgUt3I2U", "https://drive.google.com/uc?export=download&id=1XdL62dPC4dpqNdc-BhHnrkm2Hl6morgo", "3", "3", "Nike ACG Air Nasu 2", 10000, 4, 500, "Take on the tough terrain of the outdoors.The Nike ACG Air Nasu 2 steps up the durability with Ripstop on the upper and reinforced details to stand up to the rigours of the trail.It has mesh elements up top and a lining within to help keep you on your path with a breathable, supportive feel.A sticky rubber outsole is highlighted with lugs that are designed to help give you traction when navigating wet and rocky surfaces.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", "DC8296-001", "3" },
-                    { 8, "Nike", "Metallic Silver/Black/White/Persian Violet", "Inspired by Japanese bullet trains, the Nike Air Max 97 lets you push your style full speed ahead.Taking the revolutionary full-length Nike Air unit that shook up the running world and adding the original silver bullet colours, it lets you ride in first-class comfort.", "https://drive.google.com/uc?export=download&id=1AblOdiYwK5ys32KY23IKPSCeAi6KWnsX", "https://drive.google.com/uc?export=download&id=1-zJ4GbHm0iys-PO3XwWHTOB1LLlMQhaR", "https://drive.google.com/uc?export=download&id=1UUI3tV4jyTpPvv8akrL0jcJXDuIWzjM1", "https://drive.google.com/uc?export=download&id=1AXIRrKM96HazbtzcSxhKY59wFjEm1zVe", "3", "3", "Nike Air Max 97", 10000, 4, 500, "Inspired by Japanese bullet trains, the Nike Air Max 97 lets you push your style full speed ahead.Taking the revolutionary full-length Nike Air unit that shook up the running world and adding the original silver bullet colours, it lets you ride in first-class comfort.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", "DJ0717-001", "3" },
-                    { 7, "Nike", "Hasta/Thunder Blue/Bucktan/Obsidian", "Made from at least 20% recycled content by weight, the Nike Air Max 97 SE takes a fresh step towards the future of footwear.The upper features 100% recycled canvas and accents of cork.The embroidered cork graphic on the tongue nods to the plant used in the shoe.", "https://drive.google.com/uc?export=download&id=13rEVfOXI6Sj9J41Z45Cti6pRinyewQ6n", "https://drive.google.com/uc?export=download&id=1cITDpeROBtZfWCsBYRj-obyMYR4SZQYX", "https://drive.google.com/uc?export=download&id=1Suli5ByGxovAPGmd_kM6GIenMTy32JPe", "https://drive.google.com/uc?export=download&id=1SkQjussYGb4HIrIIk0URRFY-L0rZjEpI", "3", "3", "Nike Air Max 97 SE", 10000, 4, 500, "Made from at least 20% recycled content by weight, the Nike Air Max 97 SE takes a fresh step towards the future of footwear.The upper features 100% recycled canvas and accents of cork.The embroidered cork graphic on the tongue nods to the plant used in the shoe.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", "DC3986-300", "3" },
-                    { 6, "Nike", "Moon Fossil/Black", "From city hikes to canyon trails and long walks on the beach, the Nike ACG Air Deschutz + is built to feel comfortable.It's got a classic '90s look and rugged outdoor-inspired design, with plush padding around the ankle for support.A heavy-duty webbing strap and adjustable hook-and-loop closure keep you focused on the journey ahead.", "https://drive.google.com/uc?export=download&id=1IAWjF3G2Lwnwj7sID83qZAnQqdfzjxkk", "https://drive.google.com/uc?export=download&id=1ezOB26pX2VmYZC1uVja89pZ4QJty7hXe", "https://drive.google.com/uc?export=download&id=1IiK2AM0M9bKRhSBofRlNSR8ZhseQsUmG", "https://drive.google.com/uc?export=download&id=1rctQk2u8mHcN41-GdWdCfHSeSRvDr1dr", "3", "3", "Nike ACG Air Deschutz +", 10000, 4, 500, "From city hikes to canyon trails and long walks on the beach, the Nike ACG Air Deschutz + is built to feel comfortable.It's got a classic '90s look and rugged outdoor-inspired design, with plush padding around the ankle for support.A heavy-duty webbing strap and adjustable hook-and-loop closure keep you focused on the journey ahead.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", "DC9092-001", "3" },
-                    { 3, "Nike", "Cream II/Orange/Black/White", "Bringing the classic BRS athletics style into a modern realm with at least 20% recycled materials by weight, the Nike Waffle One Crater is eye-candy for your feet.The playful speckled look on the midsole is created from Crater Foam, a cushiony material made from Nike Grind rubber and Nike foam materials.And for added depth, the sport-inspired upper includes transparent mesh made from recycled polyester.", "https://drive.google.com/uc?export=download&id=1sBANC4Og5eumFJBTVLYGIp2qTBKfwSzh", "https://drive.google.com/uc?export=download&id=1kFLigFwBNPiqYhIOs2QRL39nRo0IJYWS", "https://drive.google.com/uc?export=download&id=1KZJQR5jt9rzVOBxfUZRx-tjKoO3dKNDJ", "https://drive.google.com/uc?export=download&id=10oXph87Rn43M13WNaxJWpL0XS_Mf_JFt", "3", "3", "Nike Waffle One Crater", 10000, 4, 500, "Bringing the classic BRS athletics style into a modern realm with at least 20% recycled materials by weight, the Nike Waffle One Crater is eye-candy for your feet.The playful speckled look on the midsole is created from Crater Foam, a cushiony material made from Nike Grind rubber and Nike foam materials.And for added depth, the sport-inspired upper includes transparent mesh made from recycled polyester.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", "DC2650-200", "3" },
-                    { 4, "Nike", "Hemp/Sand Drift/Light Orewood Brown/Summit White", "Nothing as fly, nothing as comfortable, nothing as proven—the Nike Air Max 90 Premium stays true to its roots, with the iconic Waffle outsole, stitched overlays and classic TPU accents. Fresh colours give a modern look while Max Air cushioning adds comfort to your journey.", "https://drive.google.com/uc?export=download&id=1A74yTUs0Lmya24nL5UPG8N6cV7GFhn5a", "https://drive.google.com/uc?export=download&id=1K85ItvCTycDSRX9p1Jbzm7Egg5l6OdRa", "https://drive.google.com/uc?export=download&id=1b5FDJjrsLKAlj7zBVGLoxdp_gaVTFkVE", "https://drive.google.com/uc?export=download&id=1LSQUzknGNiwOIVtHFNmPhGSh8ZE0CFJx", "3", "3", "Nike Air Max 90 Premium", 10000, 4, 500, "Nothing as fly, nothing as comfortable, nothing as proven—the Nike Air Max 90 Premium stays true to its roots, with the iconic Waffle outsole, stitched overlays and classic TPU accents. Fresh colours give a modern look while Max Air cushioning adds comfort to your journey.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", "DA1641-201", "3" },
-                    { 14, "Nike", "Beach/Topaz Gold/Bright Crimson/Black", "The Nike SB Nyjah Free 2 is a sequel worthy of its predecessor. Inspired by the iconic Nike Air Zoom Spiridon, the original rubber design has been updated with mesh panels to help your feet stay cool through your hottest skate sessions.", "https://drive.google.com/uc?export=download&id=1tSgTxHUCeZU591E9hQI4Ax22NiD9wspM", "https://drive.google.com/uc?export=download&id=1xDl63HP0U_CkYQMetWNkVH-3p8aFtTSh", "https://drive.google.com/uc?export=download&id=15ZOwySMtoHQ9gL9SgNcyR_VZKMH_C4Nf", "https://drive.google.com/uc?export=download&id=1sziE_7UxXlHpSSLbn3ca12o34F0Q25Ya", "3", "3", "Nike SB Nyjah Free 2", 10000, 4, 500, "The Nike SB Nyjah Free 2 is a sequel worthy of its predecessor. Inspired by the iconic Nike Air Zoom Spiridon, the original rubber design has been updated with mesh panels to help your feet stay cool through your hottest skate sessions.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", "BV2078-200", "3" },
-                    { 2, "Nike", "Medium Olive/Carbon Green/Sail/Black", "The radiance lives on in the Nike Air Force 1 GORE-TEX, the b-ball OG that puts a fresh spin on what you know best: crisp leather, bold colours and the perfect amount of flash to make you shine.This time it's clad in GORE-TEX technology.", "https://drive.google.com/uc?export=download&id=1YBpU6fwcCzV18ho__mhCCO0yD8ES-ef7", "https://drive.google.com/uc?export=download&id=1Y4gS9zvfZdshJc4YySjz13ZGlMIft4kv", "https://drive.google.com/uc?export=download&id=1AyILI7QsTzqBPE6OvDMZpY7OAtxjkuH8", "https://drive.google.com/uc?export=download&id=1WT_vD4nC_szHPH9LVbl_UztqvXlmqs2e", "2", "2", "Nike Air Force 1", 10000, 5, 500, "The radiance lives on in the Nike Air Force 1 GORE-TEX, the b-ball OG that puts a fresh spin on what you know best: crisp leather, bold colours and the perfect amount of flash to make you shine.This time it's clad in GORE-TEX technology.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", "DM6435-222", "2" },
-                    { 1, "Nike", "White/White", "The radiance lives on in the Nike Air Force 1 '07, the b-ball OG that puts a fresh spin on what you know best: durably stitched overlays, clean finishes and the perfect amount of flash to make you shine.", "https://drive.google.com/uc?export=download&id=1xnPOpwwf0C13abtd60BwBAqU-7eCSJFD", "https://drive.google.com/uc?export=download&id=1YBpU6fwcCzV18ho__mhCCO0yD8ES-ef7", "https://drive.google.com/uc?export=download&id=1sBANC4Og5eumFJBTVLYGIp2qTBKfwSzh", "https://drive.google.com/uc?export=download&id=1A74yTUs0Lmya24nL5UPG8N6cV7GFhn5a", "1", "1", "Nike Air Force 1 07", 10000, 5, 500, "The radiance lives on in the Nike Air Force 1 '07, the b-ball OG that puts a fresh spin on what you know best: durably stitched overlays, clean finishes and the perfect amount of flash to make you shine.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", "CW2288-111", "1" },
-                    { 5, "Nike", "Dark Driftwood/Sail/Light Chocolate/Black", "Nothing as fly, nothing as comfortable, nothing as proven—the Nike Air Max 90 stays true to its roots with the iconic Waffle sole, stitched overlays and classic TPU accents on the heel and eyestays.A variety of materials on the upper gives a modern look, while Max Air cushioning adds comfort to your journey.", "https://drive.google.com/uc?export=download&id=17puCPm8dDBi_11T0ei5JznoGXugbuPi8", "https://drive.google.com/uc?export=download&id=1kxFSmfxV3eYg_2ikz2fF0G4UoXPedRJG", "https://drive.google.com/uc?export=download&id=1DxgC1AAKFgDxKSOtBnp_kytP3TlZ-kqr", "https://drive.google.com/uc?export=download&id=1dmp8HCRjPGXUyT3TkkHLZNiP9utabt_S", "3", "3", "Nike Air Max 90", 10000, 4, 500, "Nothing as fly, nothing as comfortable, nothing as proven—the Nike Air Max 90 stays true to its roots with the iconic Waffle sole, stitched overlays and classic TPU accents on the heel and eyestays.A variety of materials on the upper gives a modern look, while Max Air cushioning adds comfort to your journey.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", "DB0625-200", "3" },
-                    { 15, "Nike", "Pollen/Pink Blast/Black", "The first signature shoe from technical phenomenon Shane O'Neill, the Nike SB Shane T is a lightweight shoe that's built to perform. Unique lacing lets you choose between lacing your shoes the traditional way or by running them through durable ghillie loops.", "https://drive.google.com/uc?export=download&id=1tSgTxHUCeZU591E9hQI4Ax22NiD9wspM", "https://drive.google.com/uc?export=download&id=1xDl63HP0U_CkYQMetWNkVH-3p8aFtTSh", "https://drive.google.com/uc?export=download&id=15ZOwySMtoHQ9gL9SgNcyR_VZKMH_C4Nf", "https://drive.google.com/uc?export=download&id=1sziE_7UxXlHpSSLbn3ca12o34F0Q25Ya", "3", "3", "Nike SB Nyjah Free 2", 10000, 4, 500, "The first signature shoe from technical phenomenon Shane O'Neill, the Nike SB Shane T is a lightweight shoe that's built to perform. Unique lacing lets you choose between lacing your shoes the traditional way or by running them through durable ghillie loops.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", "CU9224-700", "3" }
+                    { "d89df441-9428-4357-927c-97c27004eee5", "code10", 10 },
+                    { "0509821b-1680-4dfb-b6b8-f7bc65969b19", "code50", 50 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "pd_Id", "pd_Brand", "pd_Color", "pd_Description", "pd_Img1", "pd_Img2", "pd_Img3", "pd_Img4", "pd_Material", "pd_MenuFacturer", "pd_Name", "pd_Price", "pd_Rate", "pd_ReducePrice", "pd_ShortDescription", "pd_Size", "pd_Size10", "pd_Size10_5", "pd_Size11", "pd_Size11_5", "pd_Size12", "pd_Size12_5", "pd_Size13", "pd_Size13_5", "pd_Size14", "pd_Size14_5", "pd_Size7", "pd_Size7_5", "pd_Size8", "pd_Size8_5", "pd_Size9", "pd_Size9_5", "pd_Style", "pd_Technologies", "pd_WaitForConfirmation" },
+                values: new object[,]
+                {
+                    { 14, "Nike", "Beach/Topaz Gold/Bright Crimson/Black", "The Nike SB Nyjah Free 2 is a sequel worthy of its predecessor. Inspired by the iconic Nike Air Zoom Spiridon, the original rubber design has been updated with mesh panels to help your feet stay cool through your hottest skate sessions.", "https://drive.google.com/uc?export=download&id=1tSgTxHUCeZU591E9hQI4Ax22NiD9wspM", "https://drive.google.com/uc?export=download&id=1xDl63HP0U_CkYQMetWNkVH-3p8aFtTSh", "https://drive.google.com/uc?export=download&id=15ZOwySMtoHQ9gL9SgNcyR_VZKMH_C4Nf", "https://drive.google.com/uc?export=download&id=1sziE_7UxXlHpSSLbn3ca12o34F0Q25Ya", "3", "3", "Nike SB Nyjah Free 2", 10000, 4, 500, "The Nike SB Nyjah Free 2 is a sequel worthy of its predecessor. Inspired by the iconic Nike Air Zoom Spiridon, the original rubber design has been updated with mesh panels to help your feet stay cool through your hottest skate sessions.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, "BV2078-200", "3", false },
+                    { 13, "Nike", "Beach/Topaz Gold/Bright Crimson/Black", "The Nike SB Nyjah Free 2 is a sequel worthy of its predecessor. Inspired by the iconic Nike Air Zoom Spiridon, the original rubber design has been updated with mesh panels to help your feet stay cool through your hottest skate sessions.", "https://drive.google.com/uc?export=download&id=1tSgTxHUCeZU591E9hQI4Ax22NiD9wspM", "https://drive.google.com/uc?export=download&id=1xDl63HP0U_CkYQMetWNkVH-3p8aFtTSh", "https://drive.google.com/uc?export=download&id=15ZOwySMtoHQ9gL9SgNcyR_VZKMH_C4Nf", "https://drive.google.com/uc?export=download&id=1sziE_7UxXlHpSSLbn3ca12o34F0Q25Ya", "3", "3", "Nike SB Nyjah Free 2", 10000, 4, 500, "The Nike SB Nyjah Free 2 is a sequel worthy of its predecessor. Inspired by the iconic Nike Air Zoom Spiridon, the original rubber design has been updated with mesh panels to help your feet stay cool through your hottest skate sessions.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, "BV2078-200", "3", false },
+                    { 12, "Nike", "Ghost/Ashen Slate/Obsidian Mist/Obsidian", "We could use a lot of superlatives to describe the Nike Air Max 2021.We could tell you that we've incorporated recycled materials to design a sneaker with at least 20% recycled content.Or that the new Air cushioning unit underfoot is our most revolutionary.Perhaps we'd call it the the pinnacle of comfort waxing poetic about the cored-out foam midsole that gives you the lightest, softest feel.But maybe we just say it's modern meets technical with a splash of heritage DNA.What fun is there in giving away the surprises?", "https://drive.google.com/uc?export=download&id=1IfOLISEQfFw1xol1gIopWvnLjcPxIhvx", "https://drive.google.com/uc?export=download&id=184n1JhhW9eVPiPU01g2LsrQaga75xZoT", "https://drive.google.com/uc?export=download&id=1vQa7rOZejxU29875pv8ne4fyrxt8WEdH", "https://drive.google.com/uc?export=download&id=1shZnWARtq5SwsibFewT6Km0duAMAkpoZ", "3", "3", "Nike Air Max 2021", 10000, 4, 500, "We could use a lot of superlatives to describe the Nike Air Max 2021.We could tell you that we've incorporated recycled materials to design a sneaker with at least 20% recycled content.Or that the new Air cushioning unit underfoot is our most revolutionary.Perhaps we'd call it the the pinnacle of comfort; waxing poetic about the cored-out foam midsole that gives you the lightest, softest feel.But maybe we just say it's modern meets technical with a splash of heritage DNA.What fun is there in giving away the surprises?", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, "DA1925-002", "3", false },
+                    { 11, "Nike", "Black/Wolf Grey/Cool Grey/White", "Inspired by the community art spaces of Barcelona, the Nike SB Zoom Blazer Mid Premium is made from a collage of materials like suede, leather and canvas.The design is elevated with a multi-coloured Nike embroidery on the heel and a mismatched Swoosh, capped off by a contrasting herringbone sole.", "https://drive.google.com/uc?export=download&id=1Ij5hmx63q8idVVTLu7nKiv0OJsqOdor6", "https://drive.google.com/uc?export=download&id=1EERkVDnTn-m3dfv2eUCxIGIKZuENwZIu", "https://drive.google.com/uc?export=download&id=1B6Ae6KBW8vwsPz9K1btBZuSC9OZPn5Hu", "https://drive.google.com/uc?export=download&id=1WS6keGw5BUnYs04Ji-yuVf8_CFdh-mRz", "3", "3", "Nike SB Zoom Blazer Mid Premium", 10000, 4, 500, "Inspired by the community art spaces of Barcelona, the Nike SB Zoom Blazer Mid Premium is made from a collage of materials like suede, leather and canvas.The design is elevated with a multi-coloured Nike embroidery on the heel and a mismatched Swoosh, capped off by a contrasting herringbone sole.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, "DA8854-001", "3", false },
+                    { 10, "Nike", "Light Mulberry/Flash Crimson", "Fast, rugged and just as at home in the city as it is in deserts, canyons and mountains, the Nike ACG Mountain Fly Low is ready for whatever you throw at it.The lightweight Ripstop and synthetic upper is durable and airy, while the easy-to-cinch lacing system adds on-the-go personalisation.The sticky rubber outsole brings crag-inspired traction as the soft Nike React foam sole delivers undisputed comfort whether you're pounding the pavement in the city wilds or leaping rock to rock in Joshua Tree.", "https://drive.google.com/uc?export=download&id=1l9m448SGsvJOMrAK4TRpAMTgptxq2yFN", "https://drive.google.com/uc?export=download&id=1nm4RlNHYo8JP3KtJvT_bvFqOQ5vEGY2m", "https://drive.google.com/uc?export=download&id=1DcJqtgAnjTxw_zZyvTEsktIcR5pljTk6", "https://drive.google.com/uc?export=download&id=1bjUxZvzpqdlFxn5GrukZilFWpwx5UyvX", "3", "3", "Nike ACG Mountain Fly Low", 10000, 4, 500, "Fast, rugged and just as at home in the city as it is in deserts, canyons and mountains, the Nike ACG Mountain Fly Low is ready for whatever you throw at it.The lightweight Ripstop and synthetic upper is durable and airy, while the easy-to-cinch lacing system adds on-the-go personalisation.The sticky rubber outsole brings crag-inspired traction as the soft Nike React foam sole delivers undisputed comfort whether you're pounding the pavement in the city wilds or leaping rock to rock in Joshua Tree.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, "DC9045-500", "3", false },
+                    { 9, "Nike", "Grey Fog/Melon Tint/Metallic Silver", "Take on the tough terrain of the outdoors.The Nike ACG Air Nasu 2 steps up the durability with Ripstop on the upper and reinforced details to stand up to the rigours of the trail.It has mesh elements up top and a lining within to help keep you on your path with a breathable, supportive feel.A sticky rubber outsole is highlighted with lugs that are designed to help give you traction when navigating wet and rocky surfaces.", "https://drive.google.com/uc?export=download&id=1-dFkb3D0lzmlOTVMeqxEZaWAbQDWIjhF", "https://drive.google.com/uc?export=download&id=1kRRsPNYRT0V5f7LKVRmJp82QMWJVYxeQ", "https://drive.google.com/uc?export=download&id=15wsxpi791SMVlR2Cn7k6FAbCOgUt3I2U", "https://drive.google.com/uc?export=download&id=1XdL62dPC4dpqNdc-BhHnrkm2Hl6morgo", "3", "3", "Nike ACG Air Nasu 2", 10000, 4, 500, "Take on the tough terrain of the outdoors.The Nike ACG Air Nasu 2 steps up the durability with Ripstop on the upper and reinforced details to stand up to the rigours of the trail.It has mesh elements up top and a lining within to help keep you on your path with a breathable, supportive feel.A sticky rubber outsole is highlighted with lugs that are designed to help give you traction when navigating wet and rocky surfaces.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, "DC8296-001", "3", false },
+                    { 8, "Nike", "Metallic Silver/Black/White/Persian Violet", "Inspired by Japanese bullet trains, the Nike Air Max 97 lets you push your style full speed ahead.Taking the revolutionary full-length Nike Air unit that shook up the running world and adding the original silver bullet colours, it lets you ride in first-class comfort.", "https://drive.google.com/uc?export=download&id=1AblOdiYwK5ys32KY23IKPSCeAi6KWnsX", "https://drive.google.com/uc?export=download&id=1-zJ4GbHm0iys-PO3XwWHTOB1LLlMQhaR", "https://drive.google.com/uc?export=download&id=1UUI3tV4jyTpPvv8akrL0jcJXDuIWzjM1", "https://drive.google.com/uc?export=download&id=1AXIRrKM96HazbtzcSxhKY59wFjEm1zVe", "3", "3", "Nike Air Max 97", 10000, 4, 500, "Inspired by Japanese bullet trains, the Nike Air Max 97 lets you push your style full speed ahead.Taking the revolutionary full-length Nike Air unit that shook up the running world and adding the original silver bullet colours, it lets you ride in first-class comfort.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, "DJ0717-001", "3", false },
+                    { 7, "Nike", "Hasta/Thunder Blue/Bucktan/Obsidian", "Made from at least 20% recycled content by weight, the Nike Air Max 97 SE takes a fresh step towards the future of footwear.The upper features 100% recycled canvas and accents of cork.The embroidered cork graphic on the tongue nods to the plant used in the shoe.", "https://drive.google.com/uc?export=download&id=13rEVfOXI6Sj9J41Z45Cti6pRinyewQ6n", "https://drive.google.com/uc?export=download&id=1cITDpeROBtZfWCsBYRj-obyMYR4SZQYX", "https://drive.google.com/uc?export=download&id=1Suli5ByGxovAPGmd_kM6GIenMTy32JPe", "https://drive.google.com/uc?export=download&id=1SkQjussYGb4HIrIIk0URRFY-L0rZjEpI", "3", "3", "Nike Air Max 97 SE", 10000, 4, 500, "Made from at least 20% recycled content by weight, the Nike Air Max 97 SE takes a fresh step towards the future of footwear.The upper features 100% recycled canvas and accents of cork.The embroidered cork graphic on the tongue nods to the plant used in the shoe.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, "DC3986-300", "3", false },
+                    { 6, "Nike", "Moon Fossil/Black", "From city hikes to canyon trails and long walks on the beach, the Nike ACG Air Deschutz + is built to feel comfortable.It's got a classic '90s look and rugged outdoor-inspired design, with plush padding around the ankle for support.A heavy-duty webbing strap and adjustable hook-and-loop closure keep you focused on the journey ahead.", "https://drive.google.com/uc?export=download&id=1IAWjF3G2Lwnwj7sID83qZAnQqdfzjxkk", "https://drive.google.com/uc?export=download&id=1ezOB26pX2VmYZC1uVja89pZ4QJty7hXe", "https://drive.google.com/uc?export=download&id=1IiK2AM0M9bKRhSBofRlNSR8ZhseQsUmG", "https://drive.google.com/uc?export=download&id=1rctQk2u8mHcN41-GdWdCfHSeSRvDr1dr", "3", "3", "Nike ACG Air Deschutz +", 10000, 4, 500, "From city hikes to canyon trails and long walks on the beach, the Nike ACG Air Deschutz + is built to feel comfortable.It's got a classic '90s look and rugged outdoor-inspired design, with plush padding around the ankle for support.A heavy-duty webbing strap and adjustable hook-and-loop closure keep you focused on the journey ahead.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, "DC9092-001", "3", false },
+                    { 3, "Nike", "Cream II/Orange/Black/White", "Bringing the classic BRS athletics style into a modern realm with at least 20% recycled materials by weight, the Nike Waffle One Crater is eye-candy for your feet.The playful speckled look on the midsole is created from Crater Foam, a cushiony material made from Nike Grind rubber and Nike foam materials.And for added depth, the sport-inspired upper includes transparent mesh made from recycled polyester.", "https://drive.google.com/uc?export=download&id=1sBANC4Og5eumFJBTVLYGIp2qTBKfwSzh", "https://drive.google.com/uc?export=download&id=1kFLigFwBNPiqYhIOs2QRL39nRo0IJYWS", "https://drive.google.com/uc?export=download&id=1KZJQR5jt9rzVOBxfUZRx-tjKoO3dKNDJ", "https://drive.google.com/uc?export=download&id=10oXph87Rn43M13WNaxJWpL0XS_Mf_JFt", "3", "3", "Nike Waffle One Crater", 10000, 4, 500, "Bringing the classic BRS athletics style into a modern realm with at least 20% recycled materials by weight, the Nike Waffle One Crater is eye-candy for your feet.The playful speckled look on the midsole is created from Crater Foam, a cushiony material made from Nike Grind rubber and Nike foam materials.And for added depth, the sport-inspired upper includes transparent mesh made from recycled polyester.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, "DC2650-200", "3", false },
+                    { 4, "Nike", "Hemp/Sand Drift/Light Orewood Brown/Summit White", "Nothing as fly, nothing as comfortable, nothing as proven—the Nike Air Max 90 Premium stays true to its roots, with the iconic Waffle outsole, stitched overlays and classic TPU accents. Fresh colours give a modern look while Max Air cushioning adds comfort to your journey.", "https://drive.google.com/uc?export=download&id=1A74yTUs0Lmya24nL5UPG8N6cV7GFhn5a", "https://drive.google.com/uc?export=download&id=1K85ItvCTycDSRX9p1Jbzm7Egg5l6OdRa", "https://drive.google.com/uc?export=download&id=1b5FDJjrsLKAlj7zBVGLoxdp_gaVTFkVE", "https://drive.google.com/uc?export=download&id=1LSQUzknGNiwOIVtHFNmPhGSh8ZE0CFJx", "3", "3", "Nike Air Max 90 Premium", 10000, 4, 500, "Nothing as fly, nothing as comfortable, nothing as proven—the Nike Air Max 90 Premium stays true to its roots, with the iconic Waffle outsole, stitched overlays and classic TPU accents. Fresh colours give a modern look while Max Air cushioning adds comfort to your journey.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, "DA1641-201", "3", false },
+                    { 15, "Nike", "Pollen/Pink Blast/Black", "The first signature shoe from technical phenomenon Shane O'Neill, the Nike SB Shane T is a lightweight shoe that's built to perform. Unique lacing lets you choose between lacing your shoes the traditional way or by running them through durable ghillie loops.", "https://drive.google.com/uc?export=download&id=1tSgTxHUCeZU591E9hQI4Ax22NiD9wspM", "https://drive.google.com/uc?export=download&id=1xDl63HP0U_CkYQMetWNkVH-3p8aFtTSh", "https://drive.google.com/uc?export=download&id=15ZOwySMtoHQ9gL9SgNcyR_VZKMH_C4Nf", "https://drive.google.com/uc?export=download&id=1sziE_7UxXlHpSSLbn3ca12o34F0Q25Ya", "3", "3", "Nike SB Nyjah Free 2", 10000, 4, 500, "The first signature shoe from technical phenomenon Shane O'Neill, the Nike SB Shane T is a lightweight shoe that's built to perform. Unique lacing lets you choose between lacing your shoes the traditional way or by running them through durable ghillie loops.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, "CU9224-700", "3", false },
+                    { 2, "Nike", "Medium Olive/Carbon Green/Sail/Black", "The radiance lives on in the Nike Air Force 1 GORE-TEX, the b-ball OG that puts a fresh spin on what you know best: crisp leather, bold colours and the perfect amount of flash to make you shine.This time it's clad in GORE-TEX technology.", "https://drive.google.com/uc?export=download&id=1YBpU6fwcCzV18ho__mhCCO0yD8ES-ef7", "https://drive.google.com/uc?export=download&id=1Y4gS9zvfZdshJc4YySjz13ZGlMIft4kv", "https://drive.google.com/uc?export=download&id=1AyILI7QsTzqBPE6OvDMZpY7OAtxjkuH8", "https://drive.google.com/uc?export=download&id=1WT_vD4nC_szHPH9LVbl_UztqvXlmqs2e", "2", "2", "Nike Air Force 1", 10000, 5, 500, "The radiance lives on in the Nike Air Force 1 GORE-TEX, the b-ball OG that puts a fresh spin on what you know best: crisp leather, bold colours and the perfect amount of flash to make you shine.This time it's clad in GORE-TEX technology.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, "DM6435-222", "2", false },
+                    { 1, "Nike", "White/White", "The radiance lives on in the Nike Air Force 1 '07, the b-ball OG that puts a fresh spin on what you know best: durably stitched overlays, clean finishes and the perfect amount of flash to make you shine.", "https://drive.google.com/uc?export=download&id=1xnPOpwwf0C13abtd60BwBAqU-7eCSJFD", "https://drive.google.com/uc?export=download&id=1YBpU6fwcCzV18ho__mhCCO0yD8ES-ef7", "https://drive.google.com/uc?export=download&id=1sBANC4Og5eumFJBTVLYGIp2qTBKfwSzh", "https://drive.google.com/uc?export=download&id=1A74yTUs0Lmya24nL5UPG8N6cV7GFhn5a", "1", "1", "Nike Air Force 1 07", 10000, 5, 500, "The radiance lives on in the Nike Air Force 1 '07, the b-ball OG that puts a fresh spin on what you know best: durably stitched overlays, clean finishes and the perfect amount of flash to make you shine.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, "CW2288-111", "1", false },
+                    { 5, "Nike", "Dark Driftwood/Sail/Light Chocolate/Black", "Nothing as fly, nothing as comfortable, nothing as proven—the Nike Air Max 90 stays true to its roots with the iconic Waffle sole, stitched overlays and classic TPU accents on the heel and eyestays.A variety of materials on the upper gives a modern look, while Max Air cushioning adds comfort to your journey.", "https://drive.google.com/uc?export=download&id=17puCPm8dDBi_11T0ei5JznoGXugbuPi8", "https://drive.google.com/uc?export=download&id=1kxFSmfxV3eYg_2ikz2fF0G4UoXPedRJG", "https://drive.google.com/uc?export=download&id=1DxgC1AAKFgDxKSOtBnp_kytP3TlZ-kqr", "https://drive.google.com/uc?export=download&id=1dmp8HCRjPGXUyT3TkkHLZNiP9utabt_S", "3", "3", "Nike Air Max 90", 10000, 4, 500, "Nothing as fly, nothing as comfortable, nothing as proven—the Nike Air Max 90 stays true to its roots with the iconic Waffle sole, stitched overlays and classic TPU accents on the heel and eyestays.A variety of materials on the upper gives a modern look, while Max Air cushioning adds comfort to your journey.", "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, "DB0625-200", "3", false }
                 });
 
             migrationBuilder.InsertData(
@@ -494,23 +625,23 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Discriminator", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "360E601E-92F2-4F08-832B-604A21293258", "ce88bcbe-1ca1-4913-926f-3989fa259981", "admin", "AppRole", "admin", null },
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "ff4a9067-ab66-4715-84d0-da187005eb4e", "Staff", "AppRole", "staff", null }
+                    { "360E601E-92F2-4F08-832B-604A21293258", "d11409a6-ece8-483b-8881-be41de6e5e8b", "admin", "AppRole", "admin", null },
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "9df22adf-79b6-4fdf-827b-2e344e2a96c9", "Staff", "AppRole", "staff", null }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Shipping",
+                columns: new[] { "ship_Id", "ship_Name", "ship_Price" },
+                values: new object[] { "7CF94A7D-9239-446E-A404-086518F84652", "Ship", 5 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "bill_Address1", "bill_Address2", "bill_City", "bill_CompanyName", "bill_Country", "bill_PhoneNumber", "bill_PostalCode", "bill_State" },
                 values: new object[,]
                 {
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "2846f1a9-9aca-4c49-90bd-3592864d323c", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAELHYh3WTZkz2gcK7yBT5wksIt9+8CU3ahzAqFnVHIhkApQGtLnonEBL9XMEbiXDEfA==", null, false, "1c81eebc-ee78-48d4-a9c3-4b6a6f01a535", false, "Staff" },
-                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "41818616-090b-4813-94f6-f2ffe87e8ed7", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEDpSrpzx4RVo6K3cyrMETKjRt0z0WzI2rVJlEtOfmWJWRj5qKPmwWrE1opaEI4j2xg==", null, false, "2312c493-131d-4bff-9a5c-8e84549e9edb", false, "Admin" }
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "23421bc2-9beb-4fdb-9ad2-90f9bef0eeb6", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEGr4z+6Q7vkGvsA9nEeEnzuLITOC27ljgKzVTsiZTI9OQKQwhSThsfxNIrY9lDHJKA==", null, false, "b124cad1-22b0-42e1-9333-7648307c88d5", false, "Staff", null, null, null, null, null, null, null, null },
+                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "0bf59900-10de-4d3f-82ed-f6b6472b285b", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEAPzObd7vVuBcLXY/0Yj1w5oGXNVTq3OhQDYPNtGCyz0a9jKHDGkBpXxiDmTSYzHig==", null, false, "99c57e1b-d3f6-4b3e-ad94-33c1b63ee80e", false, "Admin", null, null, null, null, null, null, null, null }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Bills",
-                columns: new[] { "bill_Id", "bill_Paid", "bill_UserId" },
-                values: new object[] { 1, 10000, "DE544998-A3CC-4E12-ABB4-0642E57BD222" });
 
             migrationBuilder.InsertData(
                 table: "Carts",
@@ -591,9 +722,19 @@ namespace Web_Shoes.Migrations
                 column: "cart_UserID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CartsDevice_cartd_DeviceId",
+                table: "CartsDevice",
+                column: "cartd_DeviceId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductInCart_pic_ProductId",
                 table: "ProductInCart",
                 column: "pic_ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductInCartDevices_picd_ProductId",
+                table: "ProductInCartDevices",
+                column: "picd_ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductInWishlist_piw_ProductId",
@@ -675,7 +816,13 @@ namespace Web_Shoes.Migrations
                 name: "ContactUsers");
 
             migrationBuilder.DropTable(
+                name: "Coupons");
+
+            migrationBuilder.DropTable(
                 name: "ProductInCart");
+
+            migrationBuilder.DropTable(
+                name: "ProductInCartDevices");
 
             migrationBuilder.DropTable(
                 name: "ProductInWishlist");
@@ -688,6 +835,9 @@ namespace Web_Shoes.Migrations
 
             migrationBuilder.DropTable(
                 name: "RoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "Shipping");
 
             migrationBuilder.DropTable(
                 name: "UserClaims");
@@ -708,6 +858,9 @@ namespace Web_Shoes.Migrations
                 name: "Carts");
 
             migrationBuilder.DropTable(
+                name: "CartsDevice");
+
+            migrationBuilder.DropTable(
                 name: "Wishlists");
 
             migrationBuilder.DropTable(
@@ -721,6 +874,9 @@ namespace Web_Shoes.Migrations
 
             migrationBuilder.DropTable(
                 name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "Device");
 
             migrationBuilder.DropTable(
                 name: "Users");

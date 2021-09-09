@@ -30,12 +30,10 @@ namespace Web_Shoes.Controllers
 
         [Route("/cart")]
         [HttpGet("{productid}&{quantity}")]
-        public IActionResult Index(int productid,int quantity)
+        public IActionResult Index(int productid, int quantity)
         {
 
-            int aa = productid;
 
-            int bb = quantity;
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -69,7 +67,65 @@ namespace Web_Shoes.Controllers
 
 
 
+
             return View(productInCartModelQuery);
+        }
+
+
+
+        [Route("/cart/remove")]
+        [HttpGet("{productid}&{quantity}")]
+        public IActionResult RemoveProduct(int productid, int quantity)
+        {
+
+            int aa = productid;
+
+            try
+            {
+                var productQuery = _context.ProductInCart.FirstOrDefault(a => a.pic_ProductId == productid);
+                _context.ProductInCart.Remove(productQuery);
+                _context.SaveChanges();
+
+
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            ////
+
+        }
+
+        [Route("/cart/paid")]
+        [HttpGet("{coupon}&{quantity}")]
+        public IActionResult addpaid(string coupon, int quantity)
+        {
+
+            try
+            {
+                int ReducePrice = 0;
+
+                var couponQuery = _context.Coupons.FirstOrDefault(a => a.couponCode == coupon);
+
+                if (couponQuery != null)
+                {
+                    ReducePrice = couponQuery.couponPrice;
+                }
+
+
+
+
+                return Redirect("/checkout?reduceprice="+ ReducePrice);
+            }
+            catch 
+            {
+
+                return RedirectToAction(nameof(Index));
+            }
+            
         }
     }
 }

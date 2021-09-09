@@ -10,7 +10,7 @@ using Web_Shoes.Data;
 namespace Web_Shoes.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210826101236_init")]
+    [Migration("20210909181756_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -277,30 +277,44 @@ namespace Web_Shoes.Migrations
 
             modelBuilder.Entity("Web_Shoes.Entity.Bills", b =>
                 {
-                    b.Property<int>("bill_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("bill_Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("bill_Paid")
+                    b.Property<bool>("bill_Cancelled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("bill_Delivered")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("bill_Delivering")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("bill_Discount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("bill_PaidTotal")
+                        .HasColumnType("int");
+
+                    b.Property<string>("bill_Productlist")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("bill_Shipping")
                         .HasColumnType("int");
 
                     b.Property<string>("bill_UserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("bill_WaitForConfirmation")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("bill_WaitPickup")
+                        .HasColumnType("bit");
 
                     b.HasKey("bill_Id");
 
                     b.HasIndex("bill_UserId");
 
                     b.ToTable("Bills");
-
-                    b.HasData(
-                        new
-                        {
-                            bill_Id = 1,
-                            bill_Paid = 10000,
-                            bill_UserId = "DE544998-A3CC-4E12-ABB4-0642E57BD222"
-                        });
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.Cart", b =>
@@ -328,6 +342,23 @@ namespace Web_Shoes.Migrations
                             cart_Id = "D355458F-1DD3-4834-AA28-6DA34B6357FF",
                             cart_UserID = "DE544998-A3CC-4E12-ABB4-0642E57BD222"
                         });
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.CartsDevice", b =>
+                {
+                    b.Property<int>("cartd_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("cartd_DeviceId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("cartd_Id");
+
+                    b.HasIndex("cartd_DeviceId");
+
+                    b.ToTable("CartsDevice");
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.Categories", b =>
@@ -439,6 +470,73 @@ namespace Web_Shoes.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Web_Shoes.Entity.Coupons", b =>
+                {
+                    b.Property<string>("couponId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("couponCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("couponPrice")
+                        .HasColumnType("int");
+
+                    b.HasKey("couponId");
+
+                    b.ToTable("Coupons");
+
+                    b.HasData(
+                        new
+                        {
+                            couponId = "d89df441-9428-4357-927c-97c27004eee5",
+                            couponCode = "code10",
+                            couponPrice = 10
+                        },
+                        new
+                        {
+                            couponId = "0509821b-1680-4dfb-b6b8-f7bc65969b19",
+                            couponCode = "code50",
+                            couponPrice = 50
+                        });
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.Device", b =>
+                {
+                    b.Property<string>("deviceId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("deviceAddress1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("deviceAddress2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("deviceCity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("deviceCompanyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("deviceCountry")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("deviceName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("devicePhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("devicePostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("deviceState")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("deviceId");
+
+                    b.ToTable("Device");
+                });
+
             modelBuilder.Entity("Web_Shoes.Entity.ProductInCart", b =>
                 {
                     b.Property<string>("pic_CartId")
@@ -487,6 +585,24 @@ namespace Web_Shoes.Migrations
                             pic_color = "blue",
                             pic_size = "8"
                         });
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.ProductInCartDevices", b =>
+                {
+                    b.Property<int>("picd_CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("picd_ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("picd_amount")
+                        .HasColumnType("int");
+
+                    b.HasKey("picd_CartId", "picd_ProductId");
+
+                    b.HasIndex("picd_ProductId");
+
+                    b.ToTable("ProductInCartDevices");
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.ProductInWishlist", b =>
@@ -567,11 +683,62 @@ namespace Web_Shoes.Migrations
                     b.Property<string>("pd_Size")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("pd_Size10")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("pd_Size10_5")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("pd_Size11")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("pd_Size11_5")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("pd_Size12")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("pd_Size12_5")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("pd_Size13")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("pd_Size13_5")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("pd_Size14")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("pd_Size14_5")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("pd_Size7")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("pd_Size7_5")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("pd_Size8")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("pd_Size8_5")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("pd_Size9")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("pd_Size9_5")
+                        .HasColumnType("bit");
+
                     b.Property<string>("pd_Style")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("pd_Technologies")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("pd_WaitForConfirmation")
+                        .HasColumnType("bit");
 
                     b.HasKey("pd_Id");
 
@@ -596,8 +763,25 @@ namespace Web_Shoes.Migrations
                             pd_ReducePrice = 500,
                             pd_ShortDescription = "The radiance lives on in the Nike Air Force 1 '07, the b-ball OG that puts a fresh spin on what you know best: durably stitched overlays, clean finishes and the perfect amount of flash to make you shine.",
                             pd_Size = "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48",
+                            pd_Size10 = false,
+                            pd_Size10_5 = false,
+                            pd_Size11 = false,
+                            pd_Size11_5 = false,
+                            pd_Size12 = false,
+                            pd_Size12_5 = false,
+                            pd_Size13 = false,
+                            pd_Size13_5 = false,
+                            pd_Size14 = false,
+                            pd_Size14_5 = false,
+                            pd_Size7 = false,
+                            pd_Size7_5 = false,
+                            pd_Size8 = false,
+                            pd_Size8_5 = false,
+                            pd_Size9 = false,
+                            pd_Size9_5 = false,
                             pd_Style = "CW2288-111",
-                            pd_Technologies = "1"
+                            pd_Technologies = "1",
+                            pd_WaitForConfirmation = false
                         },
                         new
                         {
@@ -617,8 +801,25 @@ namespace Web_Shoes.Migrations
                             pd_ReducePrice = 500,
                             pd_ShortDescription = "The radiance lives on in the Nike Air Force 1 GORE-TEX, the b-ball OG that puts a fresh spin on what you know best: crisp leather, bold colours and the perfect amount of flash to make you shine.This time it's clad in GORE-TEX technology.",
                             pd_Size = "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48",
+                            pd_Size10 = false,
+                            pd_Size10_5 = false,
+                            pd_Size11 = false,
+                            pd_Size11_5 = false,
+                            pd_Size12 = false,
+                            pd_Size12_5 = false,
+                            pd_Size13 = false,
+                            pd_Size13_5 = false,
+                            pd_Size14 = false,
+                            pd_Size14_5 = false,
+                            pd_Size7 = false,
+                            pd_Size7_5 = false,
+                            pd_Size8 = false,
+                            pd_Size8_5 = false,
+                            pd_Size9 = false,
+                            pd_Size9_5 = false,
                             pd_Style = "DM6435-222",
-                            pd_Technologies = "2"
+                            pd_Technologies = "2",
+                            pd_WaitForConfirmation = false
                         },
                         new
                         {
@@ -638,8 +839,25 @@ namespace Web_Shoes.Migrations
                             pd_ReducePrice = 500,
                             pd_ShortDescription = "Bringing the classic BRS athletics style into a modern realm with at least 20% recycled materials by weight, the Nike Waffle One Crater is eye-candy for your feet.The playful speckled look on the midsole is created from Crater Foam, a cushiony material made from Nike Grind rubber and Nike foam materials.And for added depth, the sport-inspired upper includes transparent mesh made from recycled polyester.",
                             pd_Size = "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48",
+                            pd_Size10 = false,
+                            pd_Size10_5 = false,
+                            pd_Size11 = false,
+                            pd_Size11_5 = false,
+                            pd_Size12 = false,
+                            pd_Size12_5 = false,
+                            pd_Size13 = false,
+                            pd_Size13_5 = false,
+                            pd_Size14 = false,
+                            pd_Size14_5 = false,
+                            pd_Size7 = false,
+                            pd_Size7_5 = false,
+                            pd_Size8 = false,
+                            pd_Size8_5 = false,
+                            pd_Size9 = false,
+                            pd_Size9_5 = false,
                             pd_Style = "DC2650-200",
-                            pd_Technologies = "3"
+                            pd_Technologies = "3",
+                            pd_WaitForConfirmation = false
                         },
                         new
                         {
@@ -659,8 +877,25 @@ namespace Web_Shoes.Migrations
                             pd_ReducePrice = 500,
                             pd_ShortDescription = "Nothing as fly, nothing as comfortable, nothing as proven—the Nike Air Max 90 Premium stays true to its roots, with the iconic Waffle outsole, stitched overlays and classic TPU accents. Fresh colours give a modern look while Max Air cushioning adds comfort to your journey.",
                             pd_Size = "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48",
+                            pd_Size10 = false,
+                            pd_Size10_5 = false,
+                            pd_Size11 = false,
+                            pd_Size11_5 = false,
+                            pd_Size12 = false,
+                            pd_Size12_5 = false,
+                            pd_Size13 = false,
+                            pd_Size13_5 = false,
+                            pd_Size14 = false,
+                            pd_Size14_5 = false,
+                            pd_Size7 = false,
+                            pd_Size7_5 = false,
+                            pd_Size8 = false,
+                            pd_Size8_5 = false,
+                            pd_Size9 = false,
+                            pd_Size9_5 = false,
                             pd_Style = "DA1641-201",
-                            pd_Technologies = "3"
+                            pd_Technologies = "3",
+                            pd_WaitForConfirmation = false
                         },
                         new
                         {
@@ -680,8 +915,25 @@ namespace Web_Shoes.Migrations
                             pd_ReducePrice = 500,
                             pd_ShortDescription = "Nothing as fly, nothing as comfortable, nothing as proven—the Nike Air Max 90 stays true to its roots with the iconic Waffle sole, stitched overlays and classic TPU accents on the heel and eyestays.A variety of materials on the upper gives a modern look, while Max Air cushioning adds comfort to your journey.",
                             pd_Size = "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48",
+                            pd_Size10 = false,
+                            pd_Size10_5 = false,
+                            pd_Size11 = false,
+                            pd_Size11_5 = false,
+                            pd_Size12 = false,
+                            pd_Size12_5 = false,
+                            pd_Size13 = false,
+                            pd_Size13_5 = false,
+                            pd_Size14 = false,
+                            pd_Size14_5 = false,
+                            pd_Size7 = false,
+                            pd_Size7_5 = false,
+                            pd_Size8 = false,
+                            pd_Size8_5 = false,
+                            pd_Size9 = false,
+                            pd_Size9_5 = false,
                             pd_Style = "DB0625-200",
-                            pd_Technologies = "3"
+                            pd_Technologies = "3",
+                            pd_WaitForConfirmation = false
                         },
                         new
                         {
@@ -701,8 +953,25 @@ namespace Web_Shoes.Migrations
                             pd_ReducePrice = 500,
                             pd_ShortDescription = "From city hikes to canyon trails and long walks on the beach, the Nike ACG Air Deschutz + is built to feel comfortable.It's got a classic '90s look and rugged outdoor-inspired design, with plush padding around the ankle for support.A heavy-duty webbing strap and adjustable hook-and-loop closure keep you focused on the journey ahead.",
                             pd_Size = "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48",
+                            pd_Size10 = false,
+                            pd_Size10_5 = false,
+                            pd_Size11 = false,
+                            pd_Size11_5 = false,
+                            pd_Size12 = false,
+                            pd_Size12_5 = false,
+                            pd_Size13 = false,
+                            pd_Size13_5 = false,
+                            pd_Size14 = false,
+                            pd_Size14_5 = false,
+                            pd_Size7 = false,
+                            pd_Size7_5 = false,
+                            pd_Size8 = false,
+                            pd_Size8_5 = false,
+                            pd_Size9 = false,
+                            pd_Size9_5 = false,
                             pd_Style = "DC9092-001",
-                            pd_Technologies = "3"
+                            pd_Technologies = "3",
+                            pd_WaitForConfirmation = false
                         },
                         new
                         {
@@ -722,8 +991,25 @@ namespace Web_Shoes.Migrations
                             pd_ReducePrice = 500,
                             pd_ShortDescription = "Made from at least 20% recycled content by weight, the Nike Air Max 97 SE takes a fresh step towards the future of footwear.The upper features 100% recycled canvas and accents of cork.The embroidered cork graphic on the tongue nods to the plant used in the shoe.",
                             pd_Size = "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48",
+                            pd_Size10 = false,
+                            pd_Size10_5 = false,
+                            pd_Size11 = false,
+                            pd_Size11_5 = false,
+                            pd_Size12 = false,
+                            pd_Size12_5 = false,
+                            pd_Size13 = false,
+                            pd_Size13_5 = false,
+                            pd_Size14 = false,
+                            pd_Size14_5 = false,
+                            pd_Size7 = false,
+                            pd_Size7_5 = false,
+                            pd_Size8 = false,
+                            pd_Size8_5 = false,
+                            pd_Size9 = false,
+                            pd_Size9_5 = false,
                             pd_Style = "DC3986-300",
-                            pd_Technologies = "3"
+                            pd_Technologies = "3",
+                            pd_WaitForConfirmation = false
                         },
                         new
                         {
@@ -743,8 +1029,25 @@ namespace Web_Shoes.Migrations
                             pd_ReducePrice = 500,
                             pd_ShortDescription = "Inspired by Japanese bullet trains, the Nike Air Max 97 lets you push your style full speed ahead.Taking the revolutionary full-length Nike Air unit that shook up the running world and adding the original silver bullet colours, it lets you ride in first-class comfort.",
                             pd_Size = "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48",
+                            pd_Size10 = false,
+                            pd_Size10_5 = false,
+                            pd_Size11 = false,
+                            pd_Size11_5 = false,
+                            pd_Size12 = false,
+                            pd_Size12_5 = false,
+                            pd_Size13 = false,
+                            pd_Size13_5 = false,
+                            pd_Size14 = false,
+                            pd_Size14_5 = false,
+                            pd_Size7 = false,
+                            pd_Size7_5 = false,
+                            pd_Size8 = false,
+                            pd_Size8_5 = false,
+                            pd_Size9 = false,
+                            pd_Size9_5 = false,
                             pd_Style = "DJ0717-001",
-                            pd_Technologies = "3"
+                            pd_Technologies = "3",
+                            pd_WaitForConfirmation = false
                         },
                         new
                         {
@@ -764,8 +1067,25 @@ namespace Web_Shoes.Migrations
                             pd_ReducePrice = 500,
                             pd_ShortDescription = "Take on the tough terrain of the outdoors.The Nike ACG Air Nasu 2 steps up the durability with Ripstop on the upper and reinforced details to stand up to the rigours of the trail.It has mesh elements up top and a lining within to help keep you on your path with a breathable, supportive feel.A sticky rubber outsole is highlighted with lugs that are designed to help give you traction when navigating wet and rocky surfaces.",
                             pd_Size = "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48",
+                            pd_Size10 = false,
+                            pd_Size10_5 = false,
+                            pd_Size11 = false,
+                            pd_Size11_5 = false,
+                            pd_Size12 = false,
+                            pd_Size12_5 = false,
+                            pd_Size13 = false,
+                            pd_Size13_5 = false,
+                            pd_Size14 = false,
+                            pd_Size14_5 = false,
+                            pd_Size7 = false,
+                            pd_Size7_5 = false,
+                            pd_Size8 = false,
+                            pd_Size8_5 = false,
+                            pd_Size9 = false,
+                            pd_Size9_5 = false,
                             pd_Style = "DC8296-001",
-                            pd_Technologies = "3"
+                            pd_Technologies = "3",
+                            pd_WaitForConfirmation = false
                         },
                         new
                         {
@@ -785,8 +1105,25 @@ namespace Web_Shoes.Migrations
                             pd_ReducePrice = 500,
                             pd_ShortDescription = "Fast, rugged and just as at home in the city as it is in deserts, canyons and mountains, the Nike ACG Mountain Fly Low is ready for whatever you throw at it.The lightweight Ripstop and synthetic upper is durable and airy, while the easy-to-cinch lacing system adds on-the-go personalisation.The sticky rubber outsole brings crag-inspired traction as the soft Nike React foam sole delivers undisputed comfort whether you're pounding the pavement in the city wilds or leaping rock to rock in Joshua Tree.",
                             pd_Size = "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48",
+                            pd_Size10 = false,
+                            pd_Size10_5 = false,
+                            pd_Size11 = false,
+                            pd_Size11_5 = false,
+                            pd_Size12 = false,
+                            pd_Size12_5 = false,
+                            pd_Size13 = false,
+                            pd_Size13_5 = false,
+                            pd_Size14 = false,
+                            pd_Size14_5 = false,
+                            pd_Size7 = false,
+                            pd_Size7_5 = false,
+                            pd_Size8 = false,
+                            pd_Size8_5 = false,
+                            pd_Size9 = false,
+                            pd_Size9_5 = false,
                             pd_Style = "DC9045-500",
-                            pd_Technologies = "3"
+                            pd_Technologies = "3",
+                            pd_WaitForConfirmation = false
                         },
                         new
                         {
@@ -806,8 +1143,25 @@ namespace Web_Shoes.Migrations
                             pd_ReducePrice = 500,
                             pd_ShortDescription = "Inspired by the community art spaces of Barcelona, the Nike SB Zoom Blazer Mid Premium is made from a collage of materials like suede, leather and canvas.The design is elevated with a multi-coloured Nike embroidery on the heel and a mismatched Swoosh, capped off by a contrasting herringbone sole.",
                             pd_Size = "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48",
+                            pd_Size10 = false,
+                            pd_Size10_5 = false,
+                            pd_Size11 = false,
+                            pd_Size11_5 = false,
+                            pd_Size12 = false,
+                            pd_Size12_5 = false,
+                            pd_Size13 = false,
+                            pd_Size13_5 = false,
+                            pd_Size14 = false,
+                            pd_Size14_5 = false,
+                            pd_Size7 = false,
+                            pd_Size7_5 = false,
+                            pd_Size8 = false,
+                            pd_Size8_5 = false,
+                            pd_Size9 = false,
+                            pd_Size9_5 = false,
                             pd_Style = "DA8854-001",
-                            pd_Technologies = "3"
+                            pd_Technologies = "3",
+                            pd_WaitForConfirmation = false
                         },
                         new
                         {
@@ -827,8 +1181,25 @@ namespace Web_Shoes.Migrations
                             pd_ReducePrice = 500,
                             pd_ShortDescription = "We could use a lot of superlatives to describe the Nike Air Max 2021.We could tell you that we've incorporated recycled materials to design a sneaker with at least 20% recycled content.Or that the new Air cushioning unit underfoot is our most revolutionary.Perhaps we'd call it the the pinnacle of comfort; waxing poetic about the cored-out foam midsole that gives you the lightest, softest feel.But maybe we just say it's modern meets technical with a splash of heritage DNA.What fun is there in giving away the surprises?",
                             pd_Size = "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48",
+                            pd_Size10 = false,
+                            pd_Size10_5 = false,
+                            pd_Size11 = false,
+                            pd_Size11_5 = false,
+                            pd_Size12 = false,
+                            pd_Size12_5 = false,
+                            pd_Size13 = false,
+                            pd_Size13_5 = false,
+                            pd_Size14 = false,
+                            pd_Size14_5 = false,
+                            pd_Size7 = false,
+                            pd_Size7_5 = false,
+                            pd_Size8 = false,
+                            pd_Size8_5 = false,
+                            pd_Size9 = false,
+                            pd_Size9_5 = false,
                             pd_Style = "DA1925-002",
-                            pd_Technologies = "3"
+                            pd_Technologies = "3",
+                            pd_WaitForConfirmation = false
                         },
                         new
                         {
@@ -848,8 +1219,25 @@ namespace Web_Shoes.Migrations
                             pd_ReducePrice = 500,
                             pd_ShortDescription = "The Nike SB Nyjah Free 2 is a sequel worthy of its predecessor. Inspired by the iconic Nike Air Zoom Spiridon, the original rubber design has been updated with mesh panels to help your feet stay cool through your hottest skate sessions.",
                             pd_Size = "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48",
+                            pd_Size10 = false,
+                            pd_Size10_5 = false,
+                            pd_Size11 = false,
+                            pd_Size11_5 = false,
+                            pd_Size12 = false,
+                            pd_Size12_5 = false,
+                            pd_Size13 = false,
+                            pd_Size13_5 = false,
+                            pd_Size14 = false,
+                            pd_Size14_5 = false,
+                            pd_Size7 = false,
+                            pd_Size7_5 = false,
+                            pd_Size8 = false,
+                            pd_Size8_5 = false,
+                            pd_Size9 = false,
+                            pd_Size9_5 = false,
                             pd_Style = "BV2078-200",
-                            pd_Technologies = "3"
+                            pd_Technologies = "3",
+                            pd_WaitForConfirmation = false
                         },
                         new
                         {
@@ -869,8 +1257,25 @@ namespace Web_Shoes.Migrations
                             pd_ReducePrice = 500,
                             pd_ShortDescription = "The Nike SB Nyjah Free 2 is a sequel worthy of its predecessor. Inspired by the iconic Nike Air Zoom Spiridon, the original rubber design has been updated with mesh panels to help your feet stay cool through your hottest skate sessions.",
                             pd_Size = "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48",
+                            pd_Size10 = false,
+                            pd_Size10_5 = false,
+                            pd_Size11 = false,
+                            pd_Size11_5 = false,
+                            pd_Size12 = false,
+                            pd_Size12_5 = false,
+                            pd_Size13 = false,
+                            pd_Size13_5 = false,
+                            pd_Size14 = false,
+                            pd_Size14_5 = false,
+                            pd_Size7 = false,
+                            pd_Size7_5 = false,
+                            pd_Size8 = false,
+                            pd_Size8_5 = false,
+                            pd_Size9 = false,
+                            pd_Size9_5 = false,
                             pd_Style = "BV2078-200",
-                            pd_Technologies = "3"
+                            pd_Technologies = "3",
+                            pd_WaitForConfirmation = false
                         },
                         new
                         {
@@ -890,8 +1295,25 @@ namespace Web_Shoes.Migrations
                             pd_ReducePrice = 500,
                             pd_ShortDescription = "The first signature shoe from technical phenomenon Shane O'Neill, the Nike SB Shane T is a lightweight shoe that's built to perform. Unique lacing lets you choose between lacing your shoes the traditional way or by running them through durable ghillie loops.",
                             pd_Size = "EU41|EU41.5|EU42|EU43|EU44|EU45|EU46|EU47|EU48",
+                            pd_Size10 = false,
+                            pd_Size10_5 = false,
+                            pd_Size11 = false,
+                            pd_Size11_5 = false,
+                            pd_Size12 = false,
+                            pd_Size12_5 = false,
+                            pd_Size13 = false,
+                            pd_Size13_5 = false,
+                            pd_Size14 = false,
+                            pd_Size14_5 = false,
+                            pd_Size7 = false,
+                            pd_Size7_5 = false,
+                            pd_Size8 = false,
+                            pd_Size8_5 = false,
+                            pd_Size9 = false,
+                            pd_Size9_5 = false,
                             pd_Style = "CU9224-700",
-                            pd_Technologies = "3"
+                            pd_Technologies = "3",
+                            pd_WaitForConfirmation = false
                         });
                 });
 
@@ -1003,6 +1425,30 @@ namespace Web_Shoes.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Web_Shoes.Entity.Shipping", b =>
+                {
+                    b.Property<string>("ship_Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ship_Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ship_Price")
+                        .HasColumnType("int");
+
+                    b.HasKey("ship_Id");
+
+                    b.ToTable("Shipping");
+
+                    b.HasData(
+                        new
+                        {
+                            ship_Id = "7CF94A7D-9239-446E-A404-086518F84652",
+                            ship_Name = "Ship",
+                            ship_Price = 5
+                        });
+                });
+
             modelBuilder.Entity("Web_Shoes.Entity.Wishlists", b =>
                 {
                     b.Property<int>("wl_Id")
@@ -1065,14 +1511,14 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd",
-                            ConcurrencyStamp = "ff4a9067-ab66-4715-84d0-da187005eb4e",
+                            ConcurrencyStamp = "9df22adf-79b6-4fdf-827b-2e344e2a96c9",
                             Name = "staff",
                             Description = "Staff"
                         },
                         new
                         {
                             Id = "360E601E-92F2-4F08-832B-604A21293258",
-                            ConcurrencyStamp = "ce88bcbe-1ca1-4913-926f-3989fa259981",
+                            ConcurrencyStamp = "d11409a6-ece8-483b-8881-be41de6e5e8b",
                             Name = "admin",
                             Description = "admin"
                         });
@@ -1091,6 +1537,30 @@ namespace Web_Shoes.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("bill_Address1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_Address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_CompanyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_State")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasDiscriminator().HasValue("AppUser");
 
                     b.HasData(
@@ -1098,15 +1568,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "DE544998-A3CC-4E12-ABB4-0642E57BD222",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "41818616-090b-4813-94f6-f2ffe87e8ed7",
+                            ConcurrencyStamp = "0bf59900-10de-4d3f-82ed-f6b6472b285b",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDpSrpzx4RVo6K3cyrMETKjRt0z0WzI2rVJlEtOfmWJWRj5qKPmwWrE1opaEI4j2xg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAPzObd7vVuBcLXY/0Yj1w5oGXNVTq3OhQDYPNtGCyz0a9jKHDGkBpXxiDmTSYzHig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2312c493-131d-4bff-9a5c-8e84549e9edb",
+                            SecurityStamp = "99c57e1b-d3f6-4b3e-ad94-33c1b63ee80e",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             DoB = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1117,15 +1587,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2846f1a9-9aca-4c49-90bd-3592864d323c",
+                            ConcurrencyStamp = "23421bc2-9beb-4fdb-9ad2-90f9bef0eeb6",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@GMAIL.COM",
                             NormalizedUserName = "STAFF@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELHYh3WTZkz2gcK7yBT5wksIt9+8CU3ahzAqFnVHIhkApQGtLnonEBL9XMEbiXDEfA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGr4z+6Q7vkGvsA9nEeEnzuLITOC27ljgKzVTsiZTI9OQKQwhSThsfxNIrY9lDHJKA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1c81eebc-ee78-48d4-a9c3-4b6a6f01a535",
+                            SecurityStamp = "b124cad1-22b0-42e1-9333-7648307c88d5",
                             TwoFactorEnabled = false,
                             UserName = "Staff",
                             DoB = new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1203,6 +1673,15 @@ namespace Web_Shoes.Migrations
                     b.Navigation("AppUserC");
                 });
 
+            modelBuilder.Entity("Web_Shoes.Entity.CartsDevice", b =>
+                {
+                    b.HasOne("Web_Shoes.Entity.Device", "DeviceCD")
+                        .WithMany("CartsDeviceD")
+                        .HasForeignKey("cartd_DeviceId");
+
+                    b.Navigation("DeviceCD");
+                });
+
             modelBuilder.Entity("Web_Shoes.Entity.ProductInCart", b =>
                 {
                     b.HasOne("Web_Shoes.Entity.Cart", "CartPICart")
@@ -1220,6 +1699,25 @@ namespace Web_Shoes.Migrations
                     b.Navigation("CartPICart");
 
                     b.Navigation("ProductsPICart");
+                });
+
+            modelBuilder.Entity("Web_Shoes.Entity.ProductInCartDevices", b =>
+                {
+                    b.HasOne("Web_Shoes.Entity.CartsDevice", "CartsDevicePICD")
+                        .WithMany("ProductInCartDevicesCD")
+                        .HasForeignKey("picd_CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Web_Shoes.Entity.Products", "ProductsPICD")
+                        .WithMany("ProductInCartDevicesP")
+                        .HasForeignKey("picd_ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CartsDevicePICD");
+
+                    b.Navigation("ProductsPICD");
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.ProductInWishlist", b =>
@@ -1302,13 +1800,25 @@ namespace Web_Shoes.Migrations
                     b.Navigation("ProductInCartC");
                 });
 
+            modelBuilder.Entity("Web_Shoes.Entity.CartsDevice", b =>
+                {
+                    b.Navigation("ProductInCartDevicesCD");
+                });
+
             modelBuilder.Entity("Web_Shoes.Entity.Categories", b =>
                 {
                     b.Navigation("ProductsInCategoriesC");
                 });
 
+            modelBuilder.Entity("Web_Shoes.Entity.Device", b =>
+                {
+                    b.Navigation("CartsDeviceD");
+                });
+
             modelBuilder.Entity("Web_Shoes.Entity.Products", b =>
                 {
+                    b.Navigation("ProductInCartDevicesP");
+
                     b.Navigation("ProductInCartP");
 
                     b.Navigation("ProductInWishlistP");

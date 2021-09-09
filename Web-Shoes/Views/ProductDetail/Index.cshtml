@@ -4,8 +4,10 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-
+    
 }
+<link href="~/css/productDetailPage.css" rel="stylesheet" />
+<link href="~/css/captcha.css" rel="stylesheet" />
 
 <div class="breadcrumbs">
     <div class="container">
@@ -103,34 +105,172 @@
                         <div class="block-26 mb-2">
                             <h4>Size</h4>
                             <ul>
-                                <li onclick="size(7)" ><a href="#">7</a></li>
-                                <li onclick="size(7.5)"><a href="#">7.5</a></li>
-                                <li onclick="size(8)"><a href="#">8</a></li>
-                                <li onclick="size(8.5)"><a href="#">8.5</a></li>
-                                <li onclick="size(9)"><a href="#">9</a></li>
-                                <li onclick="size(9.5)"><a href="#">9.5</a></li>
-                                <li onclick="size(10)"><a href="#">10</a></li>
-                                <li onclick="size(10.5)"><a href="#">10.5</a></li>
-                                <li onclick="size(11)"><a href="#">11</a></li>
-                                <li onclick="size(11.5)"><a href="#">11.5</a></li>
-                                <li onclick="size(12)"><a href="#">12</a></li>
-                                <li onclick="size(12.5)"><a href="#">12.5</a></li>
-                                <li onclick="size(13)"><a href="#">13</a></li>
-                                <li onclick="size(13.5)"><a href="#">13.5</a></li>
-                                <li onclick="size(14)"><a href="#">14</a></li>
+                                @{
+                                    //7
+                                    if (ViewBag.Size7)
+                                    {
+                                        <li onclick="size(7,'size_7')" id="size_7"><a href="#">7</a></li>
+                                    }
+
+                                    //7.5
+                                    if (ViewBag.Size7_5)
+                                    {
+                                        <li onclick="size(7.5,'size_7_5')" id="size_7_5"><a href="#">7.5</a></li>
+                                    }
+
+                                    //8
+                                    if (ViewBag.Size8)
+                                    {
+                                        <li onclick="size(8,'size_8')" id="size_8"><a href="#">8</a></li>
+                                    }
+
+                                    //8.5
+                                    if (ViewBag.Size8_5)
+                                    {
+                                        <li onclick="size(8.5,'size_8_5')" id="size_8_5"><a href="#">8.5</a></li>
+                                    }
+
+                                    //9
+                                    if (ViewBag.Size9)
+                                    {
+                                        <li onclick="size(9,'size_9')" id="size_9"><a href="#">9</a></li>
+                                    }
+
+                                    //9.5
+                                    if (ViewBag.Size9_5)
+                                    {
+                                        <li onclick="size(9.5,'size_9_5')" id="size_9_5"><a href="#">9.5</a></li>
+                                    }
+
+                                    //10
+                                    if (ViewBag.Size10)
+                                    {
+                                        <li onclick="size(10,'size_10')" id="size_10"><a href="#">10</a></li>
+                                    }
+
+                                    //10_5
+                                    if (ViewBag.Size10_5)
+                                    {
+                                        <li onclick="size(10.5,'size_10_5')" id="size_10_5"><a href="#">10.5</a></li>
+                                    }
+
+                                    //11
+                                    if (ViewBag.Size11)
+                                    {
+                                        <li onclick="size(11,'size_11')" id="size_11"><a href="#">11</a></li>
+                                    }
+
+                                    //11.5
+                                    if (ViewBag.Size11_5)
+                                    {
+                                        <li onclick="size(11.5,'size_11_5')" id="size_11_5"><a href="#">11.5</a></li>
+                                    }
+
+                                    //12
+                                    if (ViewBag.Size12)
+                                    {
+                                        <li onclick="size(12,'size_12')" id="size_12"><a href="#">12</a></li>
+                                    }
+
+                                    //12.5
+                                    if (ViewBag.Size12_5)
+                                    {
+                                        <li onclick="size(12.5,'size_12_5')" id="size_12_5"><a href="#">12.5</a></li>
+                                    }
+
+                                    //13
+                                    if (ViewBag.Size13)
+                                    {
+                                        <li onclick="size(13,'size_13')" id="size_13"><a href="#">13</a></li>
+                                    }
+
+                                    //13.5
+                                    if (ViewBag.Size13_5)
+                                    {
+                                        <li onclick="size(13.5,'size_13_5')" id="size_13_5"><a href="#">13.5</a></li>
+                                    }
+
+                                    //14
+                                    if (ViewBag.Size14)
+                                    {
+                                        <li onclick="size(14,'size_14')" id="size_14"><a href="#">14</a></li>
+                                    }
+
+                                    //14.5
+                                    if (ViewBag.Size14_5)
+                                    {
+                                        <li onclick="size(14.5,'size_14_5')" id="size_14_5"><a href="#">14.5</a></li>
+                                    }
+                                }
                             </ul>
                         </div>
 
 
+                        @if (@ViewBag.Img1 != null)
+                        {
+                            <img id="red" src=@ViewBag.Img1 alt="Snow" style="width:100%;max-width:300px" hidden>
+                        }
+
+                        @if (@ViewBag.Img2 != null)
+                        {
+                            <img id="blue" src=@ViewBag.Img2 alt="Snow" style="width:100%;max-width:300px" hidden>
+                        }
+
+                        @if (@ViewBag.Img3 != null)
+                        {
+                            <img id="green" src=@ViewBag.Img3 alt="Snow" style="width:100%;max-width:300px" hidden>
+                        }
+
+                        @if (@ViewBag.Img4 != null)
+                        {
+                            <img id="yellow" src=@ViewBag.Img4 alt="Snow" style="width:100%;max-width:300px" hidden>
+                        }
+
+                        
+                        
+                        
+                        
+
+                        <div id="myModal" class="modal">
+
+                            <!-- The Close Button -->
+                            <span class="close">&times;</span>
+
+                            <!-- Modal Content (The Image) -->
+                            <img class="modal-content" id="img01">
+
+                            <!-- Modal Caption (Image Text) -->
+                            <div id="caption"></div>
 
 
+                        </div>
 
-                        <div class="block-26 mb-4">
+                        <div class="block-26 mb-4 ">
                             <h4>Color</h4>
                             <ul>
-                                <li onclick="color('red')"><a href="#">Red</a></li>
-                                <li onclick="color('blue')"><a href="#">Blue</a></li>
-                                <li onclick="color('green')"><a href="#">Green</a></li>
+                                @if (@ViewBag.Img1 != null)
+                                {
+                                    <li onclick="color('red','buttonRed','buttonBlue','buttonGreen','buttonYellow',1)" id="buttonRed" ><a href="#">Red</a></li>
+                                }
+
+                                @if (@ViewBag.Img2 != null)
+                                {
+                                    <li onclick="color('blue','buttonRed','buttonBlue','buttonGreen','buttonYellow',2)" id="buttonBlue"><a href="#">Blue</a></li>
+                                }
+
+                                @if (@ViewBag.Img3 != null)
+                                {
+                                    <li onclick="color('green','buttonRed','buttonBlue','buttonGreen','buttonYellow',3)" id="buttonGreen"><a href="#">Green</a></li>
+                                }
+
+                                @if (@ViewBag.Img4 != null)
+                                {
+                                    <li onclick="color('yellow','buttonRed','buttonBlue','buttonGreen','buttonYellow',4)" id="buttonYellow"><a href="#">Yellow</a></li>
+                                }
+
+
+
+
                             </ul>
                         </div>
 
@@ -224,14 +364,35 @@
                                                 </div>
                                             }
 
-                                            <div class="review">
-                                                <form asp-controller="ProductDetail" asp-action="Comment" method="post">
-                                                    <label>User: </label>
-                                                    <input type="text" name="idproduct" value="@ViewBag.Id" hidden/>
-                                                    <input type="text" name="comment" value="" />
-                                                    <input type="submit" name="name" value="Comment" />
-                                                </form>
-                                            </div>
+                                        <div class="review">
+                                            <form asp-controller="ProductDetail" asp-action="Comment" method="post" onsubmit="return checkform(this);">
+                                                <div class="form-group">
+                                                    <label for="comment">Your Comment</label>
+                                                    <input type="text" name="idproduct" value="@ViewBag.Id" hidden />
+                                                    <textarea name="comment" class="form-control" rows="3"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <!-- START CAPTCHA -->
+                                                    <br>
+                                                    <div class="capbox">
+
+                                                        <div id="CaptchaDiv"></div>
+
+                                                        <div class="capbox-inner">
+                                                            Type the number:<br>
+
+                                                            <input type="hidden" id="txtCaptcha">
+                                                            <input type="text" name="CaptchaInput" id="CaptchaInput" size="15"><br>
+
+                                                        </div>
+                                                    </div>
+                                                    <br><br>
+
+                                                    <!-- END CAPTCHA -->
+                                                </div>
+                                                <input type="submit" name="name" class="btn btn-default" value="Send" />
+                                            </form>
+                                        </div>
 
                                         </div>
 
@@ -309,8 +470,8 @@
         </div>
     </div>
 </div>
-
-
+<script src="~/js/productDetailPage.js"></script>
+<script src="~/js/captcha.js"></script>
 <script>
 
     var ProductColor;
@@ -318,23 +479,152 @@
     var ProductAmount;
 
 
-    function color(color) {
+    function color(color, idbutton1, idbutton2, idbutton3, idbutton4,indexbutton) {
 
+        switch (indexbutton) {
+            case 1:
+                // code block
+                var button1 = document.getElementById(idbutton1); //click
+                button1.style = 'background-color: #4CAF50;';
 
+                var button2 = document.getElementById(idbutton2); 
+                button2.style = '';
+
+                var button3 = document.getElementById(idbutton3); 
+                button3.style = '';
+
+                var button4 = document.getElementById(idbutton4); 
+                button4.style = '';
+                break;
+
+            case 2:
+                // code block
+                var button1 = document.getElementById(idbutton1); 
+                button1.style = '';
+
+                var button2 = document.getElementById(idbutton2); //click
+                button2.style = 'background-color: #4CAF50;';
+
+                var button3 = document.getElementById(idbutton3);
+                button3.style = '';
+
+                var button4 = document.getElementById(idbutton4);
+                button4.style = '';
+                break;
+            case 3:
+                // code block
+                var button1 = document.getElementById(idbutton1); 
+                button1.style = '';
+
+                var button2 = document.getElementById(idbutton2);
+                button2.style = '';
+
+                var button3 = document.getElementById(idbutton3); //click
+                button3.style = 'background-color: #4CAF50;';
+
+                var button4 = document.getElementById(idbutton4);
+                button4.style = '';
+                break;
+
+            case 4:
+                // code block
+                var button1 = document.getElementById(idbutton1); 
+                button1.style = '';
+
+                var button2 = document.getElementById(idbutton2);
+                button2.style = '';
+
+                var button3 = document.getElementById(idbutton3);
+                button3.style = '';
+
+                var button4 = document.getElementById(idbutton4);  //click
+                button4.style = 'background-color: #4CAF50;';
+                break;
+            default:
+            // code block
+        }
+
+        
         ProductColor = color;
-
+        modalImage(color)
 
     }
 
-    function size(size) {
+    function size(size,chooseSizeid) {
+
+        // size 7
+        var size_7 = document.getElementById("size_7");
+        size_7.style = '';
+
+        // size 7.5
+        var size_7_5 = document.getElementById("size_7_5");
+        size_7_5.style = '';
+
+        // size 8
+        var size_8 = document.getElementById("size_8");
+        size_8.style = '';
+
+        // size 8.5
+        var size_8_5 = document.getElementById("size_8_5");
+        size_8_5.style = '';
+
+        // size 9
+        var size_9 = document.getElementById("size_9");
+        size_9.style = '';
+
+        // size 9.5
+        var size_9_5 = document.getElementById("size_9_5");
+        size_9_5.style = '';
+
+        // size 10
+        var size_10 = document.getElementById("size_10");
+        size_10.style = '';
+
+        // size 10.5
+        var size_10_5 = document.getElementById("size_10_5");
+        size_10_5.style = '';
+
+        // size 11
+        var size_11 = document.getElementById("size_11");
+        size_11.style = '';
+
+        // size 11.5
+        var size_11_5 = document.getElementById("size_11_5");
+        size_11_5.style = '';
+
+        // size 12
+        var size_12 = document.getElementById("size_12");
+        size_12.style = '';
+
+        // size 12.5
+        var size_12_5 = document.getElementById("size_12_5");
+        size_12_5.style = '';
+
+        // size 13
+        var size_13 = document.getElementById("size_13");
+        size_13.style = '';
+
+        // size 13.5
+        var size_13_5 = document.getElementById("size_13_5");
+        size_13_5.style = '';
+
+        // size 14
+        var size_14 = document.getElementById("size_14");
+        size_14.style = '';
+
+        // size 14.5
+        var size_14_5 = document.getElementById("size_14_5");
+        size_14_5.style = '';
+
+        var choose = document.getElementById(chooseSizeid);
+        choose.style = "background-color: #4CAF50;";
 
 
-
-
+        // add input text
         ProductSize = size;
-
-
     }
+
+ 
 
     function amount() {
 
@@ -347,8 +637,6 @@
     function addtocart() {
 
         amount();
-
-
 
 
         var a = document.querySelector("#addtocartbutton");
