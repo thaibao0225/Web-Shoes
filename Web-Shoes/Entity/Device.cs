@@ -10,7 +10,6 @@ namespace Web_Shoes.Entity
 
         public string deviceId { get; set; }
         public string deviceName { get; set; }
-
         public string deviceCountry { set; get; }
         public string deviceCompanyName { set; get; }
         public string deviceCity { set; get; }

@@ -26,3 +26,4 @@
         modal.style.display = "none";
     }
 }
+

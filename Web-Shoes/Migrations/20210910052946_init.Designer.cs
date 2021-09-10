@@ -10,7 +10,7 @@ using Web_Shoes.Data;
 namespace Web_Shoes.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210910044339_init")]
+    [Migration("20210910052946_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -346,10 +346,8 @@ namespace Web_Shoes.Migrations
 
             modelBuilder.Entity("Web_Shoes.Entity.CartsDevice", b =>
                 {
-                    b.Property<int>("cartd_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("cartd_Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("cartd_DeviceId")
                         .HasColumnType("nvarchar(450)");
@@ -488,13 +486,13 @@ namespace Web_Shoes.Migrations
                     b.HasData(
                         new
                         {
-                            couponId = "52595a24-110d-4c8a-908c-61b2813ad1ec",
+                            couponId = "13f94591-291b-420d-bb01-144ab9535e3c",
                             couponCode = "code10",
                             couponPrice = 10
                         },
                         new
                         {
-                            couponId = "0157edb7-ce9d-4d38-acbf-1c46a1d69853",
+                            couponId = "fc108063-d3a7-4e66-9ca0-969cf387423d",
                             couponCode = "code50",
                             couponPrice = 50
                         });
@@ -589,14 +587,20 @@ namespace Web_Shoes.Migrations
 
             modelBuilder.Entity("Web_Shoes.Entity.ProductInCartDevices", b =>
                 {
-                    b.Property<int>("picd_CartId")
-                        .HasColumnType("int");
+                    b.Property<string>("picd_CartId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("picd_ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("picd_amount")
                         .HasColumnType("int");
+
+                    b.Property<string>("picd_color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("picd_size")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("picd_CartId", "picd_ProductId");
 
@@ -1583,14 +1587,14 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd",
-                            ConcurrencyStamp = "9b107992-d17c-4ae3-86c2-07f866efde6c",
+                            ConcurrencyStamp = "ff0fc52f-7489-4a0e-859f-bb2bcbf8533e",
                             Name = "staff",
                             Description = "Staff"
                         },
                         new
                         {
                             Id = "360E601E-92F2-4F08-832B-604A21293258",
-                            ConcurrencyStamp = "2e78529f-d1f4-49af-b370-a5c4f1c9ba03",
+                            ConcurrencyStamp = "10b589e6-33ad-442a-9ff6-a34cfa2a731a",
                             Name = "admin",
                             Description = "admin"
                         });
@@ -1640,15 +1644,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "DE544998-A3CC-4E12-ABB4-0642E57BD222",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d0b24560-8b24-4344-babf-46166092b3b3",
+                            ConcurrencyStamp = "6d1b36a2-f2af-4e81-9b9a-5e6b624d44da",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJfGMaxTf8AR7+AaRS+f0V0l0R9UCPiaoQUlYyNJkAfx8RCTvTX/+d1W6xMW62vLxg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAED2FfTAJhLD6ao64yDoDrB8qWrCzhVMHM8lqyTXU8ARvrI4zdWUt0Wu/Cw1xaqzbDg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "47c6ebe7-d1b6-430e-ae4e-e82ab7377190",
+                            SecurityStamp = "bf452600-a93a-487b-af3e-16fd1e099e5b",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             DoB = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1659,15 +1663,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7b83f01b-2682-48a9-a765-dd7f45f5b5b7",
+                            ConcurrencyStamp = "c971de94-805b-41cc-a7fb-aecda6b695f9",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@GMAIL.COM",
                             NormalizedUserName = "STAFF@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELou/zApVU9+9FcQicUxiiv1e36pGVWFw6lLcOFClNfbUNUJJLxAQF+wO/FXGLh5mQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMGTsmF3LVdKNYV1IWZQGW7ObiJgWZA3oGb2PBi74fqokARwWbY2OncO0E79hlobsw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "576f84d2-7006-43f3-b05f-a390f4151145",
+                            SecurityStamp = "3e1fd6ed-90b5-4f8e-9c18-3ba2721e1e4b",
                             TwoFactorEnabled = false,
                             UserName = "Staff",
                             DoB = new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),

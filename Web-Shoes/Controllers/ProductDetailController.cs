@@ -97,50 +97,96 @@ namespace Web_Shoes.Controllers
             try
             {
                 string namePc = Environment.MachineName;
-
-                string a = quantity;
-                string a2 = color;
-                string a3 = size;
+                bool checkLogin = (User?.Identity.IsAuthenticated).GetValueOrDefault();
 
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
                 var userName = User.FindFirstValue(ClaimTypes.Name);
 
-
-                int quantityProduct = 1;
-
-
+                int quantityProduct = Int16.Parse(quantity);
 
                 string cartId = Guid.NewGuid().ToString();
+                
 
-
-                //Create cart
-                var cartCreate = new Cart()
+                if (checkLogin)
                 {
-                    cart_Id = cartId,
-                    cart_UserID = userId
-                };
+                    
 
-                _context.Cart.Add(cartCreate);
+                    
 
-                // await _context.SaveChangesAsync();
+                    // Logined
+                    //Create cart
+                    var cartCreate = new Cart()
+                    {
+                        cart_Id = cartId,
+                        cart_UserID = userId
+                    };
 
-                //Create ProductInCart
+                    _context.Cart.Add(cartCreate);
 
-                var ProductInCartCreate = new ProductInCart()
+                    //Create ProductInCart
+
+                    var ProductInCartCreate = new ProductInCart()
+                    {
+                        pic_CartId = cartId,
+                        pic_ProductId = productid,
+                        pic_amount = quantityProduct,
+                        pic_size = size,
+                        pic_color = color
+                    };
+
+                    _context.ProductInCart.Add(ProductInCartCreate);
+
+                    await _context.SaveChangesAsync();
+                }else
                 {
-                    pic_CartId = cartId,
-                    pic_ProductId = productid,
-                    pic_amount = quantityProduct,
-                    pic_size = size,
-                    pic_color = color
-                };
+                    /// No logined
+                    /// Create Device in DB
+                    var deviceQuery = _context.Devices.FirstOrDefault(a => a.deviceName == namePc);
 
-                _context.ProductInCart.Add(ProductInCartCreate);
+                    if (deviceQuery == null)
+                    {
+                        string DeviceId = Guid.NewGuid().ToString();
 
-                await _context.SaveChangesAsync();
+                        var AddDevice = new Device()
+                        {
+                            deviceId = DeviceId,
+                            deviceName = namePc
+                        };
 
-                //var productDetailQuery = _context.Products.FirstOrDefault(a => a.pd_Id == id);
+                        _context.Devices.Add(AddDevice);
+
+                        await _context.SaveChangesAsync();
+                    }
+                    /// Create Device in DB
+                    /// 
+
+
+                    var deviceQueryre = _context.Devices.FirstOrDefault(a => a.deviceName == namePc);
+
+                    //Create cart
+                    var CartsDevice = new CartsDevice()
+                    {
+                        cartd_Id = cartId,
+                        cartd_DeviceId = deviceQueryre.deviceId
+                    };
+
+                    _context.CartsDevice.Add(CartsDevice);
+
+                    var ProductInCartDevices = new ProductInCartDevices()
+                    {
+                        picd_CartId = cartId,
+                        picd_ProductId = productid,
+                        picd_amount = quantityProduct,
+                        picd_size = size,
+                        picd_color = color
+                    };
+
+                    _context.ProductInCartDevices.Add(ProductInCartDevices);
+
+                    await _context.SaveChangesAsync();
+                }
+
+                
 
 
                 return Redirect("/cart");
