@@ -50,39 +50,23 @@ namespace Web_Shoes.Controllers
             ViewBag.ShortDescription = productDetailQuery.pd_ShortDescription;
             ViewBag.Description = productDetailQuery.pd_Description;
 
-            //ViewBag.Size7 = productDetailQuery.pd_Size7;
-            //ViewBag.Size7_5 = productDetailQuery.pd_Size7_5;
-            //ViewBag.Size8 = productDetailQuery.pd_Size8;
-            //ViewBag.Size8_5 = productDetailQuery.pd_Size8_5;
-            //ViewBag.Size9 = productDetailQuery.pd_Size9;
-            //ViewBag.Size9_5 = productDetailQuery.pd_Size9_5;
-            //ViewBag.Size10 = productDetailQuery.pd_Size10;
-            //ViewBag.Size10_5 = productDetailQuery.pd_Size10_5;
-            //ViewBag.Size11 = productDetailQuery.pd_Size11;
-            //ViewBag.Size11_5 = productDetailQuery.pd_Size11_5;
-            //ViewBag.Size12 = productDetailQuery.pd_Size12;
-            //ViewBag.Size12_5 = productDetailQuery.pd_Size12_5;
-            //ViewBag.Size13 = productDetailQuery.pd_Size13;
-            //ViewBag.Size13_5 = productDetailQuery.pd_Size13_5;
-            //ViewBag.Size14 = productDetailQuery.pd_Size14;
-            //ViewBag.Size14_5 = productDetailQuery.pd_Size14_5;
+            ViewBag.Size7 = productDetailQuery.pd_Size7;
+            ViewBag.Size7_5 = productDetailQuery.pd_Size7_5;
+            ViewBag.Size8 = productDetailQuery.pd_Size8;
+            ViewBag.Size8_5 = productDetailQuery.pd_Size8_5;
+            ViewBag.Size9 = productDetailQuery.pd_Size9;
+            ViewBag.Size9_5 = productDetailQuery.pd_Size9_5;
+            ViewBag.Size10 = productDetailQuery.pd_Size10;
+            ViewBag.Size10_5 = productDetailQuery.pd_Size10_5;
+            ViewBag.Size11 = productDetailQuery.pd_Size11;
+            ViewBag.Size11_5 = productDetailQuery.pd_Size11_5;
+            ViewBag.Size12 = productDetailQuery.pd_Size12;
+            ViewBag.Size12_5 = productDetailQuery.pd_Size12_5;
+            ViewBag.Size13 = productDetailQuery.pd_Size13;
+            ViewBag.Size13_5 = productDetailQuery.pd_Size13_5;
+            ViewBag.Size14 = productDetailQuery.pd_Size14;
+            ViewBag.Size14_5 = productDetailQuery.pd_Size14_5;
 
-            ViewBag.Size7 = true;
-            ViewBag.Size7_5 = true;
-            ViewBag.Size8 = true;
-            ViewBag.Size8_5 = true;
-            ViewBag.Size9 = true;
-            ViewBag.Size9_5 = true;
-            ViewBag.Size10 = true;
-            ViewBag.Size10_5 = true;
-            ViewBag.Size11 = true;
-            ViewBag.Size11_5 = true;
-            ViewBag.Size12 = true;
-            ViewBag.Size12_5 = true;
-            ViewBag.Size13 = true;
-            ViewBag.Size13_5 = true;
-            ViewBag.Size14 = true;
-            ViewBag.Size14_5 = true;
 
             var review = from a in _context.AppUser
                          join b in _context.Reviews on a.Id equals b.review_UserId
@@ -112,6 +96,7 @@ namespace Web_Shoes.Controllers
 
             try
             {
+                string namePc = Environment.MachineName;
 
                 string a = quantity;
                 string a2 = color;

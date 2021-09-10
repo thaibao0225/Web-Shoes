@@ -25,6 +25,7 @@ namespace Web_Shoes.Controllers
         {
             //string search = Request.Form["search"];
 
+            string namePc = Environment.MachineName;
 
             return View();
         }
