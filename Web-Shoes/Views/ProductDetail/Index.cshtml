@@ -557,17 +557,102 @@
 
     function Sizebutton(size, chooseSizeid) {
 
-
+        //Size 7
         var size7 = document.getElementById('size_7');
         if (size7 != null) {
             size7.style = 'background-color: #CCCCCC;';
         }
 
+        //Size 7.5
+        var size7_5 = document.getElementById('size_7_5');
+        if (size7_5 != null) {
+            size7_5.style = 'background-color: #CCCCCC;';
+        }
+
+        //Size 8
+        var size8 = document.getElementById('size_8');
+        if (size8 != null) {
+            size8.style = 'background-color: #CCCCCC;';
+        }
+
+        //Size 8.5
+        var size8_5 = document.getElementById('size_8_5');
+        if (size8_5 != null) {
+            size8_5.style = 'background-color: #CCCCCC;';
+        }
+
+        //Size 9
+        var size9 = document.getElementById('size_9');
+        if (size9 != null) {
+            size9.style = 'background-color: #CCCCCC;';
+        }
+
+        //Size 9.5
+        var size9_5 = document.getElementById('size_9_5');
+        if (size9_5 != null) {
+            size9_5.style = 'background-color: #CCCCCC;';
+        }
+
+        //Size 10
+        var size10= document.getElementById('size_10');
+        if (size10 != null) {
+            size10.style = 'background-color: #CCCCCC;';
+        }
+
+        //Size 10.5
+        var size10_5 = document.getElementById('size_10_5');
+        if (size10_5 != null) {
+            size10_5.style = 'background-color: #CCCCCC;';
+        }
+
+        //Size 11
+        var size11 = document.getElementById('size_11');
+        if (size11 != null) {
+            size11.style = 'background-color: #CCCCCC;';
+        }
+
+        //Size 11.5
+        var size11_5 = document.getElementById('size_11_5');
+        if (size11_5 != null) {
+            size11_5.style = 'background-color: #CCCCCC;';
+        }
+
+        //Size 12
+        var size12 = document.getElementById('size_12');
+        if (size12 != null) {
+            size12.style = 'background-color: #CCCCCC;';
+        }
+
+        //Size 12.5
+        var size12_5 = document.getElementById('size_12_5');
+        if (size12_5 != null) {
+            size12_5.style = 'background-color: #CCCCCC;';
+        }
+
+        //Size 13
+        var size13 = document.getElementById('size_13');
+        if (size13 != null) {
+            size13.style = 'background-color: #CCCCCC;';
+        }
+
+        //Size 13.5
+        var size13_5 = document.getElementById('size_13_5');
+        if (size13_5 != null) {
+            size13_5.style = 'background-color: #CCCCCC;';
+        }
+
+        //Size 14
+        var size14 = document.getElementById('size_14');
+        if (size14 != null) {
+            size14.style = 'background-color: #CCCCCC;';
+        }
+
+        //Size 14.5
+        var size14_5 = document.getElementById('size_14_5');
+        if (size14_5 != null) {
+            size14_5.style = 'background-color: #CCCCCC;';
+        }
         
-       
-
-
-
 
         var choose = document.getElementById(chooseSizeid);
         choose.style = "background-color: #4CAF50;";
@@ -583,14 +668,12 @@
 
         var a = document.querySelector("#quantity");
 
-
         ProductAmount = a.value;
     }
 
     function addtocart() {
 
         amount();
-
 
         var a = document.querySelector("#addtocartbutton");
         a.href = "/productdetailadd?productid=@ViewBag.Id&quantity=" + ProductAmount + "&color=" + ProductColor + "&size=" + ProductSize;
