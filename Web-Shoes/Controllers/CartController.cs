@@ -33,42 +33,73 @@ namespace Web_Shoes.Controllers
         public IActionResult Index(int productid, int quantity)
         {
 
-
-
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
             var userName = User.FindFirstValue(ClaimTypes.Name);
 
+            string namePc = Environment.MachineName;
+            bool checkLogin = (User?.Identity.IsAuthenticated).GetValueOrDefault();
 
-            var query = from a in _context.Products
-                        join b in _context.ProductInCart on a.pd_Id equals b.pic_ProductId
-                        join c in _context.Cart on b.pic_CartId equals c.cart_Id
-                        join d in _context.AppUser on c.cart_UserID equals d.Id
-                        select new { a, b, c, d };
+            if (checkLogin)
+            {
+                //login
+                var query = from a in _context.Products
+                            join b in _context.ProductInCart on a.pd_Id equals b.pic_ProductId
+                            join c in _context.Cart on b.pic_CartId equals c.cart_Id
+                            join d in _context.AppUser on c.cart_UserID equals d.Id
+                            select new { a, b, c, d };
+
+                query = query.Where(x => x.d.Id == userId);
+
+                var productInCartModelQuery = query
+                    .Select(x => new ProductInCartModel()
+                    {
+                        ProductId = x.a.pd_Id,
+                        ProductName = x.a.pd_Name,
+                        ProductPrice = x.a.pd_Price,
+                        ProductImg1 = x.a.pd_Img1,
+                        Quantity = x.b.pic_amount,
+                        UserId = x.d.Id,
+                        Color = x.b.pic_color,
+                        Size = x.b.pic_size
+
+                    });
+
+                return View(productInCartModelQuery);
+            }
+            else
+            {
+                //No login
+                var query = from a in _context.Products
+                            join b in _context.ProductInCartDevices on a.pd_Id equals b.picd_ProductId
+                            join c in _context.CartsDevice on b.picd_CartId equals c.cartd_Id
+                            join d in _context.Devices on c.cartd_DeviceId equals d.deviceId
+                            select new { a, b, c, d };
+
+                query = query.Where(x => x.d.deviceName == namePc);
+
+                var productInCartModelQuery = query
+                    .Select(x => new ProductInCartModel()
+                    {
+                        ProductId = x.a.pd_Id,
+                        ProductName = x.a.pd_Name,
+                        ProductPrice = x.a.pd_Price,
+                        ProductImg1 = x.a.pd_Img1,
+                        Quantity = x.b.picd_amount,
+                        UserId = x.d.deviceId,
+                        Color = x.b.picd_color,
+                        Size = x.b.picd_size
+
+                    });
+
+                return View(productInCartModelQuery);
+
+            }
+            
 
 
-            query = query.Where(x => x.d.Id == userId);
 
 
-
-            var productInCartModelQuery = query
-                .Select(x => new ProductInCartModel()
-                {
-                    ProductId = x.a.pd_Id,
-                    ProductName = x.a.pd_Name,
-                    ProductPrice = x.a.pd_Price,
-                    ProductImg1 = x.a.pd_Img1,
-                    Quantity = x.b.pic_amount,
-                    UserId = x.d.Id,
-                    Color = x.b.pic_color,
-                    Size = x.b.pic_size
-
-                });
-
-
-
-
-            return View(productInCartModelQuery);
+            
         }
 
 

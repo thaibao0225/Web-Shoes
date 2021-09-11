@@ -50,39 +50,23 @@ namespace Web_Shoes.Controllers
             ViewBag.ShortDescription = productDetailQuery.pd_ShortDescription;
             ViewBag.Description = productDetailQuery.pd_Description;
 
-            //ViewBag.Size7 = productDetailQuery.pd_Size7;
-            //ViewBag.Size7_5 = productDetailQuery.pd_Size7_5;
-            //ViewBag.Size8 = productDetailQuery.pd_Size8;
-            //ViewBag.Size8_5 = productDetailQuery.pd_Size8_5;
-            //ViewBag.Size9 = productDetailQuery.pd_Size9;
-            //ViewBag.Size9_5 = productDetailQuery.pd_Size9_5;
-            //ViewBag.Size10 = productDetailQuery.pd_Size10;
-            //ViewBag.Size10_5 = productDetailQuery.pd_Size10_5;
-            //ViewBag.Size11 = productDetailQuery.pd_Size11;
-            //ViewBag.Size11_5 = productDetailQuery.pd_Size11_5;
-            //ViewBag.Size12 = productDetailQuery.pd_Size12;
-            //ViewBag.Size12_5 = productDetailQuery.pd_Size12_5;
-            //ViewBag.Size13 = productDetailQuery.pd_Size13;
-            //ViewBag.Size13_5 = productDetailQuery.pd_Size13_5;
-            //ViewBag.Size14 = productDetailQuery.pd_Size14;
-            //ViewBag.Size14_5 = productDetailQuery.pd_Size14_5;
+            ViewBag.Size7 = productDetailQuery.pd_Size7;
+            ViewBag.Size7_5 = productDetailQuery.pd_Size7_5;
+            ViewBag.Size8 = productDetailQuery.pd_Size8;
+            ViewBag.Size8_5 = productDetailQuery.pd_Size8_5;
+            ViewBag.Size9 = productDetailQuery.pd_Size9;
+            ViewBag.Size9_5 = productDetailQuery.pd_Size9_5;
+            ViewBag.Size10 = productDetailQuery.pd_Size10;
+            ViewBag.Size10_5 = productDetailQuery.pd_Size10_5;
+            ViewBag.Size11 = productDetailQuery.pd_Size11;
+            ViewBag.Size11_5 = productDetailQuery.pd_Size11_5;
+            ViewBag.Size12 = productDetailQuery.pd_Size12;
+            ViewBag.Size12_5 = productDetailQuery.pd_Size12_5;
+            ViewBag.Size13 = productDetailQuery.pd_Size13;
+            ViewBag.Size13_5 = productDetailQuery.pd_Size13_5;
+            ViewBag.Size14 = productDetailQuery.pd_Size14;
+            ViewBag.Size14_5 = productDetailQuery.pd_Size14_5;
 
-            ViewBag.Size7 = true;
-            ViewBag.Size7_5 = true;
-            ViewBag.Size8 = true;
-            ViewBag.Size8_5 = true;
-            ViewBag.Size9 = true;
-            ViewBag.Size9_5 = true;
-            ViewBag.Size10 = true;
-            ViewBag.Size10_5 = true;
-            ViewBag.Size11 = true;
-            ViewBag.Size11_5 = true;
-            ViewBag.Size12 = true;
-            ViewBag.Size12_5 = true;
-            ViewBag.Size13 = true;
-            ViewBag.Size13_5 = true;
-            ViewBag.Size14 = true;
-            ViewBag.Size14_5 = true;
 
             var review = from a in _context.AppUser
                          join b in _context.Reviews on a.Id equals b.review_UserId
@@ -112,50 +96,97 @@ namespace Web_Shoes.Controllers
 
             try
             {
-
-                string a = quantity;
-                string a2 = color;
-                string a3 = size;
+                string namePc = Environment.MachineName;
+                bool checkLogin = (User?.Identity.IsAuthenticated).GetValueOrDefault();
 
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
                 var userName = User.FindFirstValue(ClaimTypes.Name);
 
-
-                int quantityProduct = 1;
-
-
+                int quantityProduct = Int16.Parse(quantity);
 
                 string cartId = Guid.NewGuid().ToString();
+                
 
-
-                //Create cart
-                var cartCreate = new Cart()
+                if (checkLogin)
                 {
-                    cart_Id = cartId,
-                    cart_UserID = userId
-                };
+                    
 
-                _context.Cart.Add(cartCreate);
+                    
 
-                // await _context.SaveChangesAsync();
+                    // Logined
+                    //Create cart
+                    var cartCreate = new Cart()
+                    {
+                        cart_Id = cartId,
+                        cart_UserID = userId
+                    };
 
-                //Create ProductInCart
+                    _context.Cart.Add(cartCreate);
 
-                var ProductInCartCreate = new ProductInCart()
+                    //Create ProductInCart
+
+                    var ProductInCartCreate = new ProductInCart()
+                    {
+                        pic_CartId = cartId,
+                        pic_ProductId = productid,
+                        pic_amount = quantityProduct,
+                        pic_size = size,
+                        pic_color = color
+                    };
+
+                    _context.ProductInCart.Add(ProductInCartCreate);
+
+                    await _context.SaveChangesAsync();
+                }else
                 {
-                    pic_CartId = cartId,
-                    pic_ProductId = productid,
-                    pic_amount = quantityProduct,
-                    pic_size = size,
-                    pic_color = color
-                };
+                    /// No logined
+                    /// Create Device in DB
+                    var deviceQuery = _context.Devices.FirstOrDefault(a => a.deviceName == namePc);
 
-                _context.ProductInCart.Add(ProductInCartCreate);
+                    if (deviceQuery == null)
+                    {
+                        string DeviceId = Guid.NewGuid().ToString();
 
-                await _context.SaveChangesAsync();
+                        var AddDevice = new Device()
+                        {
+                            deviceId = DeviceId,
+                            deviceName = namePc
+                        };
 
-                //var productDetailQuery = _context.Products.FirstOrDefault(a => a.pd_Id == id);
+                        _context.Devices.Add(AddDevice);
+
+                        await _context.SaveChangesAsync();
+                    }
+                    /// Create Device in DB
+                    /// 
+
+
+                    var deviceQueryre = _context.Devices.FirstOrDefault(a => a.deviceName == namePc);
+
+                    //Create cart
+                    var CartsDevice = new CartsDevice()
+                    {
+                        cartd_Id = cartId,
+                        cartd_DeviceId = deviceQueryre.deviceId
+                    };
+
+                    _context.CartsDevice.Add(CartsDevice);
+
+                    var ProductInCartDevices = new ProductInCartDevices()
+                    {
+                        picd_CartId = cartId,
+                        picd_ProductId = productid,
+                        picd_amount = quantityProduct,
+                        picd_size = size,
+                        picd_color = color
+                    };
+
+                    _context.ProductInCartDevices.Add(ProductInCartDevices);
+
+                    await _context.SaveChangesAsync();
+                }
+
+                
 
 
                 return Redirect("/cart");

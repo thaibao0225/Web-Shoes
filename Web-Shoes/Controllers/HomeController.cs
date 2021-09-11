@@ -28,6 +28,9 @@ namespace Web_Shoes.Controllers
         {
 
             var HomeProductQuery = from a in _context.Products select a;
+
+            
+
             return View(HomeProductQuery);
         }
 
