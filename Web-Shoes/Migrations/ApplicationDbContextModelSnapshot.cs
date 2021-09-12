@@ -281,6 +281,12 @@ namespace Web_Shoes.Migrations
                     b.Property<bool>("bill_Cancelled")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("bill_Confirmation")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("bill_DatetimeOrder")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("bill_Delivered")
                         .HasColumnType("bit");
 
@@ -290,10 +296,31 @@ namespace Web_Shoes.Migrations
                     b.Property<int>("bill_Discount")
                         .HasColumnType("int");
 
+                    b.Property<string>("bill_Note")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("bill_PaidTotal")
                         .HasColumnType("int");
 
-                    b.Property<string>("bill_Productlist")
+                    b.Property<string>("bill_PaymentMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_ProductColorlist")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_ProductIdlist")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_ProductNamelist")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_ProductPricelist")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_ProductSizelist")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bill_Quantity")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("bill_Shipping")
@@ -313,6 +340,54 @@ namespace Web_Shoes.Migrations
                     b.HasIndex("bill_UserId");
 
                     b.ToTable("Bills");
+
+                    b.HasData(
+                        new
+                        {
+                            bill_Id = "D269BF93-A5E2-4C4A-8146-9967DDE80D30",
+                            bill_Cancelled = false,
+                            bill_Confirmation = true,
+                            bill_DatetimeOrder = new DateTime(2021, 9, 13, 1, 38, 30, 866, DateTimeKind.Local).AddTicks(3720),
+                            bill_Delivered = false,
+                            bill_Delivering = false,
+                            bill_Discount = 0,
+                            bill_Note = "",
+                            bill_PaidTotal = 2000,
+                            bill_PaymentMethod = "Check Payment",
+                            bill_ProductColorlist = "Blue|Red|Black|Green",
+                            bill_ProductIdlist = "1|2|3|4",
+                            bill_ProductNamelist = "product 1|product 2| product 3| product 4",
+                            bill_ProductPricelist = "550|450|350|640",
+                            bill_ProductSizelist = "7|8|9|14",
+                            bill_Quantity = "1|1|2|1",
+                            bill_Shipping = 10,
+                            bill_UserId = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
+                            bill_WaitForConfirmation = false,
+                            bill_WaitPickup = false
+                        },
+                        new
+                        {
+                            bill_Id = "AFD66490-12F5-4EA7-BFF6-425624290D6D",
+                            bill_Cancelled = false,
+                            bill_Confirmation = true,
+                            bill_DatetimeOrder = new DateTime(2021, 9, 13, 1, 38, 30, 867, DateTimeKind.Local).AddTicks(5754),
+                            bill_Delivered = false,
+                            bill_Delivering = false,
+                            bill_Discount = 0,
+                            bill_Note = "",
+                            bill_PaidTotal = 2100,
+                            bill_PaymentMethod = "Check Payment",
+                            bill_ProductColorlist = "Blue|Red|Black|Green",
+                            bill_ProductIdlist = "5|6|7|8",
+                            bill_ProductNamelist = "product 5|product 6| product 7| product 8",
+                            bill_ProductPricelist = "550|450|350|640",
+                            bill_ProductSizelist = "7|8|9|14",
+                            bill_Quantity = "1|1|2|2",
+                            bill_Shipping = 10,
+                            bill_UserId = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
+                            bill_WaitForConfirmation = false,
+                            bill_WaitPickup = false
+                        });
                 });
 
             modelBuilder.Entity("Web_Shoes.Entity.Cart", b =>
@@ -484,13 +559,13 @@ namespace Web_Shoes.Migrations
                     b.HasData(
                         new
                         {
-                            couponId = "13f94591-291b-420d-bb01-144ab9535e3c",
+                            couponId = "45b5f004-a23d-4d7b-b4c0-f88b1c4a0e65",
                             couponCode = "code10",
                             couponPrice = 10
                         },
                         new
                         {
-                            couponId = "fc108063-d3a7-4e66-9ca0-969cf387423d",
+                            couponId = "7adf04f9-8b7e-4f48-a313-b29e463f1163",
                             couponCode = "code50",
                             couponPrice = 50
                         });
@@ -1585,14 +1660,14 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd",
-                            ConcurrencyStamp = "ff0fc52f-7489-4a0e-859f-bb2bcbf8533e",
+                            ConcurrencyStamp = "3db99378-e8b6-411e-83ff-20d2967cc770",
                             Name = "staff",
                             Description = "Staff"
                         },
                         new
                         {
                             Id = "360E601E-92F2-4F08-832B-604A21293258",
-                            ConcurrencyStamp = "10b589e6-33ad-442a-9ff6-a34cfa2a731a",
+                            ConcurrencyStamp = "1813b372-bef2-43ea-8681-fed1855f4cce",
                             Name = "admin",
                             Description = "admin"
                         });
@@ -1642,15 +1717,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "DE544998-A3CC-4E12-ABB4-0642E57BD222",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6d1b36a2-f2af-4e81-9b9a-5e6b624d44da",
+                            ConcurrencyStamp = "602b22f2-483d-4ca5-bd11-64fb50958900",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAED2FfTAJhLD6ao64yDoDrB8qWrCzhVMHM8lqyTXU8ARvrI4zdWUt0Wu/Cw1xaqzbDg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI/2crBeI934ihanOXYq3mVFVTxWNwCddJl2JfNu6vSt838EhKPj3TdmEJitEEvmbQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bf452600-a93a-487b-af3e-16fd1e099e5b",
+                            SecurityStamp = "50e31a49-0655-4154-b8e4-bb997734871d",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             DoB = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1661,15 +1736,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c971de94-805b-41cc-a7fb-aecda6b695f9",
+                            ConcurrencyStamp = "96181fad-1c25-4107-b178-4357fe0d31bd",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@GMAIL.COM",
                             NormalizedUserName = "STAFF@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMGTsmF3LVdKNYV1IWZQGW7ObiJgWZA3oGb2PBi74fqokARwWbY2OncO0E79hlobsw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB0NP2qmWad2r0oJ2nRPQ8lLQOsRtweRFWzjIZEWJnRBPfPF8Kc7qWM21j4PMfcKRw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3e1fd6ed-90b5-4f8e-9c18-3ba2721e1e4b",
+                            SecurityStamp = "a3b8ec95-a9ab-43bd-8861-b7616ba77835",
                             TwoFactorEnabled = false,
                             UserName = "Staff",
                             DoB = new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),

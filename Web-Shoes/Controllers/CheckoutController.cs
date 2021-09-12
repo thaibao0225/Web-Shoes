@@ -199,10 +199,10 @@ namespace Web_Shoes.Controllers
             int discount = Int32.Parse(reducePrice.ToString());
             ViewBag.Total = reTotal + ship - discount;
 
-            string productList = "";
+            string productNameList = "";
             foreach (var item in cartDetail)
             {
-                productList += "|" + item.checkout_Quantity + "|" + item.checkout_ProductName;
+                productNameList += "|" + item.checkout_Quantity + "|" + item.checkout_ProductName;
             }
 
 
@@ -213,7 +213,7 @@ namespace Web_Shoes.Controllers
                 bill_Discount = discount,
                 bill_Shipping = ship,
                 bill_PaidTotal = reTotal + ship - discount,
-                bill_Productlist = productList
+                bill_ProductNamelist = productNameList
 
 
             };
