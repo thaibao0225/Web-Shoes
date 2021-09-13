@@ -987,32 +987,64 @@ namespace Web_Shoes.Data.DataSeeding
 
 
 
-            //string billId = "D269BF93-A5E2-4C4A-8146-9967DDE80D30";
+            string billId1 = "D269BF93-A5E2-4C4A-8146-9967DDE80D30";
+            string billId2 = "AFD66490-12F5-4EA7-BFF6-425624290D6D";
 
             //Table Bills
 
-            //builder.Entity<Bills>().HasData(
-            //    new Bills()
-            //    {
-            //        bill_Id = billId,
-            //        bill_UserId = IdStaff,
-            //        bill_City = "HCM",
-            //        bill_CompanyName = "Project",
-            //        bill_Country = "Viet Nam",
-            //        bill_Email = "staff@gmail.com",
-            //        bill_PhoneNumber ="0123456789",
-            //        bill_Address1 = "123/123",
-            //        bill_Address2 = "1234/1234",
-            //        bill_PostalCode ="700000",
-            //        bill_Productlist = "1|1|2|2|1|3",
-            //        bill_Shipping = 5,
-            //        bill_State = "Binh Tan",
-            //        bill_PaidTotal = 100
+            builder.Entity<Bills>().HasData(
+                new Bills()
+                {
+                    bill_Id = billId1,
+                    bill_UserId = IdStaff,
+                    bill_PaidTotal = 2000,
+                    bill_ProductIdlist = "1|2|3|4",
+                    bill_ProductNamelist = "product 1|product 2| product 3| product 4",
+                    bill_ProductSizelist = "7|8|9|14",
+                    bill_ProductColorlist = "Blue|Red|Black|Green",
+                    bill_ProductPricelist = "550|450|350|640",
+                    bill_Shipping = 10,
+                    bill_Discount = 0,
+                    bill_Confirmation = true,
+                    bill_DatetimeOrder = DateTime.Now,
+                    bill_PaymentMethod = "Check Payment",
+                    bill_Note = "",
+                    bill_Quantity = "1|1|2|1",
+                    bill_HideStatus = false,
+                    bill_WaitForConfirmation = false,
+                    bill_WaitPickup = false,
+                    bill_Delivering = false,
+                    bill_Delivered =  false,
+                    bill_Cancelled = false
+                },
 
+                new Bills()
+                {
+                    bill_Id = billId2,
+                    bill_UserId = IdStaff,
+                    bill_PaidTotal = 2100,
+                    bill_ProductIdlist = "5|6|7|8",
+                    bill_ProductNamelist = "product 5|product 6| product 7| product 8",
+                    bill_ProductSizelist = "7|8|9|14",
+                    bill_ProductColorlist = "Blue|Red|Black|Green",
+                    bill_ProductPricelist = "550|450|350|640",
+                    bill_Shipping = 10,
+                    bill_Discount = 0,
+                    bill_Confirmation = true,
+                    bill_DatetimeOrder = DateTime.Now,
+                    bill_PaymentMethod = "Check Payment",
+                    bill_Note = "",
+                    bill_Quantity = "1|1|2|2",
+                    bill_WaitForConfirmation = false,
+                    bill_HideStatus = false,
 
+                    bill_WaitPickup = false,
+                    bill_Delivering = false,
+                    bill_Delivered = false,
+                    bill_Cancelled = false
+                }); ;
 
-
-            //    });
+            //Table Shiping
 
             string shipId = "7CF94A7D-9239-446E-A404-086518F84652";
 
