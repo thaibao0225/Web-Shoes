@@ -3,7 +3,12 @@ const searchButton = document.getElementById('search-button');
 const searchInput = document.getElementById('search-input');
 searchButton.addEventListener('click', () => {
     const inputValue = searchInput.value;
-    alert(inputValue);
+    
+    var href = "/ordersearch?search=" + searchName;
+    alert(href);
+    searchButton.href = href;
+    searchButton.click;
+    
 });
 
 

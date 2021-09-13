@@ -1010,6 +1010,7 @@ namespace Web_Shoes.Data.DataSeeding
                     bill_PaymentMethod = "Check Payment",
                     bill_Note = "",
                     bill_Quantity = "1|1|2|1",
+                    bill_HideStatus = false,
                     bill_WaitForConfirmation = false,
                     bill_WaitPickup = false,
                     bill_Delivering = false,
@@ -1035,7 +1036,7 @@ namespace Web_Shoes.Data.DataSeeding
                     bill_Note = "",
                     bill_Quantity = "1|1|2|2",
                     bill_WaitForConfirmation = false,
-
+                    bill_HideStatus = false,
 
                     bill_WaitPickup = false,
                     bill_Delivering = false,

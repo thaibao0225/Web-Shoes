@@ -317,6 +317,7 @@ namespace Web_Shoes.Migrations
                     bill_PaymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     bill_Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     bill_Quantity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bill_HideStatus = table.Column<bool>(type: "bit", nullable: false),
                     bill_WaitForConfirmation = table.Column<bool>(type: "bit", nullable: false),
                     bill_WaitPickup = table.Column<bool>(type: "bit", nullable: false),
                     bill_Delivering = table.Column<bool>(type: "bit", nullable: false),
@@ -608,8 +609,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "couponId", "couponCode", "couponPrice" },
                 values: new object[,]
                 {
-                    { "45b5f004-a23d-4d7b-b4c0-f88b1c4a0e65", "code10", 10 },
-                    { "7adf04f9-8b7e-4f48-a313-b29e463f1163", "code50", 50 }
+                    { "4f9e7c01-5982-45a9-aacd-01bce58f3677", "code10", 10 },
+                    { "9f451708-c35c-4ad6-b428-e30459428231", "code50", 50 }
                 });
 
             migrationBuilder.InsertData(
@@ -639,8 +640,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Discriminator", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "360E601E-92F2-4F08-832B-604A21293258", "1813b372-bef2-43ea-8681-fed1855f4cce", "admin", "AppRole", "admin", null },
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "3db99378-e8b6-411e-83ff-20d2967cc770", "Staff", "AppRole", "staff", null }
+                    { "360E601E-92F2-4F08-832B-604A21293258", "2f2f7422-7532-4bc2-8878-ab534dec3bd2", "admin", "AppRole", "admin", null },
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "0c47227f-4579-4705-91d5-7b74f1b12582", "Staff", "AppRole", "staff", null }
                 });
 
             migrationBuilder.InsertData(
@@ -653,17 +654,17 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "bill_Address1", "bill_Address2", "bill_City", "bill_CompanyName", "bill_Country", "bill_PhoneNumber", "bill_PostalCode", "bill_State" },
                 values: new object[,]
                 {
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "96181fad-1c25-4107-b178-4357fe0d31bd", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEB0NP2qmWad2r0oJ2nRPQ8lLQOsRtweRFWzjIZEWJnRBPfPF8Kc7qWM21j4PMfcKRw==", null, false, "a3b8ec95-a9ab-43bd-8861-b7616ba77835", false, "Staff", null, null, null, null, null, null, null, null },
-                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "602b22f2-483d-4ca5-bd11-64fb50958900", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEI/2crBeI934ihanOXYq3mVFVTxWNwCddJl2JfNu6vSt838EhKPj3TdmEJitEEvmbQ==", null, false, "50e31a49-0655-4154-b8e4-bb997734871d", false, "Admin", null, null, null, null, null, null, null, null }
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "ef61ab5f-3fca-42a9-8952-94819dad39f1", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEJGxjTGxy2+yLZxDOQTp9/K3ejGkKc7NNketxF5I83DDbDZoayiW/ej6xmbt8YuEwg==", null, false, "b568026a-2c10-4e3c-bdf3-c93130426c24", false, "Staff", null, null, null, null, null, null, null, null },
+                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "ce4f75ea-2bc7-4315-a6b8-2828fa0353d3", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEIrVdmju47Tulj0eRGA6W44UDyRd0ZjrII6+yVSP2Nf+YKy1r9ElyjIZBI9jBfvFcQ==", null, false, "61e3ae38-7de8-45c0-b531-4b576fa01783", false, "Admin", null, null, null, null, null, null, null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Bills",
-                columns: new[] { "bill_Id", "bill_Cancelled", "bill_Confirmation", "bill_DatetimeOrder", "bill_Delivered", "bill_Delivering", "bill_Discount", "bill_Note", "bill_PaidTotal", "bill_PaymentMethod", "bill_ProductColorlist", "bill_ProductIdlist", "bill_ProductNamelist", "bill_ProductPricelist", "bill_ProductSizelist", "bill_Quantity", "bill_Shipping", "bill_UserId", "bill_WaitForConfirmation", "bill_WaitPickup" },
+                columns: new[] { "bill_Id", "bill_Cancelled", "bill_Confirmation", "bill_DatetimeOrder", "bill_Delivered", "bill_Delivering", "bill_Discount", "bill_HideStatus", "bill_Note", "bill_PaidTotal", "bill_PaymentMethod", "bill_ProductColorlist", "bill_ProductIdlist", "bill_ProductNamelist", "bill_ProductPricelist", "bill_ProductSizelist", "bill_Quantity", "bill_Shipping", "bill_UserId", "bill_WaitForConfirmation", "bill_WaitPickup" },
                 values: new object[,]
                 {
-                    { "D269BF93-A5E2-4C4A-8146-9967DDE80D30", false, true, new DateTime(2021, 9, 13, 1, 38, 30, 866, DateTimeKind.Local).AddTicks(3720), false, false, 0, "", 2000, "Check Payment", "Blue|Red|Black|Green", "1|2|3|4", "product 1|product 2| product 3| product 4", "550|450|350|640", "7|8|9|14", "1|1|2|1", 10, "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", false, false },
-                    { "AFD66490-12F5-4EA7-BFF6-425624290D6D", false, true, new DateTime(2021, 9, 13, 1, 38, 30, 867, DateTimeKind.Local).AddTicks(5754), false, false, 0, "", 2100, "Check Payment", "Blue|Red|Black|Green", "5|6|7|8", "product 5|product 6| product 7| product 8", "550|450|350|640", "7|8|9|14", "1|1|2|2", 10, "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", false, false }
+                    { "D269BF93-A5E2-4C4A-8146-9967DDE80D30", false, true, new DateTime(2021, 9, 13, 12, 9, 54, 397, DateTimeKind.Local).AddTicks(1079), false, false, 0, false, "", 2000, "Check Payment", "Blue|Red|Black|Green", "1|2|3|4", "product 1|product 2| product 3| product 4", "550|450|350|640", "7|8|9|14", "1|1|2|1", 10, "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", false, false },
+                    { "AFD66490-12F5-4EA7-BFF6-425624290D6D", false, true, new DateTime(2021, 9, 13, 12, 9, 54, 398, DateTimeKind.Local).AddTicks(3157), false, false, 0, false, "", 2100, "Check Payment", "Blue|Red|Black|Green", "5|6|7|8", "product 5|product 6| product 7| product 8", "550|450|350|640", "7|8|9|14", "1|1|2|2", 10, "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", false, false }
                 });
 
             migrationBuilder.InsertData(

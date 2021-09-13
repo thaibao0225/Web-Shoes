@@ -10,7 +10,7 @@
 <div class="row">
     <div class="col-md-4">
         <div class="input-group">
-            <form action="/" method="post">
+            <form asp-action="Search"  method="post">
                 <table>
                     <tr>
                         <td>
@@ -20,12 +20,10 @@
                             </select>
                         </td>
                         <td>
-                            <input id="search-input" type="search" class="form-control" />
+                            <input id="search-input" type="search" name="searchinput" class="form-control" />
                         </td>
                         <td>
-                            <button id="search-button" type="button" class="btn btn-primary">
-                                <i class="fas fa-search"></i>
-                            </button>
+                            <input type="submit" class="btn btn-primary"  value="Search" />
                         </td>
                     </tr>
                 </table>
@@ -52,8 +50,7 @@
             <th>Confirm</th>
             
             <th></th> <!--View detail-->
-            <th></th> <!--Confirm-->
-            <th></th> <!--Edit-->
+            
             <th></th> <!--Delete-->
         </tr>
 
@@ -72,8 +69,7 @@
                     <td>@item.OrderC_Confirm</td>
                     
                     <td><a asp-action="Details" asp-route-id="@item.OrderC_BillId" >View detail</a></td>
-                    <td><a asp-action="##" asp-route-id="@item.OrderC_BillId">Confirm</a></td>
-                    <td><a asp-action="Edit" asp-route-id="@item.OrderC_BillId">Edit</a></td>
+                    
                     <td><a asp-action="Delete" asp-route-id="@item.OrderC_BillId">Delete</a></td>
                 </tr>
             }
@@ -81,6 +77,8 @@
 
     </table>
 </div>
+
+
 
 
 <script src="~/js/OrderConfirmationManagement.js"></script>

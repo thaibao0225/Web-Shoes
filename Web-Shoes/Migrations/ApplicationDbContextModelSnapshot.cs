@@ -296,6 +296,9 @@ namespace Web_Shoes.Migrations
                     b.Property<int>("bill_Discount")
                         .HasColumnType("int");
 
+                    b.Property<bool>("bill_HideStatus")
+                        .HasColumnType("bit");
+
                     b.Property<string>("bill_Note")
                         .HasColumnType("nvarchar(max)");
 
@@ -347,10 +350,11 @@ namespace Web_Shoes.Migrations
                             bill_Id = "D269BF93-A5E2-4C4A-8146-9967DDE80D30",
                             bill_Cancelled = false,
                             bill_Confirmation = true,
-                            bill_DatetimeOrder = new DateTime(2021, 9, 13, 1, 38, 30, 866, DateTimeKind.Local).AddTicks(3720),
+                            bill_DatetimeOrder = new DateTime(2021, 9, 13, 12, 9, 54, 397, DateTimeKind.Local).AddTicks(1079),
                             bill_Delivered = false,
                             bill_Delivering = false,
                             bill_Discount = 0,
+                            bill_HideStatus = false,
                             bill_Note = "",
                             bill_PaidTotal = 2000,
                             bill_PaymentMethod = "Check Payment",
@@ -370,10 +374,11 @@ namespace Web_Shoes.Migrations
                             bill_Id = "AFD66490-12F5-4EA7-BFF6-425624290D6D",
                             bill_Cancelled = false,
                             bill_Confirmation = true,
-                            bill_DatetimeOrder = new DateTime(2021, 9, 13, 1, 38, 30, 867, DateTimeKind.Local).AddTicks(5754),
+                            bill_DatetimeOrder = new DateTime(2021, 9, 13, 12, 9, 54, 398, DateTimeKind.Local).AddTicks(3157),
                             bill_Delivered = false,
                             bill_Delivering = false,
                             bill_Discount = 0,
+                            bill_HideStatus = false,
                             bill_Note = "",
                             bill_PaidTotal = 2100,
                             bill_PaymentMethod = "Check Payment",
@@ -559,13 +564,13 @@ namespace Web_Shoes.Migrations
                     b.HasData(
                         new
                         {
-                            couponId = "45b5f004-a23d-4d7b-b4c0-f88b1c4a0e65",
+                            couponId = "4f9e7c01-5982-45a9-aacd-01bce58f3677",
                             couponCode = "code10",
                             couponPrice = 10
                         },
                         new
                         {
-                            couponId = "7adf04f9-8b7e-4f48-a313-b29e463f1163",
+                            couponId = "9f451708-c35c-4ad6-b428-e30459428231",
                             couponCode = "code50",
                             couponPrice = 50
                         });
@@ -1660,14 +1665,14 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd",
-                            ConcurrencyStamp = "3db99378-e8b6-411e-83ff-20d2967cc770",
+                            ConcurrencyStamp = "0c47227f-4579-4705-91d5-7b74f1b12582",
                             Name = "staff",
                             Description = "Staff"
                         },
                         new
                         {
                             Id = "360E601E-92F2-4F08-832B-604A21293258",
-                            ConcurrencyStamp = "1813b372-bef2-43ea-8681-fed1855f4cce",
+                            ConcurrencyStamp = "2f2f7422-7532-4bc2-8878-ab534dec3bd2",
                             Name = "admin",
                             Description = "admin"
                         });
@@ -1717,15 +1722,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "DE544998-A3CC-4E12-ABB4-0642E57BD222",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "602b22f2-483d-4ca5-bd11-64fb50958900",
+                            ConcurrencyStamp = "ce4f75ea-2bc7-4315-a6b8-2828fa0353d3",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI/2crBeI934ihanOXYq3mVFVTxWNwCddJl2JfNu6vSt838EhKPj3TdmEJitEEvmbQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIrVdmju47Tulj0eRGA6W44UDyRd0ZjrII6+yVSP2Nf+YKy1r9ElyjIZBI9jBfvFcQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "50e31a49-0655-4154-b8e4-bb997734871d",
+                            SecurityStamp = "61e3ae38-7de8-45c0-b531-4b576fa01783",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             DoB = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1736,15 +1741,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "96181fad-1c25-4107-b178-4357fe0d31bd",
+                            ConcurrencyStamp = "ef61ab5f-3fca-42a9-8952-94819dad39f1",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@GMAIL.COM",
                             NormalizedUserName = "STAFF@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB0NP2qmWad2r0oJ2nRPQ8lLQOsRtweRFWzjIZEWJnRBPfPF8Kc7qWM21j4PMfcKRw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJGxjTGxy2+yLZxDOQTp9/K3ejGkKc7NNketxF5I83DDbDZoayiW/ej6xmbt8YuEwg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a3b8ec95-a9ab-43bd-8861-b7616ba77835",
+                            SecurityStamp = "b568026a-2c10-4e3c-bdf3-c93130426c24",
                             TwoFactorEnabled = false,
                             UserName = "Staff",
                             DoB = new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
