@@ -12,6 +12,7 @@ namespace Web_Shoes.Entity
         public AppUser AppUserR { get; set; }
         public string review_UserId { set; get; }
         public List<ReviewInproduct> ReviewInproductR { get; set; }
+        public List<SubReviewInReview> SubReviewInReview { get; set; }
 
         public DateTime review_UploadTime { set; get; }
 

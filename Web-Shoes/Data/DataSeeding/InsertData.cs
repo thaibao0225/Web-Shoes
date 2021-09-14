@@ -893,6 +893,56 @@ namespace Web_Shoes.Data.DataSeeding
 
                 });
 
+            var SubReviewId1 = Guid.NewGuid().ToString(); 
+
+            var SubReviewId2 = Guid.NewGuid().ToString();
+
+            var SubReviewId3 = Guid.NewGuid().ToString();
+
+
+            // Table SubReview 
+
+            builder.Entity<SubReview>().HasData(
+                new SubReview()
+                {
+                    subReview_Id = SubReviewId1,
+                    subReview_UserId = IdAdmin,
+                    subReview_Commnet = "subreview 1",
+                    subReview_DateCommnet = new DateTime(2020, 01, 02)
+                },
+                new SubReview()
+                {
+                    subReview_Id = SubReviewId2,
+                    subReview_UserId = IdStaff,
+                    subReview_Commnet = "subreview 3",
+                    subReview_DateCommnet = new DateTime(2020, 01, 03)
+                },
+                new SubReview()
+                {
+                    subReview_Id = SubReviewId3,
+                    subReview_UserId = IdAdmin,
+                    subReview_Commnet = "subreview 3",
+                    subReview_DateCommnet = new DateTime(2020, 01, 03)
+                }
+                );
+
+            builder.Entity<SubReviewInReview>().HasData(
+                new SubReviewInReview()
+                {
+                    SRiR_ReviewId = ReviewId1,
+                    SRiR_SubReviewId = SubReviewId1
+                },
+                new SubReviewInReview()
+                {
+                    SRiR_ReviewId = ReviewId1,
+                    SRiR_SubReviewId = SubReviewId2
+                },
+                new SubReviewInReview()
+                {
+                    SRiR_ReviewId = ReviewId2,
+                    SRiR_SubReviewId = SubReviewId3
+                }
+                );
 
 
 

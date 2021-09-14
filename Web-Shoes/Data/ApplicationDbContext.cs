@@ -66,6 +66,9 @@ namespace Web_Shoes.Data
             builder.ApplyConfiguration(new CartsDeviceConfigurations());
             builder.ApplyConfiguration(new ProductInCartDevicesConfigurations());
             builder.ApplyConfiguration(new ShippingConfigurations());
+            builder.ApplyConfiguration(new SubReviewInReviewConfigurations());
+            builder.ApplyConfiguration(new SubReviewConfigurations());
+
 
 
 
@@ -107,6 +110,9 @@ namespace Web_Shoes.Data
 
         public DbSet<Shipping> Shipping { set; get; }
 
+        public DbSet<SubReview> SubReview { set; get; }
+
+        public DbSet<SubReviewInReview> SubReviewInReview { set; get; }
 
         public DbSet<Web_Shoes.Models.UserInRoleModel> UserInRoleModel { get; set; }
         //public DbSet<AppUserRole> AppUserRole { set; get; }
