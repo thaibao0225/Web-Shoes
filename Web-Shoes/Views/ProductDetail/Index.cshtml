@@ -385,9 +385,13 @@
                                                             <input type="submit" name="name" class="btn btn-default" value="Send" />
                                                         </form>
                                                     </div>
-                                                    <div>
-                                                        <a href="#" class="text-success" data-toggle="collapse" data-target="#viewcomments-@iViewcomments"><span>View more <bold> @item.review_CountSubReview</bold> Comments</span> </a>
-                                                    </div>
+                                                    if (@item.review_CountSubReview >= 1)
+                                                    {
+                                                        <div>
+                                                            <a href="#" class="text-success" data-toggle="collapse" data-target="#viewcomments-@iViewcomments"><span>View more <bold> @item.review_CountSubReview</bold> Comments</span> </a>
+                                                        </div>
+                                                    }
+
                                                     icommentmain++;
                                                     idMainComment = item.review_id;
 
@@ -440,7 +444,7 @@
 
 
                                                         icommentreply++;
-                                                        
+
                                                     }
 
                                                 </div>

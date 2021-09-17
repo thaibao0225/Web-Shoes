@@ -285,7 +285,9 @@ namespace Web_Shoes.Controllers
                     review_id = reviewId,
                     review_Comment = Request.Form["comment"],
                     review_UserId = userId,
-                    review_UploadTime = DateTime.Now
+                    review_UploadTime = DateTime.Now,
+                    review_HideStatus = false,
+                    review_ReviewType ="Review"
                 };
 
 
@@ -335,8 +337,9 @@ namespace Web_Shoes.Controllers
                     subReview_Id = SubReviewId,
                     subReview_Commnet = Request.Form["subcomment"],
                     subReview_DateCommnet = DateTime.Now,
-                    subReview_UserId = userId
-
+                    subReview_UserId = userId,
+                    subReview_HideStatus = false,
+                    subreview_SubReviewType = "SubReview"
                 };
 
 

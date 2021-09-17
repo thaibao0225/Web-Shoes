@@ -195,9 +195,6 @@ namespace Web_Shoes.Controllers
         public ActionResult Details(int id)
         {
             try
-
-
-
             {
                 return RedirectToAction(nameof(Index));
             }
