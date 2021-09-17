@@ -11,6 +11,8 @@ namespace Web_Shoes.Entity
         public string review_Comment { set; get; }
         public AppUser AppUserR { get; set; }
         public string review_UserId { set; get; }
+        public bool review_HideStatus { get; set; }
+        public string review_ReviewType { get; set; }
         public List<ReviewInproduct> ReviewInproductR { get; set; }
         public List<SubReviewInReview> SubReviewInReview { get; set; }
 

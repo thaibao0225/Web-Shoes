@@ -9,13 +9,16 @@ namespace Web_Shoes.Entity
     {
         public string subReview_Id { get; set; }
         public string subReview_Commnet { get; set; }
+        
         public AppUser AppUserSR { get; set; }
         public string subReview_UserId { get; set; }
+        public bool subReview_HideStatus { get; set; }
+        public string subreview_SubReviewType { get; set; }
 
         public DateTime subReview_DateCommnet { get; set; }
 
         public List<SubReviewInReview> SubReviewInReview { get; set; }
 
-
+        
     }
 }

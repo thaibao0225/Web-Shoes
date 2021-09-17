@@ -1,8 +1,119 @@
-﻿@*@model IEnumerable<Web_Shoes.Entity.Products>*@
+﻿@model IEnumerable<Web_Shoes.Models.ReviewModel>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Index</h1>
+<div >
+    <table class="table">
+        <tr>
+            <th>
+                Product Name:
+            </th>
+            <th>
+                User Comment:
+            </th>
+            <th>
+                Comment:
+            </th>
+            <th>
+                Status:
+            </th>
+            <th>
+                Update Date:
+            </th>
+            <th>
+                ReviewType:
+            </th>
+            <th></th>
+            @*View in Client site*@
+
+            <th></th>
+            @*Allow/Deny*@
+        </tr>
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>@item.review_ProductName</td>
+        <td>@item.review_UserName</td>
+        <td>@item.review_Comment</td>
+        <td>
+            @if (item.review_HideStatus)
+            {
+                <div class="p-3 mb-2 bg-danger text-white">Denied </div>
+            }
+            else
+            {
+                <div class="p-3 mb-2 bg-success text-white">Allowed </div>
+            }
+
+        </td>
+        <td>Update</td>
+        <td>
+            @{
+                if (item.review_ReviewType == "Review")
+                {
+                    <a>Review</a>
+                }
+            }
+        </td>
+        <td><a href="/productdetail?id=@item.review_ProductId"><span>View in Client site</span></a></td>
+        @if (item.review_HideStatus)
+        {
+            <td><a asp-action="AllowAction" asp-route-ReviewId="@item.review_id" asp-route-Type="@item.review_ReviewType" class="btn btn-success btn-lg active h-20 "><span>Allow</span></a></td>
+        }
+        else
+        {
+            <td><a asp-action="DenyAction" asp-route-ReviewId="@item.review_id" asp-route-Type="@item.review_ReviewType"  class="btn btn-danger btn-lg active h-20"><span>Deny</span></a></td>
+
+
+        }
+
+
+    </tr>
+            foreach (var itemSub in item.review_SubreviewModelList)
+            {
+                <tr>
+                    <td>@item.review_ProductName</td>
+                    <td>@itemSub.subReview_UserName</td>
+                    <td>@itemSub.subReview_SubComment</td>
+                    <td>
+                        
+                        @if (itemSub.subReview_HideStatus)
+                        {
+                            <div class="p-3 mb-2 bg-danger text-white">Denied </div>
+                        }
+                        else
+                        {
+                            <div class="p-3 mb-2 bg-success text-white">Allowed </div>
+                        }
+                    </td>
+                    <td>Update</td>
+                    <td>
+                        @{
+                            if (itemSub.subReview_SubReviewType == "SubReview")
+                            {
+                                <a>SubReview</a>
+                            }
+                        }
+                    </td>
+                    <td><a href="/productdetail?id=@item.review_ProductId"><span>View in Client site</span></a></td>
+                    @if (itemSub.subReview_HideStatus)
+                    {
+                        <td><a asp-action="AllowAction" asp-route-ReviewId="@itemSub.subReview_Subid" asp-route-Type="@itemSub.subReview_SubReviewType" class="btn btn-success btn-lg active h-20 "><span>Allow</span></a></td>
+                    }
+                    else
+                    {
+                        <td><a asp-action="DenyAction" asp-route-ReviewId="@itemSub.subReview_Subid" asp-route-Type="@itemSub.subReview_SubReviewType" class="btn btn-danger btn-lg active h-20"><span>Deny</span></a></td>
+                    }
+
+
+                </tr>
+            }
+        }
+
+
+
+    </table>
+</div>

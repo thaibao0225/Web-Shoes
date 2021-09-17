@@ -15,5 +15,7 @@ namespace Web_Shoes.Models
         public DateTime subReview_SubUploadTime { set; get; }
 
         public string subReview_UserName { set; get; }
+        public bool subReview_HideStatus { set; get; }
+        public string subReview_SubReviewType { set; get; }
     }
 }

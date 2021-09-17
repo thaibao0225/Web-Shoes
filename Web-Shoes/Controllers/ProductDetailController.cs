@@ -82,7 +82,7 @@ namespace Web_Shoes.Controllers
                             select new {a,b,c,d };
 
 
-            review = review.Where(x => x.d.pd_Id == id);
+            review = review.Where(x => x.d.pd_Id == id && x.b.review_HideStatus == false);
 
             var reviewQuery = review.Select(x => new ReviewModel()
             {
@@ -100,6 +100,8 @@ namespace Web_Shoes.Controllers
 
                 
             });
+
+            SubReview = SubReview.Where(x => x.b.subReview_HideStatus == false);
 
             var subReviewQuery = SubReview.Select(x => new SubreviewModel()
             {
