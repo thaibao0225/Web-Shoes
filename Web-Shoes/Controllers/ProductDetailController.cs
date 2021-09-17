@@ -280,33 +280,39 @@ namespace Web_Shoes.Controllers
 
                 string reviewId = Guid.NewGuid().ToString();
 
-                var reviews = new Reviews()
-                {
-                    review_id = reviewId,
-                    review_Comment = Request.Form["comment"],
-                    review_UserId = userId,
-                    review_UploadTime = DateTime.Now,
-                    review_HideStatus = false,
-                    review_ReviewType ="Review"
-                };
-
-
-
                 string idproduct = Request.Form["idproduct"];
-                
-                int idProductInt = Int32.Parse(idproduct);
-
-                _context.Reviews.Add(reviews);
-
-                var reviewInProduct = new ReviewInproduct()
+                if (Request.Form["comment"] != "")
                 {
-                    rip_ProductId = idProductInt,
-                    rip_ReviewId = reviewId
-                };
-                _context.ReviewInproduct.Add(reviewInProduct);
+                    var reviews = new Reviews()
+                    {
+                        review_id = reviewId,
+                        review_Comment = Request.Form["comment"],
+                        review_UserId = userId,
+                        review_UploadTime = DateTime.Now,
+                        review_HideStatus = false,
+                        review_ReviewType = "Review"
+                    };
+
+
+
+                    
+
+                    int idProductInt = Int32.Parse(idproduct);
+
+                    _context.Reviews.Add(reviews);
+
+                    var reviewInProduct = new ReviewInproduct()
+                    {
+                        rip_ProductId = idProductInt,
+                        rip_ReviewId = reviewId
+                    };
+                    _context.ReviewInproduct.Add(reviewInProduct);
+
+
+                    await _context.SaveChangesAsync();
+                }
 
                 
-                await _context.SaveChangesAsync();
 
                 return Redirect("/productdetail?id=" + idproduct);
             }
@@ -332,34 +338,39 @@ namespace Web_Shoes.Controllers
 
                 string SubReviewId = Guid.NewGuid().ToString();
 
-                var SubReviews = new SubReview()
+                string idproduct = Request.Form["idproduct"];
+                if (Request.Form["subcomment"] != "")
                 {
-                    subReview_Id = SubReviewId,
-                    subReview_Commnet = Request.Form["subcomment"],
-                    subReview_DateCommnet = DateTime.Now,
-                    subReview_UserId = userId,
-                    subReview_HideStatus = false,
-                    subreview_SubReviewType = "SubReview"
-                };
+                    var SubReviews = new SubReview()
+                    {
+                        subReview_Id = SubReviewId,
+                        subReview_Commnet = Request.Form["subcomment"],
+                        subReview_DateCommnet = DateTime.Now,
+                        subReview_UserId = userId,
+                        subReview_HideStatus = false,
+                        subreview_SubReviewType = "SubReview"
+                    };
 
 
 
-                string idproduct = Request.Form["idproduct"]; 
-                string idCommentMain = Request.Form["idcommentmain"]; 
+                    
+                    string idCommentMain = Request.Form["idcommentmain"];
 
-                int idProductInt = Int32.Parse(idproduct);
+                    int idProductInt = Int32.Parse(idproduct);
 
-                _context.SubReview.Add(SubReviews);
+                    _context.SubReview.Add(SubReviews);
 
-                var SubReviewInReview = new SubReviewInReview()
-                {
-                    SRiR_ReviewId = idCommentMain,
-                    SRiR_SubReviewId = SubReviewId
-                };
-                _context.SubReviewInReview.Add(SubReviewInReview);
+                    var SubReviewInReview = new SubReviewInReview()
+                    {
+                        SRiR_ReviewId = idCommentMain,
+                        SRiR_SubReviewId = SubReviewId
+                    };
+                    _context.SubReviewInReview.Add(SubReviewInReview);
 
 
-                await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
+                }
+               
 
                 return Redirect("/productdetail?id=" + idproduct);
             }
