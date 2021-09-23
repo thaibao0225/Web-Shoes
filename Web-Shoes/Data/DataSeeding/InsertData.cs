@@ -873,7 +873,9 @@ namespace Web_Shoes.Data.DataSeeding
                     review_id = ReviewId1,
                     review_Comment = "Good1",
                     review_UserId = IdAdmin,
-                    review_UploadTime = new DateTime(2020, 01, 02)
+                    review_UploadTime = new DateTime(2020, 01, 02),
+                    review_HideStatus = false,
+                    review_ReviewType = "Review"
 
                 },
                 new Reviews()
@@ -881,7 +883,9 @@ namespace Web_Shoes.Data.DataSeeding
                     review_id = ReviewId2,
                     review_Comment = "Good2",
                     review_UserId = IdStaff,
-                    review_UploadTime = new DateTime(2020, 01, 02)
+                    review_UploadTime = new DateTime(2020, 01, 02),
+                    review_HideStatus = false,
+                    review_ReviewType = "Review"
 
                 },
                 new Reviews()
@@ -889,10 +893,68 @@ namespace Web_Shoes.Data.DataSeeding
                     review_id = ReviewId3,
                     review_Comment = "Good3",
                     review_UserId = IdAdmin,
-                    review_UploadTime = new DateTime(2020, 01, 02)
+                    review_UploadTime = new DateTime(2020, 01, 02),
+                    review_HideStatus = false,
+                    review_ReviewType = "Review"
 
                 });
 
+            var SubReviewId1 = Guid.NewGuid().ToString(); 
+
+            var SubReviewId2 = Guid.NewGuid().ToString();
+
+            var SubReviewId3 = Guid.NewGuid().ToString();
+
+
+            // Table SubReview 
+
+            builder.Entity<SubReview>().HasData(
+                new SubReview()
+                {
+                    subReview_Id = SubReviewId1,
+                    subReview_UserId = IdAdmin,
+                    subReview_Commnet = "subreview 1",
+                    subReview_DateCommnet = new DateTime(2020, 01, 02),
+                    subReview_HideStatus = false,
+                    subreview_SubReviewType = "SubReview"
+                },
+                new SubReview()
+                {
+                    subReview_Id = SubReviewId2,
+                    subReview_UserId = IdStaff,
+                    subReview_Commnet = "subreview 3",
+                    subReview_DateCommnet = new DateTime(2020, 01, 03),
+                    subReview_HideStatus = false,
+                    subreview_SubReviewType = "SubReview"
+                },
+                new SubReview()
+                {
+                    subReview_Id = SubReviewId3,
+                    subReview_UserId = IdAdmin,
+                    subReview_Commnet = "subreview 3",
+                    subReview_DateCommnet = new DateTime(2020, 01, 03),
+                    subReview_HideStatus = false,
+                    subreview_SubReviewType = "SubReview"
+                }
+                );
+
+            builder.Entity<SubReviewInReview>().HasData(
+                new SubReviewInReview()
+                {
+                    SRiR_ReviewId = ReviewId1,
+                    SRiR_SubReviewId = SubReviewId1
+                },
+                new SubReviewInReview()
+                {
+                    SRiR_ReviewId = ReviewId1,
+                    SRiR_SubReviewId = SubReviewId2
+                },
+                new SubReviewInReview()
+                {
+                    SRiR_ReviewId = ReviewId2,
+                    SRiR_SubReviewId = SubReviewId3
+                }
+                );
 
 
 

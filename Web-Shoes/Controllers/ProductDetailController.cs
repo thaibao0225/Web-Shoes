@@ -68,25 +68,87 @@ namespace Web_Shoes.Controllers
             ViewBag.Size14_5 = productDetailQuery.pd_Size14_5;
 
 
+
             var review = from a in _context.AppUser
                          join b in _context.Reviews on a.Id equals b.review_UserId
                          join c in _context.ReviewInproduct on b.review_id equals c.rip_ReviewId
                          join d in _context.Products on c.rip_ProductId equals d.pd_Id
                          select new { a, b, c, d };
 
-            review = review.Where(x => x.d.pd_Id == id);
+            var SubReview = from a in _context.AppUser
+                            join b in _context.SubReview on a.Id equals b.subReview_UserId
+                            join c in _context.SubReviewInReview on b.subReview_Id equals c.SRiR_SubReviewId
+                            join d in _context.Reviews on c.SRiR_ReviewId equals d.review_id
+                            select new {a,b,c,d };
+
+
+            review = review.Where(x => x.d.pd_Id == id && x.b.review_HideStatus == false);
 
             var reviewQuery = review.Select(x => new ReviewModel()
             {
+                // table Review
                 review_id = x.b.review_id,
                 review_UserId = x.a.Id,
                 review_ProductId = x.d.pd_Id,
                 review_Comment = x.b.review_Comment,
                 review_UserName = x.a.UserName,
-                review_UploadTime = x.b.review_UploadTime
+                review_UploadTime = x.b.review_UploadTime,
+
+                review_CountSubReview = 1
+                //// table SubReview
+                //Subreview = 
+
+                
             });
 
-            return View(reviewQuery);
+            SubReview = SubReview.Where(x => x.b.subReview_HideStatus == false);
+
+            var subReviewQuery = SubReview.Select(x => new SubreviewModel()
+            {
+                subReview_Subid = x.b.subReview_Id,
+                subReview_SubComment = x.b.subReview_Commnet,
+                subReview_SubUserId = x.b.subReview_UserId,
+                subReview_SubUploadTime = x.b.subReview_DateCommnet,
+                subReview_UserName = x.a.UserName,
+                subReview_ReviewId = x.d.review_id
+            });
+
+            List<ReviewModel> reviewAdd = new List<ReviewModel>();
+           
+
+
+            //Query of Review
+            foreach (var itemReview in reviewQuery)
+            {
+
+                List<SubreviewModel> subreviewAddList = new List<SubreviewModel>();
+                //Query of SubReview
+                foreach (var itemSubReview in subReviewQuery)
+                {
+                    //If SubReview In Review
+                    if (itemReview.review_id == itemSubReview.subReview_ReviewId)
+                    {
+                        //SubreviewModel subreviewAdd = new SubreviewModel();
+                        //subreviewAdd.subReview_ReviewId = itemSubReview.subReview_ReviewId;
+                        //subreviewAdd.subReview_SubComment = itemSubReview.subReview_SubComment;
+                        //subreviewAdd.subReview_Subid = itemSubReview.subReview_Subid;
+                        //subreviewAdd.subReview_SubUploadTime = itemSubReview.subReview_SubUploadTime;
+                        //subreviewAdd.subReview_SubUserId = itemSubReview.subReview_Subid;
+                        //subreviewAdd.subReview_UserName = itemSubReview.subReview_UserName;
+
+                        subreviewAddList.Add(itemSubReview);
+                    }
+                }
+
+                itemReview.review_SubreviewModelList = subreviewAddList;
+                itemReview.review_CountSubReview = subreviewAddList.Count();
+                reviewAdd.Add(itemReview);
+            }
+            var reviewQuery1 = reviewAdd.Cast<ReviewModel>().ToArray();
+
+
+
+            return View(reviewQuery1);
         }
 
         [Route("/productdetailadd")]
@@ -218,31 +280,39 @@ namespace Web_Shoes.Controllers
 
                 string reviewId = Guid.NewGuid().ToString();
 
-                var reviews = new Reviews()
-                {
-                    review_id = reviewId,
-                    review_Comment = Request.Form["comment"],
-                    review_UserId = userId,
-                    review_UploadTime = DateTime.Now
-                };
-
-
-
                 string idproduct = Request.Form["idproduct"];
-                
-                int idProductInt = Int32.Parse(idproduct);
-
-                _context.Reviews.Add(reviews);
-
-                var reviewInProduct = new ReviewInproduct()
+                if (Request.Form["comment"] != "")
                 {
-                    rip_ProductId = idProductInt,
-                    rip_ReviewId = reviewId
-                };
-                _context.ReviewInproduct.Add(reviewInProduct);
+                    var reviews = new Reviews()
+                    {
+                        review_id = reviewId,
+                        review_Comment = Request.Form["comment"],
+                        review_UserId = userId,
+                        review_UploadTime = DateTime.Now,
+                        review_HideStatus = false,
+                        review_ReviewType = "Review"
+                    };
+
+
+
+                    
+
+                    int idProductInt = Int32.Parse(idproduct);
+
+                    _context.Reviews.Add(reviews);
+
+                    var reviewInProduct = new ReviewInproduct()
+                    {
+                        rip_ProductId = idProductInt,
+                        rip_ReviewId = reviewId
+                    };
+                    _context.ReviewInproduct.Add(reviewInProduct);
+
+
+                    await _context.SaveChangesAsync();
+                }
 
                 
-                await _context.SaveChangesAsync();
 
                 return Redirect("/productdetail?id=" + idproduct);
             }
@@ -252,12 +322,63 @@ namespace Web_Shoes.Controllers
                 return View();
             }
 
+        }
+
+        [Route("/productcommentreply")]
+        [HttpPost]
+        public async Task<IActionResult> Commentreply()
+        {
+
+            try
+            {
+
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                var userName = User.FindFirstValue(ClaimTypes.Name);
+
+                string SubReviewId = Guid.NewGuid().ToString();
+
+                string idproduct = Request.Form["idproduct"];
+                if (Request.Form["subcomment"] != "")
+                {
+                    var SubReviews = new SubReview()
+                    {
+                        subReview_Id = SubReviewId,
+                        subReview_Commnet = Request.Form["subcomment"],
+                        subReview_DateCommnet = DateTime.Now,
+                        subReview_UserId = userId,
+                        subReview_HideStatus = false,
+                        subreview_SubReviewType = "SubReview"
+                    };
 
 
 
+                    
+                    string idCommentMain = Request.Form["idcommentmain"];
+
+                    int idProductInt = Int32.Parse(idproduct);
+
+                    _context.SubReview.Add(SubReviews);
+
+                    var SubReviewInReview = new SubReviewInReview()
+                    {
+                        SRiR_ReviewId = idCommentMain,
+                        SRiR_SubReviewId = SubReviewId
+                    };
+                    _context.SubReviewInReview.Add(SubReviewInReview);
 
 
+                    await _context.SaveChangesAsync();
+                }
+               
 
+                return Redirect("/productdetail?id=" + idproduct);
+            }
+            catch
+            {
+                ViewBag.thongbao = "Cann't create";
+                return View();
+            }
 
         }
 

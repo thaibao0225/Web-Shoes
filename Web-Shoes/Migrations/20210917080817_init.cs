@@ -360,6 +360,8 @@ namespace Web_Shoes.Migrations
                     review_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     review_Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     review_UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    review_HideStatus = table.Column<bool>(type: "bit", nullable: false),
+                    review_ReviewType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     review_UploadTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -368,6 +370,28 @@ namespace Web_Shoes.Migrations
                     table.ForeignKey(
                         name: "FK_Reviews_Users_review_UserId",
                         column: x => x.review_UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SubReview",
+                columns: table => new
+                {
+                    subReview_Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    subReview_Commnet = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    subReview_UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    subReview_HideStatus = table.Column<bool>(type: "bit", nullable: false),
+                    subreview_SubReviewType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    subReview_DateCommnet = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubReview", x => x.subReview_Id);
+                    table.ForeignKey(
+                        name: "FK_SubReview_Users_subReview_UserId",
+                        column: x => x.subReview_UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -556,6 +580,30 @@ namespace Web_Shoes.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SubReviewInReview",
+                columns: table => new
+                {
+                    SRiR_ReviewId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    SRiR_SubReviewId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubReviewInReview", x => new { x.SRiR_ReviewId, x.SRiR_SubReviewId });
+                    table.ForeignKey(
+                        name: "FK_SubReviewInReview_Reviews_SRiR_ReviewId",
+                        column: x => x.SRiR_ReviewId,
+                        principalTable: "Reviews",
+                        principalColumn: "review_id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SubReviewInReview_SubReview_SRiR_SubReviewId",
+                        column: x => x.SRiR_SubReviewId,
+                        principalTable: "SubReview",
+                        principalColumn: "subReview_Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductInWishlist",
                 columns: table => new
                 {
@@ -609,8 +657,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "couponId", "couponCode", "couponPrice" },
                 values: new object[,]
                 {
-                    { "4f9e7c01-5982-45a9-aacd-01bce58f3677", "code10", 10 },
-                    { "9f451708-c35c-4ad6-b428-e30459428231", "code50", 50 }
+                    { "a0dc366b-5c5c-4c9b-8da6-e3d297f0461c", "code10", 10 },
+                    { "d0e97e85-b6c2-4805-8f65-63431a4a5aa6", "code50", 50 }
                 });
 
             migrationBuilder.InsertData(
@@ -640,8 +688,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Discriminator", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "360E601E-92F2-4F08-832B-604A21293258", "2f2f7422-7532-4bc2-8878-ab534dec3bd2", "admin", "AppRole", "admin", null },
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "0c47227f-4579-4705-91d5-7b74f1b12582", "Staff", "AppRole", "staff", null }
+                    { "360E601E-92F2-4F08-832B-604A21293258", "1311fc83-77ce-4db1-863b-32a7087828dc", "admin", "AppRole", "admin", null },
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd", "859be0b9-be6c-49c8-9a22-7d852ecee866", "Staff", "AppRole", "staff", null }
                 });
 
             migrationBuilder.InsertData(
@@ -654,8 +702,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "bill_Address1", "bill_Address2", "bill_City", "bill_CompanyName", "bill_Country", "bill_PhoneNumber", "bill_PostalCode", "bill_State" },
                 values: new object[,]
                 {
-                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "ef61ab5f-3fca-42a9-8952-94819dad39f1", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEJGxjTGxy2+yLZxDOQTp9/K3ejGkKc7NNketxF5I83DDbDZoayiW/ej6xmbt8YuEwg==", null, false, "b568026a-2c10-4e3c-bdf3-c93130426c24", false, "Staff", null, null, null, null, null, null, null, null },
-                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "ce4f75ea-2bc7-4315-a6b8-2828fa0353d3", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEIrVdmju47Tulj0eRGA6W44UDyRd0ZjrII6+yVSP2Nf+YKy1r9ElyjIZBI9jBfvFcQ==", null, false, "61e3ae38-7de8-45c0-b531-4b576fa01783", false, "Admin", null, null, null, null, null, null, null, null }
+                    { "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", 0, "9b7441ee-2de3-4a2d-ba35-99f4d8ed3bba", "AppUser", new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "staff@gmail.com", true, "staff", "staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEFHhgvNr4uKCNTPeZgKDx2sLTTKqlul0Jx3v/VoCHg2ILDTo11LMYsw+G7n26zkM9Q==", null, false, "ee33e2a3-514f-48b0-ad43-ad6f5f6570a5", false, "Staff", null, null, null, null, null, null, null, null },
+                    { "DE544998-A3CC-4E12-ABB4-0642E57BD222", 0, "3e41168b-e833-4546-8159-632546fb331f", "AppUser", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "admin", "admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEAScqT6s/GpwhokW3tOH16udwiWyS/bWMvVxW3qgoYPn4kwVConhiIo3BHpf/iIQQw==", null, false, "07a9bf58-d774-4ff1-817e-50f3407d1901", false, "Admin", null, null, null, null, null, null, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -663,8 +711,8 @@ namespace Web_Shoes.Migrations
                 columns: new[] { "bill_Id", "bill_Cancelled", "bill_Confirmation", "bill_DatetimeOrder", "bill_Delivered", "bill_Delivering", "bill_Discount", "bill_HideStatus", "bill_Note", "bill_PaidTotal", "bill_PaymentMethod", "bill_ProductColorlist", "bill_ProductIdlist", "bill_ProductNamelist", "bill_ProductPricelist", "bill_ProductSizelist", "bill_Quantity", "bill_Shipping", "bill_UserId", "bill_WaitForConfirmation", "bill_WaitPickup" },
                 values: new object[,]
                 {
-                    { "D269BF93-A5E2-4C4A-8146-9967DDE80D30", false, true, new DateTime(2021, 9, 13, 12, 9, 54, 397, DateTimeKind.Local).AddTicks(1079), false, false, 0, false, "", 2000, "Check Payment", "Blue|Red|Black|Green", "1|2|3|4", "product 1|product 2| product 3| product 4", "550|450|350|640", "7|8|9|14", "1|1|2|1", 10, "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", false, false },
-                    { "AFD66490-12F5-4EA7-BFF6-425624290D6D", false, true, new DateTime(2021, 9, 13, 12, 9, 54, 398, DateTimeKind.Local).AddTicks(3157), false, false, 0, false, "", 2100, "Check Payment", "Blue|Red|Black|Green", "5|6|7|8", "product 5|product 6| product 7| product 8", "550|450|350|640", "7|8|9|14", "1|1|2|2", 10, "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", false, false }
+                    { "D269BF93-A5E2-4C4A-8146-9967DDE80D30", false, true, new DateTime(2021, 9, 17, 15, 8, 16, 373, DateTimeKind.Local).AddTicks(7687), false, false, 0, false, "", 2000, "Check Payment", "Blue|Red|Black|Green", "1|2|3|4", "product 1|product 2| product 3| product 4", "550|450|350|640", "7|8|9|14", "1|1|2|1", 10, "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", false, false },
+                    { "AFD66490-12F5-4EA7-BFF6-425624290D6D", false, true, new DateTime(2021, 9, 17, 15, 8, 16, 374, DateTimeKind.Local).AddTicks(8743), false, false, 0, false, "", 2100, "Check Payment", "Blue|Red|Black|Green", "5|6|7|8", "product 5|product 6| product 7| product 8", "550|450|350|640", "7|8|9|14", "1|1|2|2", 10, "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", false, false }
                 });
 
             migrationBuilder.InsertData(
@@ -688,12 +736,22 @@ namespace Web_Shoes.Migrations
 
             migrationBuilder.InsertData(
                 table: "Reviews",
-                columns: new[] { "review_id", "review_Comment", "review_UploadTime", "review_UserId" },
+                columns: new[] { "review_id", "review_Comment", "review_HideStatus", "review_ReviewType", "review_UploadTime", "review_UserId" },
                 values: new object[,]
                 {
-                    { "EEBA6608-AB75-4E83-909F-604B1A06F16C", "Good1", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "DE544998-A3CC-4E12-ABB4-0642E57BD222" },
-                    { "C2A543C2-B1E2-4DC5-A131-9137E4673FA6", "Good3", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "DE544998-A3CC-4E12-ABB4-0642E57BD222" },
-                    { "9EED8607-D2BB-45EE-AEE3-C59D858A7F97", "Good2", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff" }
+                    { "EEBA6608-AB75-4E83-909F-604B1A06F16C", "Good1", false, "Review", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "DE544998-A3CC-4E12-ABB4-0642E57BD222" },
+                    { "C2A543C2-B1E2-4DC5-A131-9137E4673FA6", "Good3", false, "Review", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "DE544998-A3CC-4E12-ABB4-0642E57BD222" },
+                    { "9EED8607-D2BB-45EE-AEE3-C59D858A7F97", "Good2", false, "Review", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SubReview",
+                columns: new[] { "subReview_Id", "subReview_Commnet", "subReview_DateCommnet", "subReview_HideStatus", "subReview_UserId", "subreview_SubReviewType" },
+                values: new object[,]
+                {
+                    { "d5b55c4c-e3b6-456c-ac1c-b92499cf8e6f", "subreview 1", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "DE544998-A3CC-4E12-ABB4-0642E57BD222", "SubReview" },
+                    { "0cda98b5-98d1-448c-a69e-76bf74e28e67", "subreview 3", new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "DE544998-A3CC-4E12-ABB4-0642E57BD222", "SubReview" },
+                    { "884548bd-6033-4ec3-a217-154db4e045f4", "subreview 3", new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff", "SubReview" }
                 });
 
             migrationBuilder.InsertData(
@@ -733,6 +791,16 @@ namespace Web_Shoes.Migrations
                     { 1, "EEBA6608-AB75-4E83-909F-604B1A06F16C" },
                     { 1, "C2A543C2-B1E2-4DC5-A131-9137E4673FA6" },
                     { 1, "9EED8607-D2BB-45EE-AEE3-C59D858A7F97" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SubReviewInReview",
+                columns: new[] { "SRiR_ReviewId", "SRiR_SubReviewId" },
+                values: new object[,]
+                {
+                    { "EEBA6608-AB75-4E83-909F-604B1A06F16C", "d5b55c4c-e3b6-456c-ac1c-b92499cf8e6f" },
+                    { "9EED8607-D2BB-45EE-AEE3-C59D858A7F97", "0cda98b5-98d1-448c-a69e-76bf74e28e67" },
+                    { "EEBA6608-AB75-4E83-909F-604B1A06F16C", "884548bd-6033-4ec3-a217-154db4e045f4" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -791,6 +859,16 @@ namespace Web_Shoes.Migrations
                 column: "NormalizedName",
                 unique: true,
                 filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SubReview_subReview_UserId",
+                table: "SubReview",
+                column: "subReview_UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SubReviewInReview_SRiR_SubReviewId",
+                table: "SubReviewInReview",
+                column: "SRiR_SubReviewId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
@@ -864,6 +942,9 @@ namespace Web_Shoes.Migrations
                 name: "Shipping");
 
             migrationBuilder.DropTable(
+                name: "SubReviewInReview");
+
+            migrationBuilder.DropTable(
                 name: "UserClaims");
 
             migrationBuilder.DropTable(
@@ -895,6 +976,9 @@ namespace Web_Shoes.Migrations
 
             migrationBuilder.DropTable(
                 name: "Reviews");
+
+            migrationBuilder.DropTable(
+                name: "SubReview");
 
             migrationBuilder.DropTable(
                 name: "Roles");
