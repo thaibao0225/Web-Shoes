@@ -37,7 +37,7 @@
                     <div class="item">
                         <div class="product-entry border">
                             <a href="#" class="prod-img">
-                                <img src="@ViewBag.Img1" class="img-fluid" alt="Free html5 bootstrap 4 template">
+                                <img src="@ViewBag.Img1" class="img-fluid" alt="Free html5 bootstrap 4 template" id="slider-product">
                             </a>
                         </div>
                     </div>
@@ -254,22 +254,22 @@
                             <ul>
                                 @if (@ViewBag.Img1 != null)
                                 {
-                                    <li onclick="color('red','buttonRed','buttonBlue','buttonGreen','buttonYellow',1)" id="buttonRed" ><a href="#">Red</a></li>
+                                    <li onclick="color('red','buttonRed','buttonBlue','buttonGreen','buttonYellow',1,'@ViewBag.Img1')" id="buttonRed" ><a href="#">Red</a></li>
                                 }
 
                                 @if (@ViewBag.Img2 != null)
                                 {
-                                    <li onclick="color('blue','buttonRed','buttonBlue','buttonGreen','buttonYellow',2)" id="buttonBlue"><a href="#">Blue</a></li>
+                                    <li onclick="color('blue','buttonRed','buttonBlue','buttonGreen','buttonYellow',2,'@ViewBag.Img2')" id="buttonBlue"><a href="#">Blue</a></li>
                                 }
 
                                 @if (@ViewBag.Img3 != null)
                                 {
-                                    <li onclick="color('green','buttonRed','buttonBlue','buttonGreen','buttonYellow',3)" id="buttonGreen"><a href="#">Green</a></li>
+                                    <li onclick="color('green','buttonRed','buttonBlue','buttonGreen','buttonYellow',3,'@ViewBag.Img3')" id="buttonGreen"><a href="#">Green</a></li>
                                 }
 
                                 @if (@ViewBag.Img4 != null)
                                 {
-                                    <li onclick="color('yellow','buttonRed','buttonBlue','buttonGreen','buttonYellow',4)" id="buttonYellow"><a href="#">Yellow</a></li>
+                                    <li onclick="color('yellow','buttonRed','buttonBlue','buttonGreen','buttonYellow',4,'@ViewBag.Img4')" id="buttonYellow"><a href="#">Yellow</a></li>
                                 }
 
 
@@ -284,14 +284,14 @@
 
                     <div class="input-group mb-4">
                         <span class="input-group-btn">
-                            <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                            <button type="button" class="quantity-left-minus btn" data-type="minus" data-field=""  onclick="QuantityMinus()" >
                                 <i class="icon-minus2"></i>
                             </button>
                         </span>
 
-                        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="2" min="1" max="100">
+                        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
                         <span class="input-group-btn ml-1">
-                            <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                            <button type="button" class="quantity-right-plus btn" data-type="plus" data-field=""  onclick="QuantityAdd()">
                                 <i class="icon-plus2"></i>
                             </button>
                         </span>
@@ -465,22 +465,7 @@
                                                     <div class="form-group">
 
                                                         <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
-                                                        @*START CAPTCHA*@
-                                                        <!--<br>
-    <div class="capbox">
 
-        <div id="CaptchaDiv"></div>
-
-        <div class="capbox-inner">
-            Type the number:<br>
-
-            <input type="hidden" id="txtCaptcha">
-            <input type="text" name="CaptchaInput" id="CaptchaInput" size="15"><br>
-
-        </div>
-    </div>
-    <br><br>-->
-                                                        @*END CAPTCHA*@
                                                     </div>
                                                     <input type="submit" name="name" class="btn btn-default" value="Send" />
                                                 </form>
@@ -565,8 +550,7 @@
 </div>
 
 
-<script src="~/js/productDetailPage.js"></script>
-<script src="~/js/captcha.js"></script>
+
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 
@@ -577,7 +561,7 @@
     var ProductAmount;
 
 
-    function color(color, idbutton1, idbutton2, idbutton3, idbutton4,indexbutton) {
+    function color(color, idbutton1, idbutton2, idbutton3, idbutton4,indexbutton,urlimage) {
 
         switch (indexbutton) {
             case 1:
@@ -593,6 +577,9 @@
 
                 var button4 = document.getElementById(idbutton4);
                 button4.style = '';
+
+                var aa = document.querySelector("#slider-product");
+                aa.src = urlimage;
                 break;
 
             case 2:
@@ -608,6 +595,8 @@
 
                 var button4 = document.getElementById(idbutton4);
                 button4.style = '';
+                var aa = document.querySelector("#slider-product");
+                aa.src = urlimage;
                 break;
             case 3:
                 // code block
@@ -622,6 +611,8 @@
 
                 var button4 = document.getElementById(idbutton4);
                 button4.style = '';
+                var aa = document.querySelector("#slider-product");
+                aa.src = urlimage;
                 break;
 
             case 4:
@@ -637,6 +628,8 @@
 
                 var button4 = document.getElementById(idbutton4);  //click
                 button4.style = 'background-color: #4CAF50;';
+                var aa = document.querySelector("#slider-product");
+                aa.src = urlimage;
                 break;
             default:
             // code block
@@ -770,6 +763,33 @@
 
         var a = document.querySelector("#addtocartbutton");
         a.href = "/productdetailadd?productid=@ViewBag.Id&quantity=" + ProductAmount + "&color=" + ProductColor + "&size=" + ProductSize;
+
+    }
+
+
+    function QuantityAdd() {
+        var button = document.getElementById('button-add');
+        var textQuantity = document.getElementById('quantity');
+
+        var value = textQuantity.value;
+
+        
+        textQuantity.value = parseInt(value) + 1;
+        
+
+        
+        
+    }
+
+    function QuantityMinus(){
+        var button = document.getElementById('button-minus');
+        var textQuantity = document.getElementById('quantity');
+
+        var value = textQuantity.value;
+        if (value >0) {
+            textQuantity.value = value - 1;
+        }
+        
 
     }
 </script>
