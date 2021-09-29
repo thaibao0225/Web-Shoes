@@ -31,17 +31,10 @@
 
             <!-- START CAPTCHA -->
             <br>
-            <div class="capbox">
+            <div class="form-group">
 
-                <div id="CaptchaDiv"></div>
+                <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
 
-                <div class="capbox-inner">
-                    Type the number:<br>
-
-                    <input type="hidden" id="txtCaptcha">
-                    <input type="text" name="CaptchaInput" id="CaptchaInput" size="15"><br>
-
-                </div>
             </div>
             <br><br>
 
@@ -81,7 +74,8 @@
     </div>
 </div>
 
-<script src="~/js/captcha.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
