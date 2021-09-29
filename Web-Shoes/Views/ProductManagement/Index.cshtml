@@ -17,6 +17,9 @@
                 @Html.DisplayNameFor(model => model.pd_Name)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.pd_Code)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.pd_Description)
             </th>
             <th>
@@ -37,28 +40,31 @@
         {
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.pd_Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.pd_Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.pd_Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.pd_ReducePrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.pd_Rate)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.pd_Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.pd_Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.pd_Id">Delete</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pd_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pd_Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pd_Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pd_Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pd_ReducePrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pd_Rate)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.pd_Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.pd_Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.pd_Id">Delete</a>
+                </td>
+            </tr>
             }
         }
 

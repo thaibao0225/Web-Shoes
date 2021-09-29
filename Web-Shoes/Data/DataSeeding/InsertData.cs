@@ -58,7 +58,8 @@ namespace Web_Shoes.Data.DataSeeding
                     pd_NameImg1 = "1",
                     pd_NameImg2 = "2",
                     pd_NameImg3 = "3",
-                    pd_NameImg4 = "4"
+                    pd_NameImg4 = "4",
+                    pd_Code = "AA-01"
 
 
                 },
@@ -101,7 +102,8 @@ namespace Web_Shoes.Data.DataSeeding
                     pd_NameImg1 = "1",
                     pd_NameImg2 = "2",
                     pd_NameImg3 = "3",
-                    pd_NameImg4 = "4"
+                    pd_NameImg4 = "4",
+                    pd_Code = "AA-02"
 
                 },
 
@@ -143,7 +145,8 @@ namespace Web_Shoes.Data.DataSeeding
                     pd_NameImg1 = "1",
                     pd_NameImg2 = "2",
                     pd_NameImg3 = "3",
-                    pd_NameImg4 = "4"
+                    pd_NameImg4 = "4",
+                    pd_Code = "AA-03"
 
                 },
 
@@ -185,7 +188,8 @@ namespace Web_Shoes.Data.DataSeeding
                     pd_NameImg1 = "1",
                     pd_NameImg2 = "2",
                     pd_NameImg3 = "3",
-                    pd_NameImg4 = "4"
+                    pd_NameImg4 = "4",
+                    pd_Code = "AA-04"
 
                 },
 
@@ -227,7 +231,8 @@ namespace Web_Shoes.Data.DataSeeding
                     pd_NameImg1 = "1",
                     pd_NameImg2 = "2",
                     pd_NameImg3 = "3",
-                    pd_NameImg4 = "4"
+                    pd_NameImg4 = "4",
+                    pd_Code = "AA-05"
 
                 },
 
@@ -269,7 +274,8 @@ namespace Web_Shoes.Data.DataSeeding
                     pd_NameImg1 = "1",
                     pd_NameImg2 = "2",
                     pd_NameImg3 = "3",
-                    pd_NameImg4 = "4"
+                    pd_NameImg4 = "4",
+                    pd_Code = "AA-06"
 
                 },
 
@@ -311,7 +317,8 @@ namespace Web_Shoes.Data.DataSeeding
                     pd_NameImg1 = "1",
                     pd_NameImg2 = "2",
                     pd_NameImg3 = "3",
-                    pd_NameImg4 = "4"
+                    pd_NameImg4 = "4",
+                    pd_Code = "AA-07"
 
                 },
 
@@ -353,7 +360,8 @@ namespace Web_Shoes.Data.DataSeeding
                     pd_NameImg1 = "1",
                     pd_NameImg2 = "2",
                     pd_NameImg3 = "3",
-                    pd_NameImg4 = "4"
+                    pd_NameImg4 = "4",
+                    pd_Code = "AA-08"
 
                 },
 
@@ -395,7 +403,8 @@ namespace Web_Shoes.Data.DataSeeding
                     pd_NameImg1 = "1",
                     pd_NameImg2 = "2",
                     pd_NameImg3 = "3",
-                    pd_NameImg4 = "4"
+                    pd_NameImg4 = "4",
+                    pd_Code = "AA-09"
 
                 },
 
@@ -437,7 +446,8 @@ namespace Web_Shoes.Data.DataSeeding
                     pd_NameImg1 = "1",
                     pd_NameImg2 = "2",
                     pd_NameImg3 = "3",
-                    pd_NameImg4 = "4"
+                    pd_NameImg4 = "4",
+                    pd_Code = "AA-10"
 
                 },
 
@@ -479,7 +489,8 @@ namespace Web_Shoes.Data.DataSeeding
                     pd_NameImg1 = "1",
                     pd_NameImg2 = "2",
                     pd_NameImg3 = "3",
-                    pd_NameImg4 = "4"
+                    pd_NameImg4 = "4",
+                    pd_Code = "AA-11"
 
                 },
 
@@ -521,7 +532,8 @@ namespace Web_Shoes.Data.DataSeeding
                     pd_NameImg1 = "1",
                     pd_NameImg2 = "2",
                     pd_NameImg3 = "3",
-                    pd_NameImg4 = "4"
+                    pd_NameImg4 = "4",
+                    pd_Code = "AA-12"
 
                 },
 
@@ -563,7 +575,8 @@ namespace Web_Shoes.Data.DataSeeding
                     pd_NameImg1 = "1",
                     pd_NameImg2 = "2",
                     pd_NameImg3 = "3",
-                    pd_NameImg4 = "4"
+                    pd_NameImg4 = "4",
+                    pd_Code = "AA-13"
 
                 },
 
@@ -605,7 +618,8 @@ namespace Web_Shoes.Data.DataSeeding
                     pd_NameImg1 = "1",
                     pd_NameImg2 = "2",
                     pd_NameImg3 = "3",
-                    pd_NameImg4 = "4"
+                    pd_NameImg4 = "4",
+                    pd_Code = "AA-14"
 
                 },
 
@@ -647,7 +661,8 @@ namespace Web_Shoes.Data.DataSeeding
                     pd_NameImg1 = "1",
                     pd_NameImg2 = "2",
                     pd_NameImg3 = "3",
-                    pd_NameImg4 = "4"
+                    pd_NameImg4 = "4",
+                    pd_Code = "AA-15"
 
                 }
                 );

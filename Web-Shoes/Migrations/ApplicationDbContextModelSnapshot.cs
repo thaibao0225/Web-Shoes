@@ -350,7 +350,7 @@ namespace Web_Shoes.Migrations
                             bill_Id = "D269BF93-A5E2-4C4A-8146-9967DDE80D30",
                             bill_Cancelled = false,
                             bill_Confirmation = true,
-                            bill_DatetimeOrder = new DateTime(2021, 9, 17, 15, 8, 16, 373, DateTimeKind.Local).AddTicks(7687),
+                            bill_DatetimeOrder = new DateTime(2021, 9, 29, 19, 31, 24, 557, DateTimeKind.Local).AddTicks(4025),
                             bill_Delivered = false,
                             bill_Delivering = false,
                             bill_Discount = 0,
@@ -374,7 +374,7 @@ namespace Web_Shoes.Migrations
                             bill_Id = "AFD66490-12F5-4EA7-BFF6-425624290D6D",
                             bill_Cancelled = false,
                             bill_Confirmation = true,
-                            bill_DatetimeOrder = new DateTime(2021, 9, 17, 15, 8, 16, 374, DateTimeKind.Local).AddTicks(8743),
+                            bill_DatetimeOrder = new DateTime(2021, 9, 29, 19, 31, 24, 558, DateTimeKind.Local).AddTicks(3580),
                             bill_Delivered = false,
                             bill_Delivering = false,
                             bill_Discount = 0,
@@ -564,13 +564,13 @@ namespace Web_Shoes.Migrations
                     b.HasData(
                         new
                         {
-                            couponId = "a0dc366b-5c5c-4c9b-8da6-e3d297f0461c",
+                            couponId = "d840735f-1e1f-450b-8256-4c2f85fcff1a",
                             couponCode = "code10",
                             couponPrice = 10
                         },
                         new
                         {
-                            couponId = "d0e97e85-b6c2-4805-8f65-63431a4a5aa6",
+                            couponId = "202b95c8-0a9e-4f1e-9cd0-79e969f900b8",
                             couponCode = "code50",
                             couponPrice = 50
                         });
@@ -723,6 +723,9 @@ namespace Web_Shoes.Migrations
                     b.Property<string>("pd_Brand")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("pd_Code")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("pd_Color")
                         .HasColumnType("nvarchar(max)");
 
@@ -843,6 +846,7 @@ namespace Web_Shoes.Migrations
                         {
                             pd_Id = 1,
                             pd_Brand = "Nike",
+                            pd_Code = "AA-01",
                             pd_Color = "White/White",
                             pd_Description = "The radiance lives on in the Nike Air Force 1 '07, the b-ball OG that puts a fresh spin on what you know best: durably stitched overlays, clean finishes and the perfect amount of flash to make you shine.",
                             pd_Img1 = "https://drive.google.com/uc?export=download&id=1xnPOpwwf0C13abtd60BwBAqU-7eCSJFD",
@@ -885,6 +889,7 @@ namespace Web_Shoes.Migrations
                         {
                             pd_Id = 2,
                             pd_Brand = "Nike",
+                            pd_Code = "AA-02",
                             pd_Color = "Medium Olive/Carbon Green/Sail/Black",
                             pd_Description = "The radiance lives on in the Nike Air Force 1 GORE-TEX, the b-ball OG that puts a fresh spin on what you know best: crisp leather, bold colours and the perfect amount of flash to make you shine.This time it's clad in GORE-TEX technology.",
                             pd_Img1 = "https://drive.google.com/uc?export=download&id=1YBpU6fwcCzV18ho__mhCCO0yD8ES-ef7",
@@ -927,6 +932,7 @@ namespace Web_Shoes.Migrations
                         {
                             pd_Id = 3,
                             pd_Brand = "Nike",
+                            pd_Code = "AA-03",
                             pd_Color = "Cream II/Orange/Black/White",
                             pd_Description = "Bringing the classic BRS athletics style into a modern realm with at least 20% recycled materials by weight, the Nike Waffle One Crater is eye-candy for your feet.The playful speckled look on the midsole is created from Crater Foam, a cushiony material made from Nike Grind rubber and Nike foam materials.And for added depth, the sport-inspired upper includes transparent mesh made from recycled polyester.",
                             pd_Img1 = "https://drive.google.com/uc?export=download&id=1sBANC4Og5eumFJBTVLYGIp2qTBKfwSzh",
@@ -969,6 +975,7 @@ namespace Web_Shoes.Migrations
                         {
                             pd_Id = 4,
                             pd_Brand = "Nike",
+                            pd_Code = "AA-04",
                             pd_Color = "Hemp/Sand Drift/Light Orewood Brown/Summit White",
                             pd_Description = "Nothing as fly, nothing as comfortable, nothing as proven—the Nike Air Max 90 Premium stays true to its roots, with the iconic Waffle outsole, stitched overlays and classic TPU accents. Fresh colours give a modern look while Max Air cushioning adds comfort to your journey.",
                             pd_Img1 = "https://drive.google.com/uc?export=download&id=1A74yTUs0Lmya24nL5UPG8N6cV7GFhn5a",
@@ -1011,6 +1018,7 @@ namespace Web_Shoes.Migrations
                         {
                             pd_Id = 5,
                             pd_Brand = "Nike",
+                            pd_Code = "AA-05",
                             pd_Color = "Dark Driftwood/Sail/Light Chocolate/Black",
                             pd_Description = "Nothing as fly, nothing as comfortable, nothing as proven—the Nike Air Max 90 stays true to its roots with the iconic Waffle sole, stitched overlays and classic TPU accents on the heel and eyestays.A variety of materials on the upper gives a modern look, while Max Air cushioning adds comfort to your journey.",
                             pd_Img1 = "https://drive.google.com/uc?export=download&id=17puCPm8dDBi_11T0ei5JznoGXugbuPi8",
@@ -1053,6 +1061,7 @@ namespace Web_Shoes.Migrations
                         {
                             pd_Id = 6,
                             pd_Brand = "Nike",
+                            pd_Code = "AA-06",
                             pd_Color = "Moon Fossil/Black",
                             pd_Description = "From city hikes to canyon trails and long walks on the beach, the Nike ACG Air Deschutz + is built to feel comfortable.It's got a classic '90s look and rugged outdoor-inspired design, with plush padding around the ankle for support.A heavy-duty webbing strap and adjustable hook-and-loop closure keep you focused on the journey ahead.",
                             pd_Img1 = "https://drive.google.com/uc?export=download&id=1IAWjF3G2Lwnwj7sID83qZAnQqdfzjxkk",
@@ -1095,6 +1104,7 @@ namespace Web_Shoes.Migrations
                         {
                             pd_Id = 7,
                             pd_Brand = "Nike",
+                            pd_Code = "AA-07",
                             pd_Color = "Hasta/Thunder Blue/Bucktan/Obsidian",
                             pd_Description = "Made from at least 20% recycled content by weight, the Nike Air Max 97 SE takes a fresh step towards the future of footwear.The upper features 100% recycled canvas and accents of cork.The embroidered cork graphic on the tongue nods to the plant used in the shoe.",
                             pd_Img1 = "https://drive.google.com/uc?export=download&id=13rEVfOXI6Sj9J41Z45Cti6pRinyewQ6n",
@@ -1137,6 +1147,7 @@ namespace Web_Shoes.Migrations
                         {
                             pd_Id = 8,
                             pd_Brand = "Nike",
+                            pd_Code = "AA-08",
                             pd_Color = "Metallic Silver/Black/White/Persian Violet",
                             pd_Description = "Inspired by Japanese bullet trains, the Nike Air Max 97 lets you push your style full speed ahead.Taking the revolutionary full-length Nike Air unit that shook up the running world and adding the original silver bullet colours, it lets you ride in first-class comfort.",
                             pd_Img1 = "https://drive.google.com/uc?export=download&id=1AblOdiYwK5ys32KY23IKPSCeAi6KWnsX",
@@ -1179,6 +1190,7 @@ namespace Web_Shoes.Migrations
                         {
                             pd_Id = 9,
                             pd_Brand = "Nike",
+                            pd_Code = "AA-09",
                             pd_Color = "Grey Fog/Melon Tint/Metallic Silver",
                             pd_Description = "Take on the tough terrain of the outdoors.The Nike ACG Air Nasu 2 steps up the durability with Ripstop on the upper and reinforced details to stand up to the rigours of the trail.It has mesh elements up top and a lining within to help keep you on your path with a breathable, supportive feel.A sticky rubber outsole is highlighted with lugs that are designed to help give you traction when navigating wet and rocky surfaces.",
                             pd_Img1 = "https://drive.google.com/uc?export=download&id=1-dFkb3D0lzmlOTVMeqxEZaWAbQDWIjhF",
@@ -1221,6 +1233,7 @@ namespace Web_Shoes.Migrations
                         {
                             pd_Id = 10,
                             pd_Brand = "Nike",
+                            pd_Code = "AA-10",
                             pd_Color = "Light Mulberry/Flash Crimson",
                             pd_Description = "Fast, rugged and just as at home in the city as it is in deserts, canyons and mountains, the Nike ACG Mountain Fly Low is ready for whatever you throw at it.The lightweight Ripstop and synthetic upper is durable and airy, while the easy-to-cinch lacing system adds on-the-go personalisation.The sticky rubber outsole brings crag-inspired traction as the soft Nike React foam sole delivers undisputed comfort whether you're pounding the pavement in the city wilds or leaping rock to rock in Joshua Tree.",
                             pd_Img1 = "https://drive.google.com/uc?export=download&id=1l9m448SGsvJOMrAK4TRpAMTgptxq2yFN",
@@ -1263,6 +1276,7 @@ namespace Web_Shoes.Migrations
                         {
                             pd_Id = 11,
                             pd_Brand = "Nike",
+                            pd_Code = "AA-11",
                             pd_Color = "Black/Wolf Grey/Cool Grey/White",
                             pd_Description = "Inspired by the community art spaces of Barcelona, the Nike SB Zoom Blazer Mid Premium is made from a collage of materials like suede, leather and canvas.The design is elevated with a multi-coloured Nike embroidery on the heel and a mismatched Swoosh, capped off by a contrasting herringbone sole.",
                             pd_Img1 = "https://drive.google.com/uc?export=download&id=1Ij5hmx63q8idVVTLu7nKiv0OJsqOdor6",
@@ -1305,6 +1319,7 @@ namespace Web_Shoes.Migrations
                         {
                             pd_Id = 12,
                             pd_Brand = "Nike",
+                            pd_Code = "AA-12",
                             pd_Color = "Ghost/Ashen Slate/Obsidian Mist/Obsidian",
                             pd_Description = "We could use a lot of superlatives to describe the Nike Air Max 2021.We could tell you that we've incorporated recycled materials to design a sneaker with at least 20% recycled content.Or that the new Air cushioning unit underfoot is our most revolutionary.Perhaps we'd call it the the pinnacle of comfort waxing poetic about the cored-out foam midsole that gives you the lightest, softest feel.But maybe we just say it's modern meets technical with a splash of heritage DNA.What fun is there in giving away the surprises?",
                             pd_Img1 = "https://drive.google.com/uc?export=download&id=1IfOLISEQfFw1xol1gIopWvnLjcPxIhvx",
@@ -1347,6 +1362,7 @@ namespace Web_Shoes.Migrations
                         {
                             pd_Id = 13,
                             pd_Brand = "Nike",
+                            pd_Code = "AA-13",
                             pd_Color = "Beach/Topaz Gold/Bright Crimson/Black",
                             pd_Description = "The Nike SB Nyjah Free 2 is a sequel worthy of its predecessor. Inspired by the iconic Nike Air Zoom Spiridon, the original rubber design has been updated with mesh panels to help your feet stay cool through your hottest skate sessions.",
                             pd_Img1 = "https://drive.google.com/uc?export=download&id=1tSgTxHUCeZU591E9hQI4Ax22NiD9wspM",
@@ -1389,6 +1405,7 @@ namespace Web_Shoes.Migrations
                         {
                             pd_Id = 14,
                             pd_Brand = "Nike",
+                            pd_Code = "AA-14",
                             pd_Color = "Beach/Topaz Gold/Bright Crimson/Black",
                             pd_Description = "The Nike SB Nyjah Free 2 is a sequel worthy of its predecessor. Inspired by the iconic Nike Air Zoom Spiridon, the original rubber design has been updated with mesh panels to help your feet stay cool through your hottest skate sessions.",
                             pd_Img1 = "https://drive.google.com/uc?export=download&id=1tSgTxHUCeZU591E9hQI4Ax22NiD9wspM",
@@ -1431,6 +1448,7 @@ namespace Web_Shoes.Migrations
                         {
                             pd_Id = 15,
                             pd_Brand = "Nike",
+                            pd_Code = "AA-15",
                             pd_Color = "Pollen/Pink Blast/Black",
                             pd_Description = "The first signature shoe from technical phenomenon Shane O'Neill, the Nike SB Shane T is a lightweight shoe that's built to perform. Unique lacing lets you choose between lacing your shoes the traditional way or by running them through durable ghillie loops.",
                             pd_Img1 = "https://drive.google.com/uc?export=download&id=1tSgTxHUCeZU591E9hQI4Ax22NiD9wspM",
@@ -1644,7 +1662,7 @@ namespace Web_Shoes.Migrations
                     b.HasData(
                         new
                         {
-                            subReview_Id = "d5b55c4c-e3b6-456c-ac1c-b92499cf8e6f",
+                            subReview_Id = "2530201c-767f-4e64-82f7-895065b8e8c6",
                             subReview_Commnet = "subreview 1",
                             subReview_DateCommnet = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             subReview_HideStatus = false,
@@ -1653,7 +1671,7 @@ namespace Web_Shoes.Migrations
                         },
                         new
                         {
-                            subReview_Id = "884548bd-6033-4ec3-a217-154db4e045f4",
+                            subReview_Id = "67c392fe-3cb6-4774-a654-54565df88a34",
                             subReview_Commnet = "subreview 3",
                             subReview_DateCommnet = new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             subReview_HideStatus = false,
@@ -1662,7 +1680,7 @@ namespace Web_Shoes.Migrations
                         },
                         new
                         {
-                            subReview_Id = "0cda98b5-98d1-448c-a69e-76bf74e28e67",
+                            subReview_Id = "71e4185b-a10f-4129-9e6f-b68bb05c65b1",
                             subReview_Commnet = "subreview 3",
                             subReview_DateCommnet = new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             subReview_HideStatus = false,
@@ -1689,17 +1707,17 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             SRiR_ReviewId = "EEBA6608-AB75-4E83-909F-604B1A06F16C",
-                            SRiR_SubReviewId = "d5b55c4c-e3b6-456c-ac1c-b92499cf8e6f"
+                            SRiR_SubReviewId = "2530201c-767f-4e64-82f7-895065b8e8c6"
                         },
                         new
                         {
                             SRiR_ReviewId = "EEBA6608-AB75-4E83-909F-604B1A06F16C",
-                            SRiR_SubReviewId = "884548bd-6033-4ec3-a217-154db4e045f4"
+                            SRiR_SubReviewId = "67c392fe-3cb6-4774-a654-54565df88a34"
                         },
                         new
                         {
                             SRiR_ReviewId = "9EED8607-D2BB-45EE-AEE3-C59D858A7F97",
-                            SRiR_SubReviewId = "0cda98b5-98d1-448c-a69e-76bf74e28e67"
+                            SRiR_SubReviewId = "71e4185b-a10f-4129-9e6f-b68bb05c65b1"
                         });
                 });
 
@@ -1765,14 +1783,14 @@ namespace Web_Shoes.Migrations
                         new
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb4fd",
-                            ConcurrencyStamp = "859be0b9-be6c-49c8-9a22-7d852ecee866",
+                            ConcurrencyStamp = "ce28c938-0939-45b2-bf60-006e02b36ee8",
                             Name = "staff",
                             Description = "Staff"
                         },
                         new
                         {
                             Id = "360E601E-92F2-4F08-832B-604A21293258",
-                            ConcurrencyStamp = "1311fc83-77ce-4db1-863b-32a7087828dc",
+                            ConcurrencyStamp = "66803739-0608-4af6-88cd-88d9bc738193",
                             Name = "admin",
                             Description = "admin"
                         });
@@ -1822,15 +1840,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "DE544998-A3CC-4E12-ABB4-0642E57BD222",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3e41168b-e833-4546-8159-632546fb331f",
+                            ConcurrencyStamp = "12879824-4c61-4444-87d7-63629f82f04e",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAScqT6s/GpwhokW3tOH16udwiWyS/bWMvVxW3qgoYPn4kwVConhiIo3BHpf/iIQQw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHnl9dj3J9fsKMXmuicfGAb8V9LUgdL9qeDaFBfdcVCQ+BDcdqSIx1vLS4hnaP545Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "07a9bf58-d774-4ff1-817e-50f3407d1901",
+                            SecurityStamp = "52122af6-d959-4fba-aadb-dc823a1c84a5",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             DoB = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1841,15 +1859,15 @@ namespace Web_Shoes.Migrations
                         {
                             Id = "f49e4348-718f-43e3-b1f6-6dc89c5Bb5ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9b7441ee-2de3-4a2d-ba35-99f4d8ed3bba",
+                            ConcurrencyStamp = "72fe66de-1e84-4443-bede-e2b963013c27",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@GMAIL.COM",
                             NormalizedUserName = "STAFF@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHhgvNr4uKCNTPeZgKDx2sLTTKqlul0Jx3v/VoCHg2ILDTo11LMYsw+G7n26zkM9Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAgyYEmBaOMpq3Sz+xnNAo2g2IW1IC7JEpvrN9qcPQ2QW3nhlsx45Q3t+RYWYrOZXw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ee33e2a3-514f-48b0-ad43-ad6f5f6570a5",
+                            SecurityStamp = "250aefdc-06de-4814-bccc-8ee9ffdfa878",
                             TwoFactorEnabled = false,
                             UserName = "Staff",
                             DoB = new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),

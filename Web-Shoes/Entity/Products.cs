@@ -24,7 +24,8 @@ namespace Web_Shoes.Entity
         [DisplayName("Price")]
         public int pd_Price { set; get; }
 
-
+        [DisplayName("Product code")]
+        public string pd_Code { set; get; }
 
         [DisplayName("ReducePrice")]
         public int pd_ReducePrice { set; get; }
