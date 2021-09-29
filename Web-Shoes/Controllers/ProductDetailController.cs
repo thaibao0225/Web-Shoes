@@ -128,14 +128,6 @@ namespace Web_Shoes.Controllers
                     //If SubReview In Review
                     if (itemReview.review_id == itemSubReview.subReview_ReviewId)
                     {
-                        //SubreviewModel subreviewAdd = new SubreviewModel();
-                        //subreviewAdd.subReview_ReviewId = itemSubReview.subReview_ReviewId;
-                        //subreviewAdd.subReview_SubComment = itemSubReview.subReview_SubComment;
-                        //subreviewAdd.subReview_Subid = itemSubReview.subReview_Subid;
-                        //subreviewAdd.subReview_SubUploadTime = itemSubReview.subReview_SubUploadTime;
-                        //subreviewAdd.subReview_SubUserId = itemSubReview.subReview_Subid;
-                        //subreviewAdd.subReview_UserName = itemSubReview.subReview_UserName;
-
                         subreviewAddList.Add(itemSubReview);
                     }
                 }
@@ -167,85 +159,147 @@ namespace Web_Shoes.Controllers
                 int quantityProduct = Int16.Parse(quantity);
 
                 string cartId = Guid.NewGuid().ToString();
+
                 
 
                 if (checkLogin)
                 {
-                    
 
-                    
+                    //Query Proudct in User
+                    var queryProductUser = from a in _context.Users
+                                           join b in _context.Cart on a.Id equals b.cart_UserID
+                                           join c in _context.ProductInCart on b.cart_Id equals c.pic_CartId
+                                           select new { a, b, c, };
 
-                    // Logined
-                    //Create cart
-                    var cartCreate = new Cart()
+                    queryProductUser = queryProductUser.Where(a => a.a.Id == userId 
+                    && a.c.pic_ProductId == productid
+                    && a.c.pic_size == size
+                    && a.c.pic_color == color
+                    );
+
+                
+
+                    if (queryProductUser.Count() != 0)
                     {
-                        cart_Id = cartId,
-                        cart_UserID = userId
-                    };
-
-                    _context.Cart.Add(cartCreate);
-
-                    //Create ProductInCart
-
-                    var ProductInCartCreate = new ProductInCart()
-                    {
-                        pic_CartId = cartId,
-                        pic_ProductId = productid,
-                        pic_amount = quantityProduct,
-                        pic_size = size,
-                        pic_color = color
-                    };
-
-                    _context.ProductInCart.Add(ProductInCartCreate);
-
-                    await _context.SaveChangesAsync();
-                }else
-                {
-                    /// No logined
-                    /// Create Device in DB
-                    var deviceQuery = _context.Devices.FirstOrDefault(a => a.deviceName == namePc);
-
-                    if (deviceQuery == null)
-                    {
-                        string DeviceId = Guid.NewGuid().ToString();
-
-                        var AddDevice = new Device()
+                        string QueryCartId = "";
+                        foreach (var item in queryProductUser)
                         {
-                            deviceId = DeviceId,
-                            deviceName = namePc
+                            QueryCartId = item.b.cart_Id;
+                        }
+                        var productInCartQuery = _context.ProductInCart.FirstOrDefault(a => a.pic_CartId == QueryCartId && a.pic_ProductId == productid);
+                        productInCartQuery.pic_amount = productInCartQuery.pic_amount + quantityProduct;
+                        _context.SaveChanges();
+
+                    }
+                    else
+                    {
+                        
+
+                            // Logined
+                            //Create cart
+                            var cartCreate = new Cart()
+                        {
+                            cart_Id = cartId,
+                            cart_UserID = userId
                         };
 
-                        _context.Devices.Add(AddDevice);
+                        _context.Cart.Add(cartCreate);
+
+                        //Create ProductInCart
+
+                        var ProductInCartCreate = new ProductInCart()
+                        {
+                            pic_CartId = cartId,
+                            pic_ProductId = productid,
+                            pic_amount = quantityProduct,
+                            pic_size = size,
+                            pic_color = color
+                        };
+
+                        _context.ProductInCart.Add(ProductInCartCreate);
 
                         await _context.SaveChangesAsync();
                     }
-                    /// Create Device in DB
-                    /// 
+
+                    
+                }
+                else
+                {
+                    //Query Proudct in Device
+                    var queryProductDevice = from a in _context.Devices
+                                             join b in _context.CartsDevice on a.deviceId equals b.cartd_DeviceId
+                                             join c in _context.ProductInCartDevices on b.cartd_Id equals c.picd_CartId
+                                             select new { a, b, c, };
+
+                    queryProductDevice = queryProductDevice.Where(a => a.a.deviceName == namePc
+                    && a.c.picd_ProductId == productid
+                    && a.c.picd_size == size
+                    && a.c.picd_color == color
+                    );
+
+                    
 
 
-                    var deviceQueryre = _context.Devices.FirstOrDefault(a => a.deviceName == namePc);
-
-                    //Create cart
-                    var CartsDevice = new CartsDevice()
+                    if (queryProductDevice.Count() != 0)
                     {
-                        cartd_Id = cartId,
-                        cartd_DeviceId = deviceQueryre.deviceId
-                    };
-
-                    _context.CartsDevice.Add(CartsDevice);
-
-                    var ProductInCartDevices = new ProductInCartDevices()
+                        string QueryCartId = "";
+                        foreach (var item in queryProductDevice)
+                        {
+                            QueryCartId = item.b.cartd_Id;
+                        }
+                        var productInCartQuery = _context.ProductInCartDevices.FirstOrDefault(a => a.picd_CartId == QueryCartId && a.picd_ProductId == productid);
+                        productInCartQuery.picd_amount = productInCartQuery.picd_amount + quantityProduct;
+                        _context.SaveChanges();
+                    }
+                    else
                     {
-                        picd_CartId = cartId,
-                        picd_ProductId = productid,
-                        picd_amount = quantityProduct,
-                        picd_size = size,
-                        picd_color = color
-                    };
+                        /// No logined
+                        /// Create Device in DB
+                        var deviceQuery = _context.Devices.FirstOrDefault(a => a.deviceName == namePc);
 
-                    _context.ProductInCartDevices.Add(ProductInCartDevices);
+                        if (deviceQuery == null)
+                        {
+                            string DeviceId = Guid.NewGuid().ToString();
 
-                    await _context.SaveChangesAsync();
+                            var AddDevice = new Device()
+                            {
+                                deviceId = DeviceId,
+                                deviceName = namePc
+                            };
+
+                            _context.Devices.Add(AddDevice);
+
+                            await _context.SaveChangesAsync();
+                        }
+                        /// Create Device in DB
+                        /// 
+
+
+                        var deviceQueryre = _context.Devices.FirstOrDefault(a => a.deviceName == namePc);
+
+                        //Create cart
+                        var CartsDevice = new CartsDevice()
+                        {
+                            cartd_Id = cartId,
+                            cartd_DeviceId = deviceQueryre.deviceId
+                        };
+
+                        _context.CartsDevice.Add(CartsDevice);
+
+                        var ProductInCartDevices = new ProductInCartDevices()
+                        {
+                            picd_CartId = cartId,
+                            picd_ProductId = productid,
+                            picd_amount = quantityProduct,
+                            picd_size = size,
+                            picd_color = color
+                        };
+
+                        _context.ProductInCartDevices.Add(ProductInCartDevices);
+
+                        await _context.SaveChangesAsync();
+                    }
+                    
                 }
 
                 

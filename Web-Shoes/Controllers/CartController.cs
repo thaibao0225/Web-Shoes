@@ -109,13 +109,30 @@ namespace Web_Shoes.Controllers
         public IActionResult RemoveProduct(int productid, int quantity)
         {
 
-            int aa = productid;
+            
 
             try
             {
-                var productQuery = _context.ProductInCart.FirstOrDefault(a => a.pic_ProductId == productid);
-                _context.ProductInCart.Remove(productQuery);
-                _context.SaveChanges();
+
+                string namePc = Environment.MachineName;
+                bool checkLogin = (User?.Identity.IsAuthenticated).GetValueOrDefault();
+
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var userName = User.FindFirstValue(ClaimTypes.Name);
+
+                if (checkLogin)
+                {
+                    var productQuery = _context.ProductInCart.FirstOrDefault(a => a.pic_ProductId == productid);
+                    _context.ProductInCart.Remove(productQuery);
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    var productQuery = _context.ProductInCartDevices.FirstOrDefault(a => a.picd_ProductId == productid);
+                    _context.ProductInCartDevices.Remove(productQuery);
+                    _context.SaveChanges();
+                }
+                
 
 
 
