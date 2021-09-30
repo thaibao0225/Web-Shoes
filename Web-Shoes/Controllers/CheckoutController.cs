@@ -118,10 +118,13 @@ namespace Web_Shoes.Controllers
         [HttpGet("{reduceprice}")]
         public async Task<IActionResult> AddToBill(String reduceprice)
         {
-            var aa = reduceprice;
+            
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var userName = User.FindFirstValue(ClaimTypes.Name);
+
+            string namePc = Environment.MachineName;
+            bool checkLogin = (User?.Identity.IsAuthenticated).GetValueOrDefault();
 
             string firstName = Request.Form["FirstName"];
             string country = Request.Form["Country"];
@@ -136,103 +139,217 @@ namespace Web_Shoes.Controllers
             string phone = Request.Form["Phone"];
             string reducePrice = Request.Form["Reduceprice"];
 
-
-            var query = from a in _context.Products
-                        join b in _context.ProductInCart on a.pd_Id equals b.pic_ProductId
-                        join c in _context.Cart on b.pic_CartId equals c.cart_Id
-                        join d in _context.AppUser on c.cart_UserID equals d.Id
-                        select new { a, b, c, d };
-
-
-            query = query.Where(x => x.d.Id == userId);
+            if (checkLogin)
+            {
+                var query = from a in _context.Products
+                            join b in _context.ProductInCart on a.pd_Id equals b.pic_ProductId
+                            join c in _context.Cart on b.pic_CartId equals c.cart_Id
+                            join d in _context.AppUser on c.cart_UserID equals d.Id
+                            select new { a, b, c, d };
 
 
+                query = query.Where(x => x.d.Id == userId);
 
-            var productInCartModelQuery = query
-                .Select(x => new ProductInCartModel()
+
+
+                var productInCartModelQuery = query
+                    .Select(x => new ProductInCartModel()
+                    {
+                        ProductId = x.a.pd_Id,
+                        ProductName = x.a.pd_Name,
+                        ProductPrice = x.a.pd_Price,
+                        ProductImg1 = x.a.pd_Img1,
+                        Quantity = x.b.pic_amount,
+                        UserId = x.d.Id,
+                        Color = x.b.pic_color,
+                        Size = x.b.pic_size
+
+                    });
+
+
+                var cartDetail = query.Select(a => new CheckOutModel()
                 {
-                    ProductId = x.a.pd_Id,
-                    ProductName = x.a.pd_Name,
-                    ProductPrice = x.a.pd_Price,
-                    ProductImg1 = x.a.pd_Img1,
-                    Quantity = x.b.pic_amount,
-                    UserId = x.d.Id,
-                    Color = x.b.pic_color,
-                    Size = x.b.pic_size
-
+                    checkout_ProductName = a.a.pd_Name,
+                    checkout_Quantity = a.b.pic_amount,
+                    checkout_Price = a.a.pd_Price
                 });
 
-
-            var cartDetail = query.Select(a => new CheckOutModel()
-            {
-                checkout_ProductName = a.a.pd_Name,
-                checkout_Quantity = a.b.pic_amount,
-                checkout_Price = a.a.pd_Price
-            });
-
-            var shipingQuery = _context.Shipping.FirstOrDefault(a => a.ship_Name == "ship");
+                var shipingQuery = _context.Shipping.FirstOrDefault(a => a.ship_Name == "ship");
 
 
 
-            ViewBag.Discount = reducePrice;
+                ViewBag.Discount = reducePrice;
 
-            int reTotal = 0;
-            foreach (var item in cartDetail)
-            {
-                reTotal += item.checkout_Price;
+                int reTotal = 0;
+                foreach (var item in cartDetail)
+                {
+                    reTotal += item.checkout_Price;
+                }
+
+                ViewBag.Retotal = reTotal;
+                ViewBag.Ship = 0;
+                int ship = 0;
+
+                if (shipingQuery != null)
+                {
+
+                    string a = shipingQuery.ship_Price.ToString();
+                    ship = Int32.Parse(a);
+                    ViewBag.Ship = ship;
+                }
+
+
+
+                int discount = Int32.Parse(reducePrice.ToString());
+                ViewBag.Total = reTotal + ship - discount;
+
+                string productNameList = "";
+                foreach (var item in cartDetail)
+                {
+                    productNameList += "|" + item.checkout_Quantity + "|" + item.checkout_ProductName;
+                }
+
+
+                var bill = new Bills()
+                {
+                    bill_Id = Guid.NewGuid().ToString(),
+                    bill_UserId = userId,
+                    bill_Discount = discount,
+                    bill_Shipping = ship,
+                    bill_PaidTotal = reTotal + ship - discount,
+                    bill_ProductNamelist = productNameList
+
+
+                };
+
+                /// Add
+                _context.Bills.Add(bill);
+
+
+                /// Remove
+                var CartQuery = _context.Cart.FirstOrDefault(x => x.cart_UserID == userId);
+
+
+
+                var ProductInCartQueryDelete = _context.ProductInCart.Where(a => a.pic_CartId == CartQuery.cart_Id);
+
+                _context.ProductInCart.RemoveRange(ProductInCartQueryDelete);
+
+
+                await _context.SaveChangesAsync();
             }
-
-            ViewBag.Retotal = reTotal;
-            ViewBag.Ship = 0;
-            int ship = 0;
-
-            if (shipingQuery != null)
+            else
             {
-
-                string a = shipingQuery.ship_Price.ToString();
-                ship = Int32.Parse(a);
-                ViewBag.Ship = ship;
-            }
-
-
-
-            int discount = Int32.Parse(reducePrice.ToString());
-            ViewBag.Total = reTotal + ship - discount;
-
-            string productNameList = "";
-            foreach (var item in cartDetail)
-            {
-                productNameList += "|" + item.checkout_Quantity + "|" + item.checkout_ProductName;
-            }
+                var query = from a in _context.Products
+                            join b in _context.ProductInCartDevices on a.pd_Id equals b.picd_ProductId
+                            join c in _context.CartsDevice on b.picd_CartId equals c.cartd_Id
+                            join d in _context.Devices on c.cartd_DeviceId equals d.deviceId
+                            select new { a, b, c, d };
 
 
-            var bill = new Bills()
-            {
-                bill_Id = Guid.NewGuid().ToString(),
-                bill_UserId = userId,
-                bill_Discount = discount,
-                bill_Shipping = ship,
-                bill_PaidTotal = reTotal + ship - discount,
-                bill_ProductNamelist = productNameList
+                query = query.Where(x => x.d.deviceName == namePc);
+
+                var productInCartModelQuery = query
+                    .Select(x => new ProductInCartModel()
+                    {
+                        ProductId = x.a.pd_Id,
+                        ProductName = x.a.pd_Name,
+                        ProductPrice = x.a.pd_Price,
+                        ProductImg1 = x.a.pd_Img1,
+                        Quantity = x.b.picd_amount,
+                        PCName = x.d.deviceName,
+                        Color = x.b.picd_color,
+                        Size = x.b.picd_size
+
+                    });
 
 
-            };
+                var cartDetail = query.Select(a => new CheckOutModel()
+                {
+                    checkout_ProductName = a.a.pd_Name,
+                    checkout_Quantity = a.b.picd_amount,
+                    checkout_Price = a.a.pd_Price
+                });
 
-            /// Add
-            _context.Bills.Add(bill);
-
-
-            /// Remove
-            var CartQuery = _context.Cart.FirstOrDefault(x => x.cart_UserID == userId);
+                var shipingQuery = _context.Shipping.FirstOrDefault(a => a.ship_Name == "ship");
 
 
 
-            var ProductInCartQueryDelete = _context.ProductInCart.Where(a => a.pic_CartId == CartQuery.cart_Id);
+                ViewBag.Discount = reducePrice;
 
-            _context.ProductInCart.RemoveRange(ProductInCartQueryDelete);
+                int reTotal = 0;
+                foreach (var item in cartDetail)
+                {
+                    reTotal += item.checkout_Price;
+                }
+
+                ViewBag.Retotal = reTotal;
+                ViewBag.Ship = 0;
+                int ship = 0;
+
+                if (shipingQuery != null)
+                {
+
+                    string a = shipingQuery.ship_Price.ToString();
+                    ship = Int32.Parse(a);
+                    ViewBag.Ship = ship;
+                }
 
 
-            await _context.SaveChangesAsync();
+
+                int discount = Int32.Parse(reducePrice.ToString());
+                ViewBag.Total = reTotal + ship - discount;
+
+                string productNameList = "";
+                foreach (var item in cartDetail)
+                {
+                    productNameList += "|" + item.checkout_Quantity + "|" + item.checkout_ProductName;
+                }
+
+
+                //create UserId
+
+
+                var userIdNew = Guid.NewGuid().ToString();
+
+                var user = new AppUser {Id = userIdNew, UserName = namePc, Email = email };
+                var result = await _UserManager.CreateAsync(user, "123456Aa@" );
+                if (result.Succeeded)
+                {
+                    var bill = new Bills()
+                    {
+                        bill_Id = Guid.NewGuid().ToString(),
+                        bill_UserId = userIdNew,
+                        bill_Discount = discount,
+                        bill_Shipping = ship,
+                        bill_PaidTotal = reTotal + ship - discount,
+                        bill_ProductNamelist = productNameList
+
+
+                    };
+
+                    /// Add
+                    _context.Bills.Add(bill);
+
+                    //Query
+                    var DeviceQuery = _context.Devices.FirstOrDefault(x => x.deviceName == namePc);
+
+                    /// Remove
+                    var CartQuery = _context.CartsDevice.FirstOrDefault(x => x.cartd_DeviceId == DeviceQuery.deviceId);
+
+
+
+                    var ProductInCartQueryDelete = _context.ProductInCartDevices.Where(a => a.picd_CartId == CartQuery.cartd_Id);
+
+                    _context.ProductInCartDevices.RemoveRange(ProductInCartQueryDelete);
+
+
+                    await _context.SaveChangesAsync();
+                }
+                    
+            }    
+
+            
 
 
 

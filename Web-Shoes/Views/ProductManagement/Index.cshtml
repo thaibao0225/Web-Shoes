@@ -5,11 +5,20 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+<div>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <div class="input-group ">
+        <form asp-action="Search" method="post" asp-controller="ProductManagement">
+            <input type="text" name="search-text" value="" />
+            <input type="submit" name="name" value="Search" />
+        </form>
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>

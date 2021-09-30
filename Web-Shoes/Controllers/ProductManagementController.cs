@@ -46,7 +46,26 @@ namespace Web_Shoes.Controllers
 
         }
 
+        [Route("/searchproduct")]
+        [HttpPost]
+        public ActionResult Search(string search)
+        {
+            try
+            {
+                string aa = search;
 
+
+                return RedirectToAction(nameof(Index));
+
+            }
+
+            catch
+            {
+                ViewBag.thongbao = "Cann't create";
+                return RedirectToAction(nameof(Index));
+            }
+
+        }
 
         // GET: ProductManagementController/Details/5
         [HttpGet("/productmanagement/details/{id:int?}/")]

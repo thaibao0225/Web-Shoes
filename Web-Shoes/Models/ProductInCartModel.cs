@@ -21,6 +21,8 @@ namespace Web_Shoes.Models
 
         public string Size { set; get; }
 
+        public string PCName { set; get; }
+
 
     }
 }

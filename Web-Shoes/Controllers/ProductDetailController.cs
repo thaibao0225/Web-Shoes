@@ -49,6 +49,7 @@ namespace Web_Shoes.Controllers
             ViewBag.Rate = productDetailQuery.pd_Rate;
             ViewBag.ShortDescription = productDetailQuery.pd_ShortDescription;
             ViewBag.Description = productDetailQuery.pd_Description;
+            ViewBag.Code = productDetailQuery.pd_Code;
 
             ViewBag.Size7 = productDetailQuery.pd_Size7;
             ViewBag.Size7_5 = productDetailQuery.pd_Size7_5;
